@@ -7,7 +7,7 @@ const STORIES = [
 
   /* ---------- SEVIYE 1 — BASLANGIC ---------- */
   {
-    id: "s1", lvl: 1, em: "",
+    id: "s1", lvl: 1, em: "☕",
     title: "Tom's Morning", titleTr: "Tom'un Sabahı",
     intro: "Sıradan bir sabahın en basit cümlelerle anlatımı; Tom'un rutinini adım adım takip ediyorsun. Bu hikayede geniş zamana dikkat et: he/she/it öznesiyle fiil -s eki alır (wakes, drinks, starts).",
     lines: [
@@ -46,7 +46,7 @@ const STORIES = [
     ]
   },
   {
-    id: "s2", lvl: 1, em: "",
+    id: "s2", lvl: 1, em: "🛒",
     title: "At the Market", titleTr: "Markette",
     intro: "Emma akşam yemeği için markete gider ve fiyat sorup alışveriş yapar. Bu hikayede sayılara ve fiyat sorma kalıbına dikkat et: How much is...?",
     lines: [
@@ -85,7 +85,7 @@ const STORIES = [
     ]
   },
   {
-    id: "s3", lvl: 1, em: "",
+    id: "s3", lvl: 1, em: "🏠",
     title: "My Family", titleTr: "Ailem",
     intro: "Ali ailesini tanıtıyor: kim ne iş yapar, kaç kişilerdir, akşamları ne yaparlar. Bu hikayede 'have got / has got' kalıbına dikkat et; sahiplik bildirir.",
     lines: [
@@ -124,7 +124,7 @@ const STORIES = [
     ]
   },
   {
-    id: "s4", lvl: 1, em: "",
+    id: "s4", lvl: 1, em: "🎒",
     title: "School Days", titleTr: "Okul Günleri",
     intro: "Deniz'in bir okul günü saat saat anlatılıyor. Bu hikayede saat ve gün ifadelerine dikkat et: at seven, on Friday, in the afternoon.",
     lines: [
@@ -165,7 +165,7 @@ const STORIES = [
 
   /* ---------- SEVIYE 2 — ORTA ---------- */
   {
-    id: "s5", lvl: 2, em: "",
+    id: "s5", lvl: 2, em: "🧳",
     title: "The Lost Suitcase", titleTr: "Kaybolan Bavul",
     intro: "Murat havaalanında bavulunu bulamaz ve kayıp bagaj ofisine gider. Bu hikayede düzensiz geçmiş zaman fiillerine dikkat et: went, saw, took, brought.",
     lines: [
@@ -216,7 +216,7 @@ const STORIES = [
     ]
   },
   {
-    id: "s6", lvl: 2, em: "",
+    id: "s6", lvl: 2, em: "💼",
     title: "The First Interview", titleTr: "İlk İş Görüşmesi",
     intro: "Selin hayatındaki ilk iş görüşmesine girer ve sorulara tek tek cevap verir. Bu hikayede soru cümlelerine ve 'can' ile yetenek anlatımına dikkat et.",
     lines: [
@@ -267,7 +267,7 @@ const STORIES = [
     ]
   },
   {
-    id: "s7", lvl: 2, em: "️",
+    id: "s7", lvl: 2, em: "🌧️",
     title: "A Rainy Sunday", titleTr: "Yağmurlu Bir Pazar",
     intro: "İki arkadaş piknik planlar ama hava bozunca planlarını değiştirirler. Bu hikayede sürerlik bildiren 'was/were + -ing' yapısına ve 'because' bağlacına dikkat et.",
     lines: [
@@ -318,7 +318,7 @@ const STORIES = [
     ]
   },
   {
-    id: "s8", lvl: 2, em: "",
+    id: "s8", lvl: 2, em: "🩺",
     title: "At the Doctor", titleTr: "Doktorda",
     intro: "Ahmet üç gündür kendini iyi hissetmez ve doktora gider. Bu hikayede 'must' ve 'should' ile verilen tavsiyelerin farkına dikkat et.",
     lines: [
@@ -371,7 +371,7 @@ const STORIES = [
 
   /* ---------- SEVIYE 3 — ILERI ---------- */
   {
-    id: "s9", lvl: 3, em: "",
+    id: "s9", lvl: 3, em: "🇬🇧",
     title: "Ayse's First Week in London", titleTr: "Ayşe'nin Londra'daki İlk Haftası",
     intro: "Ayşe okumak için Londra'ya taşınır ve ilk haftasında neler yaşadığını anlatır. Bu hikayede present perfect'e dikkat et: 'have/has + fiilin 3. hâli' bitmiş ama etkisi bugüne uzanan olayları anlatır.",
     lines: [
@@ -430,7 +430,7 @@ const STORIES = [
     ]
   },
   {
-    id: "s10", lvl: 3, em: "",
+    id: "s10", lvl: 3, em: "📵",
     title: "A Misunderstanding", titleTr: "Bir Yanlış Anlaşılma",
     intro: "İki arkadaş arasında telefondan doğan küçük bir yanlış anlaşılma büyür, sonra çözülür. Bu hikayede dolaylı anlatıma dikkat et: 'said that' ve 'told me' ile zaman bir adım geriye kayar.",
     lines: [
@@ -489,7 +489,7 @@ const STORIES = [
     ]
   },
   {
-    id: "s11", lvl: 3, em: "",
+    id: "s11", lvl: 3, em: "🚀",
     title: "Tomorrow's Plan", titleTr: "Yarının Planı",
     intro: "Zeynep kendi kahve dükkânını açmayı planlıyor ve ilk adımı yarın atacak. Bu hikayede gelecek zamana ve birinci tip koşul cümlelerine dikkat et: 'If it rains, we will stay at home.'",
     lines: [
@@ -548,7 +548,7 @@ const STORIES = [
     ]
   },
   {
-    id: "s12", lvl: 3, em: "️",
+    id: "s12", lvl: 3, em: "✉️",
     title: "A Letter After Many Years", titleTr: "Yıllar Sonra Bir Mektup",
     intro: "Emekli bir öğretmen, otuz yıl önceki öğrencisinden beklenmedik bir mektup alır. Bu hikayede karışık zamanlara dikkat et: geçmiş, present perfect ve gelecek aynı metinde yan yana kullanılır.",
     lines: [
