@@ -2,319 +2,1711 @@
    Yalnizca .yl* siniflari ve #v-yol. kurs.css'teki hicbir kurali ezmez.
    Panel ust blogu Bubixo ana sayfasinin koyu lacivert dilinde; icerik
    kartlari kursun mevcut acik temasini kullanir. */
-:root{
-  --yl-navy:#0d1630; --yl-navy2:#16234a; --yl-navy3:#1d2f63; --yl-ink:#e8ecf8; --yl-soft:#a9b4d6;
-  --yl-blue:#8fb0ff; --yl-btn1:#3b78f2; --yl-btn2:#1f4fb8; --yl-mint:#48e0a0;
+:root {
+  --yl-navy: #0d1630;
+  --yl-navy2: #16234a;
+  --yl-navy3: #1d2f63;
+  --yl-ink: #e8ecf8;
+  --yl-soft: #a9b4d6;
+  --yl-blue: #8fb0ff;
+  --yl-btn1: #3b78f2;
+  --yl-btn2: #1f4fb8;
+  --yl-mint: #48e0a0;
 }
-.yl{display:flex;flex-direction:column;gap:18px}
-.yl-sub{display:block}
-.yl-kicker{font-size:11.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin:0 0 4px}
-.yl-mini{font-size:13px;color:var(--soft);margin:6px 0 0}
+
+.yl {
+  display: flex;
+  flex-direction: column;
+  gap: 18px
+}
+
+.yl-sub {
+  display: block
+}
+
+.yl-kicker {
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin: 0 0 4px
+}
+
+.yl-mini {
+  font-size: 13px;
+  color: var(--soft);
+  margin: 6px 0 0
+}
 
 /* ---------- butonlar ---------- */
-.yl-btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:46px;padding:11px 20px;
-  border-radius:12px;border:1.5px solid var(--line);background:#fff;color:var(--ink);font-weight:700;font-size:14.5px;
-  line-height:1.2;text-align:center}
-.yl-btn:hover{border-color:var(--blue)}
-.yl-btn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.yl-ana{background:linear-gradient(135deg,var(--yl-btn1),var(--yl-btn2));border-color:transparent;color:#fff;box-shadow:0 6px 16px rgba(31,79,184,.28)}
-.yl-ana:hover{border-color:transparent;filter:brightness(1.06)}
-.yl-btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
-.yl-btns.yl-kucuk .yl-btn{min-height:40px;padding:8px 14px;font-size:13.5px}
-.yl-link{border:0;background:none;padding:0;font:inherit;font-weight:700;color:var(--blue);text-decoration:underline;text-underline-offset:3px;text-align:start}
+.yl-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 46px;
+  padding: 11px 20px;
+  border-radius: 12px;
+  border: 1.5px solid var(--line);
+  background: #fff;
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 14.5px;
+  line-height: 1.2;
+  text-align: center
+}
+
+.yl-btn:hover {
+  border-color: var(--blue)
+}
+
+.yl-btn svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round
+}
+
+.yl-ana {
+  background: linear-gradient(135deg, var(--yl-btn1), var(--yl-btn2));
+  border-color: transparent;
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(31, 79, 184, .28)
+}
+
+.yl-ana:hover {
+  border-color: transparent;
+  filter: brightness(1.06)
+}
+
+.yl-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px
+}
+
+.yl-btns.yl-kucuk .yl-btn {
+  min-height: 40px;
+  padding: 8px 14px;
+  font-size: 13.5px
+}
+
+.yl-link {
+  border: 0;
+  background: none;
+  padding: 0;
+  font: inherit;
+  font-weight: 700;
+  color: var(--blue);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-align: start
+}
 
 /* ---------- ust blok (koyu lacivert) ---------- */
-.yl-hero{position:relative;overflow:hidden;border-radius:20px;padding:26px 24px 22px;color:var(--yl-ink);
-  background:radial-gradient(120% 140% at 100% 0%,rgba(143,176,255,.20),transparent 55%),
-             linear-gradient(150deg,var(--yl-navy) 0%,var(--yl-navy2) 55%,var(--yl-navy3) 100%);
-  box-shadow:0 14px 34px rgba(13,22,48,.28)}
-.yl-pills{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:14px}
-.yl-pills span{font-size:12px;font-weight:700;letter-spacing:.02em;padding:5px 11px;border-radius:999px;
-  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);color:var(--yl-ink)}
-.yl-pills .yl-free{background:rgba(72,224,160,.14);border-color:rgba(72,224,160,.4);color:var(--yl-mint)}
-.yl-hero h2{font-size:clamp(23px,4.2vw,31px);line-height:1.18;color:#fff;margin:0 0 8px}
-.yl-son{color:var(--yl-soft);font-size:15px;margin:0;max-width:620px}
-.yl-son b{color:#fff}
-.yl-cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
-.yl-hayalet{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.28);color:#fff}
-.yl-hayalet:hover{border-color:var(--yl-blue);background:rgba(255,255,255,.1)}
-.yl-hero .yl-mini{color:var(--yl-soft)}
-.yl-hero .yl-mini b{color:#fff}
-.yl-hero .yl-link{color:var(--yl-blue)}
-.yl-lvls{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px;padding-top:18px;border-top:1px solid rgba(255,255,255,.12)}
-.yl-lvl>div{display:flex;align-items:baseline;gap:8px;margin-bottom:7px}
-.yl-lvl b{font-size:18px;color:#fff;font-weight:800}
-.yl-lvl span{font-size:13px;color:var(--yl-soft)}
-.yl-lvl small{display:block;margin-top:5px;font-size:12px;color:var(--yl-soft)}
-.yl-hero .yl-bar{background:rgba(255,255,255,.12)}
-.yl-hero .yl-bar i{background:linear-gradient(90deg,var(--yl-mint),#7fd6ff)}
-.yl-hero-hiz{display:flex;align-items:center;gap:10px;margin-top:16px;font-size:12.5px;color:var(--yl-soft)}
-.yl-hero .yl-hiz{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.18)}
-.yl-hero .yl-hiz button{color:var(--yl-soft)}
-.yl-hero .yl-hiz button.on{background:#fff;color:var(--yl-navy)}
+.yl-hero {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  padding: 26px 24px 22px;
+  color: var(--yl-ink);
+  background: radial-gradient(120% 140% at 100% 0%, rgba(143, 176, 255, .20), transparent 55%),
+    linear-gradient(150deg, var(--yl-navy) 0%, var(--yl-navy2) 55%, var(--yl-navy3) 100%);
+  box-shadow: 0 14px 34px rgba(13, 22, 48, .28)
+}
+
+.yl-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-bottom: 14px
+}
+
+.yl-pills span {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .02em;
+  padding: 5px 11px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .08);
+  border: 1px solid rgba(255, 255, 255, .16);
+  color: var(--yl-ink)
+}
+
+.yl-pills .yl-free {
+  background: rgba(72, 224, 160, .14);
+  border-color: rgba(72, 224, 160, .4);
+  color: var(--yl-mint)
+}
+
+.yl-hero h2 {
+  font-size: clamp(23px, 4.2vw, 31px);
+  line-height: 1.18;
+  color: #fff;
+  margin: 0 0 8px
+}
+
+.yl-son {
+  color: var(--yl-soft);
+  font-size: 15px;
+  margin: 0;
+  max-width: 620px
+}
+
+.yl-son b {
+  color: #fff
+}
+
+.yl-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px
+}
+
+.yl-hayalet {
+  background: rgba(255, 255, 255, .06);
+  border-color: rgba(255, 255, 255, .28);
+  color: #fff
+}
+
+.yl-hayalet:hover {
+  border-color: var(--yl-blue);
+  background: rgba(255, 255, 255, .1)
+}
+
+.yl-hero .yl-mini {
+  color: var(--yl-soft)
+}
+
+.yl-hero .yl-mini b {
+  color: #fff
+}
+
+.yl-hero .yl-link {
+  color: var(--yl-blue)
+}
+
+.yl-lvls {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, .12)
+}
+
+.yl-lvl>div {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 7px
+}
+
+.yl-lvl b {
+  font-size: 18px;
+  color: #fff;
+  font-weight: 800
+}
+
+.yl-lvl span {
+  font-size: 13px;
+  color: var(--yl-soft)
+}
+
+.yl-lvl small {
+  display: block;
+  margin-top: 5px;
+  font-size: 12px;
+  color: var(--yl-soft)
+}
+
+.yl-hero .yl-bar {
+  background: rgba(255, 255, 255, .12)
+}
+
+.yl-hero .yl-bar i {
+  background: linear-gradient(90deg, var(--yl-mint), #7fd6ff)
+}
+
+.yl-hero-hiz {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+  font-size: 12.5px;
+  color: var(--yl-soft)
+}
+
+.yl-hero .yl-hiz {
+  background: rgba(255, 255, 255, .08);
+  border-color: rgba(255, 255, 255, .18)
+}
+
+.yl-hero .yl-hiz button {
+  color: var(--yl-soft)
+}
+
+.yl-hero .yl-hiz button.on {
+  background: #fff;
+  color: var(--yl-navy)
+}
 
 /* ---------- ilerleme cubugu ---------- */
-.yl-bar{display:block;flex:1;height:8px;border-radius:999px;background:var(--line);overflow:hidden;min-width:40px}
-.yl-bar i{display:block;height:100%;border-radius:999px;background:var(--green);transition:width .4s}
+.yl-bar {
+  display: block;
+  flex: 1;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--line);
+  overflow: hidden;
+  min-width: 40px
+}
+
+.yl-bar i {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--green);
+  transition: width .4s
+}
 
 /* ---------- istatistikler ---------- */
-.yl-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.yl-stat{padding:15px 12px;text-align:center}
-.yl-stat b{display:block;font-family:'Fraunces',Georgia,serif;font-size:25px;line-height:1.1;color:var(--ink)}
-.yl-stat small{display:block;margin-top:4px;color:var(--soft);font-size:12.5px;line-height:1.3}
+.yl-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px
+}
+
+.yl-stat {
+  padding: 15px 12px;
+  text-align: center
+}
+
+.yl-stat b {
+  display: block;
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 25px;
+  line-height: 1.1;
+  color: var(--ink)
+}
+
+.yl-stat small {
+  display: block;
+  margin-top: 4px;
+  color: var(--soft);
+  font-size: 12.5px;
+  line-height: 1.3
+}
 
 /* ---------- kelime tekrari karti ---------- */
-.yl-tekrar-k{padding:20px 20px 16px}
-.yl-tk-ust{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap}
-.yl-tk-ust>div:first-child{flex:1 1 300px;min-width:0}
-.yl-tekrar-k h3{font-family:'Inter',system-ui,sans-serif;font-size:18px;font-weight:700;line-height:1.35;margin:0}
-.yl-tekrar-k h3 b{color:var(--blue);font-size:22px}
-.yl-tk-ust .yl-btns{margin-top:0}
-.yl-vbar{display:flex;height:9px;border-radius:999px;background:var(--line);overflow:hidden;margin-top:16px}
-.yl-vbar i{display:block;height:100%}
-.yl-v-ogrenildi{background:var(--green)}
-.yl-v-ogreniliyor{background:#5b8def}
-.yl-v-tekrar{background:var(--amber)}
-.yl-v-yeni{background:var(--line)}
-.yl-vleg{list-style:none;display:flex;flex-wrap:wrap;gap:6px 16px;margin:10px 0 0;padding:0;font-size:12.5px;color:var(--soft)}
-.yl-vleg li{display:flex;align-items:center;gap:6px}
-.yl-vleg i{width:10px;height:10px;border-radius:3px;display:inline-block}
-.yl-vleg b{color:var(--ink)}
+.yl-tekrar-k {
+  padding: 20px 20px 16px
+}
+
+.yl-tk-ust {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 14px;
+  flex-wrap: wrap
+}
+
+.yl-tk-ust>div:first-child {
+  flex: 1 1 300px;
+  min-width: 0
+}
+
+.yl-tekrar-k h3 {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.35;
+  margin: 0
+}
+
+.yl-tekrar-k h3 b {
+  color: var(--blue);
+  font-size: 22px
+}
+
+.yl-tk-ust .yl-btns {
+  margin-top: 0
+}
+
+.yl-vbar {
+  display: flex;
+  height: 9px;
+  border-radius: 999px;
+  background: var(--line);
+  overflow: hidden;
+  margin-top: 16px
+}
+
+.yl-vbar i {
+  display: block;
+  height: 100%
+}
+
+.yl-v-ogrenildi {
+  background: var(--green)
+}
+
+.yl-v-ogreniliyor {
+  background: #5b8def
+}
+
+.yl-v-tekrar {
+  background: var(--amber)
+}
+
+.yl-v-yeni {
+  background: var(--line)
+}
+
+.yl-vleg {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  margin: 10px 0 0;
+  padding: 0;
+  font-size: 12.5px;
+  color: var(--soft)
+}
+
+.yl-vleg li {
+  display: flex;
+  align-items: center;
+  gap: 6px
+}
+
+.yl-vleg i {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  display: inline-block
+}
+
+.yl-vleg b {
+  color: var(--ink)
+}
 
 /* ---------- ogrenme yolu ---------- */
-.yl-yol-b{margin-top:10px}
-.yl-yol{list-style:none;margin:0;padding:0;position:relative}
-.yl-bolum{position:relative;padding-left:0;margin:0 0 14px}
-.yl-bolum:not(:last-child)::after{content:"";position:absolute;left:31px;top:64px;bottom:-14px;width:2px;
-  background:repeating-linear-gradient(to bottom,var(--line) 0 6px,transparent 6px 11px);z-index:0}
-.yl-bolum.tam:not(:last-child)::after{background:var(--green);opacity:.45}
-.yl-bolum details{position:relative;z-index:1;background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh)}
-.yl-bolum.aktif details{border-color:rgba(59,120,242,.55);box-shadow:0 0 0 3px rgba(59,120,242,.12),var(--sh)}
-.yl-bolum summary{list-style:none;display:flex;align-items:flex-start;gap:14px;padding:16px 16px 16px 14px;cursor:pointer}
-.yl-bolum summary::-webkit-details-marker{display:none}
-.yl-no{flex:none;width:36px;height:36px;margin-left:0;border-radius:12px;display:flex;align-items:center;justify-content:center;
-  font-weight:800;font-size:15px;background:var(--blue-soft);color:var(--blue)}
-.yl-bolum.aktif .yl-no{background:linear-gradient(135deg,var(--yl-btn1),var(--yl-btn2));color:#fff}
-.yl-bolum.tam .yl-no{background:var(--green);color:#fff}
-.yl-bb{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
-.yl-sev{align-self:flex-start;font-size:11px;font-weight:800;letter-spacing:.08em;padding:2px 8px;border-radius:6px;background:var(--yl-navy);color:#fff}
-.yl-bb b{font-size:16.5px;line-height:1.3;margin-top:3px}
-.yl-bb small{color:var(--soft);font-size:13px;line-height:1.45}
-.yl-bp{display:flex;align-items:center;gap:10px;margin-top:8px}
-.yl-bp em{font-style:normal;font-size:12px;font-weight:700;color:var(--soft);white-space:nowrap}
-.yl-ok{flex:none;color:var(--soft);font-size:14px;transition:transform .2s;margin-top:8px}
-.yl-bolum details[open] .yl-ok{transform:rotate(180deg)}
-.yl-ogeler{list-style:none;margin:0;padding:4px 12px 12px;border-top:1px solid var(--line)}
-.yl-oge{width:100%;display:flex;align-items:center;gap:12px;text-align:start;border:0;background:none;padding:11px 6px;
-  border-radius:12px;color:var(--ink);min-height:52px}
-.yl-oge:hover{background:var(--bg)}
-.yl-ogeler li+li .yl-oge{border-top:1px solid var(--line);border-radius:0}
-.yl-ogeler li+li .yl-oge:hover{border-radius:0}
-.yl-oi{flex:none;width:36px;height:36px;border-radius:10px;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:17px}
-.yl-ot{flex:1;min-width:0;display:flex;flex-direction:column}
-.yl-ot em{font-style:normal;font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--blue)}
-.yl-ot b{font-size:14.5px;line-height:1.35;font-weight:600;overflow-wrap:anywhere}
-.yl-ot small{font-size:12.5px;color:var(--soft);line-height:1.4}
-.yl-od{flex:none;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--soft);font-size:16px}
-.yl-oge.bitti .yl-od{background:var(--green-soft);color:var(--green);font-size:13px}
-.yl-oge.bitti .yl-oi{background:var(--green-soft)}
-.yl-ek{margin:0;padding:0 18px 16px;font-size:13px;color:var(--soft)}
+.yl-yol-b {
+  margin-top: 10px
+}
+
+.yl-yol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative
+}
+
+.yl-bolum {
+  position: relative;
+  padding-left: 0;
+  margin: 0 0 14px
+}
+
+.yl-bolum:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 31px;
+  top: 64px;
+  bottom: -14px;
+  width: 2px;
+  background: repeating-linear-gradient(to bottom, var(--line) 0 6px, transparent 6px 11px);
+  z-index: 0
+}
+
+.yl-bolum.tam:not(:last-child)::after {
+  background: var(--green);
+  opacity: .45
+}
+
+.yl-bolum details {
+  position: relative;
+  z-index: 1;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  box-shadow: var(--sh)
+}
+
+.yl-bolum.aktif details {
+  border-color: rgba(59, 120, 242, .55);
+  box-shadow: 0 0 0 3px rgba(59, 120, 242, .12), var(--sh)
+}
+
+.yl-bolum summary {
+  list-style: none;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px 16px 16px 14px;
+  cursor: pointer
+}
+
+.yl-bolum summary::-webkit-details-marker {
+  display: none
+}
+
+.yl-no {
+  flex: none;
+  width: 36px;
+  height: 36px;
+  margin-left: 0;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 15px;
+  background: var(--blue-soft);
+  color: var(--blue)
+}
+
+.yl-bolum.aktif .yl-no {
+  background: linear-gradient(135deg, var(--yl-btn1), var(--yl-btn2));
+  color: #fff
+}
+
+.yl-bolum.tam .yl-no {
+  background: var(--green);
+  color: #fff
+}
+
+.yl-bb {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px
+}
+
+.yl-sev {
+  align-self: flex-start;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: var(--yl-navy);
+  color: #fff
+}
+
+.yl-bb b {
+  font-size: 16.5px;
+  line-height: 1.3;
+  margin-top: 3px
+}
+
+.yl-bb small {
+  color: var(--soft);
+  font-size: 13px;
+  line-height: 1.45
+}
+
+.yl-bp {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px
+}
+
+.yl-bp em {
+  font-style: normal;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--soft);
+  white-space: nowrap
+}
+
+.yl-ok {
+  flex: none;
+  color: var(--soft);
+  font-size: 14px;
+  transition: transform .2s;
+  margin-top: 8px
+}
+
+.yl-bolum details[open] .yl-ok {
+  transform: rotate(180deg)
+}
+
+.yl-ogeler {
+  list-style: none;
+  margin: 0;
+  padding: 4px 12px 12px;
+  border-top: 1px solid var(--line)
+}
+
+.yl-oge {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: start;
+  border: 0;
+  background: none;
+  padding: 11px 6px;
+  border-radius: 12px;
+  color: var(--ink);
+  min-height: 52px
+}
+
+.yl-oge:hover {
+  background: var(--bg)
+}
+
+.yl-ogeler li+li .yl-oge {
+  border-top: 1px solid var(--line);
+  border-radius: 0
+}
+
+.yl-ogeler li+li .yl-oge:hover {
+  border-radius: 0
+}
+
+.yl-oi {
+  flex: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px
+}
+
+.yl-ot {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column
+}
+
+.yl-ot em {
+  font-style: normal;
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--blue)
+}
+
+.yl-ot b {
+  font-size: 14.5px;
+  line-height: 1.35;
+  font-weight: 600;
+  overflow-wrap: anywhere
+}
+
+.yl-ot small {
+  font-size: 12.5px;
+  color: var(--soft);
+  line-height: 1.4
+}
+
+.yl-od {
+  flex: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  color: var(--soft);
+  font-size: 16px
+}
+
+.yl-oge.bitti .yl-od {
+  background: var(--green-soft);
+  color: var(--green);
+  font-size: 13px
+}
+
+.yl-oge.bitti .yl-oi {
+  background: var(--green-soft)
+}
+
+.yl-ek {
+  margin: 0;
+  padding: 0 18px 16px;
+  font-size: 13px;
+  color: var(--soft)
+}
 
 /* ---------- AI kart ---------- */
-.yl-ai{padding:20px;display:flex;flex-direction:column;gap:12px}
-.yl-ai h3{font-size:20px;margin:0}
-.yl-ai-chips{display:flex;flex-wrap:wrap;gap:8px}
-.yl-ai-chips .chip{min-height:40px}
-.yl-ai-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
-.yl-ai-kart{display:flex;flex-direction:column;align-items:flex-start;gap:4px;text-align:start;padding:16px;font:inherit;color:inherit;cursor:pointer}
-.yl-ai-kart:hover{border-color:var(--blue)}
-.yl-ai-kart b{font-size:15.5px}
-.yl-ai-kart small{color:var(--soft);font-size:13px;line-height:1.45}
-.yl-ai-kart .due{display:inline-block;margin-top:6px;background:var(--amber-soft);color:var(--amber);font-size:11px;font-weight:700;border-radius:999px;padding:2px 9px}
-.yl-ai-em{font-size:26px}
-.yl-sohbet{padding:14px;display:flex;flex-direction:column;gap:10px;max-height:52vh;overflow-y:auto}
-.yl-msg{display:flex;gap:8px;align-items:flex-start;max-width:88%}
-.yl-msg>div{padding:10px 13px;border-radius:14px;display:flex;flex-direction:column;gap:2px;min-width:0;overflow-wrap:anywhere}
-.yl-msg b{font-weight:600;font-size:14.5px}
-.yl-msg i{font-style:normal;font-size:12.5px;color:var(--soft)}
-.yl-msg.ai>div{background:var(--blue-soft);border-top-left-radius:4px}
-.yl-msg.ai .spk{flex:none;width:34px;height:34px;border-radius:50%;border:1.5px solid var(--line);background:#fff;color:var(--blue);display:flex;align-items:center;justify-content:center}
-.yl-msg.ai .spk svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.yl-msg.sen{align-self:flex-end}
-.yl-msg.sen>div{background:var(--green-soft);border-top-right-radius:4px}
-.yl-msg.sen.no>div{background:var(--red-soft)}
-.yl-msg.ip{align-self:center;max-width:100%}
-.yl-msg.ip>div{background:var(--amber-soft);font-size:13px}
-.yl-gorev{margin:14px 0 8px;font-size:14.5px;padding:11px 14px;border-radius:12px;background:var(--bg);border:1px dashed var(--line)}
-.yl-giris{display:flex;gap:8px}
-.yl-giris input{flex:1;min-width:0;min-height:46px;border:1.5px solid var(--line);border-radius:12px;padding:10px 14px;font:inherit;font-size:16px;background:#fff;color:var(--ink)}
-.yl-giris input:focus{outline:none;border-color:var(--blue)}
-.yl-giris .yl-btn{flex:none;padding:10px 14px}
-.yl-giris .rec{background:var(--red-soft);border-color:var(--red)}
+.yl-ai {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px
+}
+
+.yl-ai h3 {
+  font-size: 20px;
+  margin: 0
+}
+
+.yl-ai-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px
+}
+
+.yl-ai-chips .chip {
+  min-height: 40px
+}
+
+.yl-ai-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px
+}
+
+.yl-ai-kart {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  text-align: start;
+  padding: 16px;
+  font: inherit;
+  color: inherit;
+  cursor: pointer
+}
+
+.yl-ai-kart:hover {
+  border-color: var(--blue)
+}
+
+.yl-ai-kart b {
+  font-size: 15.5px
+}
+
+.yl-ai-kart small {
+  color: var(--soft);
+  font-size: 13px;
+  line-height: 1.45
+}
+
+.yl-ai-kart .due {
+  display: inline-block;
+  margin-top: 6px;
+  background: var(--amber-soft);
+  color: var(--amber);
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 2px 9px
+}
+
+.yl-ai-em {
+  font-size: 26px
+}
+
+.yl-sohbet {
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 52vh;
+  overflow-y: auto
+}
+
+.yl-msg {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  max-width: 88%
+}
+
+.yl-msg>div {
+  padding: 10px 13px;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  overflow-wrap: anywhere
+}
+
+.yl-msg b {
+  font-weight: 600;
+  font-size: 14.5px
+}
+
+.yl-msg i {
+  font-style: normal;
+  font-size: 12.5px;
+  color: var(--soft)
+}
+
+.yl-msg.ai>div {
+  background: var(--blue-soft);
+  border-top-left-radius: 4px
+}
+
+.yl-msg.ai .spk {
+  flex: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1.5px solid var(--line);
+  background: #fff;
+  color: var(--blue);
+  display: flex;
+  align-items: center;
+  justify-content: center
+}
+
+.yl-msg.ai .spk svg {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round
+}
+
+.yl-msg.sen {
+  align-self: flex-end
+}
+
+.yl-msg.sen>div {
+  background: var(--green-soft);
+  border-top-right-radius: 4px
+}
+
+.yl-msg.sen.no>div {
+  background: var(--red-soft)
+}
+
+.yl-msg.ip {
+  align-self: center;
+  max-width: 100%
+}
+
+.yl-msg.ip>div {
+  background: var(--amber-soft);
+  font-size: 13px
+}
+
+.yl-gorev {
+  margin: 14px 0 8px;
+  font-size: 14.5px;
+  padding: 11px 14px;
+  border-radius: 12px;
+  background: var(--bg);
+  border: 1px dashed var(--line)
+}
+
+.yl-giris {
+  display: flex;
+  gap: 8px
+}
+
+.yl-giris input {
+  flex: 1;
+  min-width: 0;
+  min-height: 46px;
+  border: 1.5px solid var(--line);
+  border-radius: 12px;
+  padding: 10px 14px;
+  font: inherit;
+  font-size: 16px;
+  background: #fff;
+  color: var(--ink)
+}
+
+.yl-giris input:focus {
+  outline: none;
+  border-color: var(--blue)
+}
+
+.yl-giris .yl-btn {
+  flex: none;
+  padding: 10px 14px
+}
+
+.yl-giris .rec {
+  background: var(--red-soft);
+  border-color: var(--red)
+}
 
 /* ---------- ses kontrolleri ---------- */
-.yl-ses{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:10px 0 14px}
-.yl-ses .yl-btn{min-height:42px;padding:8px 14px;font-size:14px;color:var(--blue)}
-.yl-ses .yl-dinle{background:var(--blue-soft);border-color:transparent}
-.yl-ses .yl-ana{color:#fff}
-.yl-hiz{display:inline-flex;border:1.5px solid var(--line);border-radius:999px;padding:3px;background:#fff}
-.yl-hiz button{border:0;background:none;border-radius:999px;padding:6px 11px;min-height:32px;font-size:12.5px;font-weight:700;color:var(--soft)}
-.yl-hiz button.on{background:var(--yl-navy);color:#fff}
-.yl-hiz-ek{margin-left:auto;display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--soft)}
+.yl-ses {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 10px 0 14px
+}
+
+.yl-ses .yl-btn {
+  min-height: 42px;
+  padding: 8px 14px;
+  font-size: 14px;
+  color: var(--blue)
+}
+
+.yl-ses .yl-dinle {
+  background: var(--blue-soft);
+  border-color: transparent
+}
+
+.yl-ses .yl-ana {
+  color: #fff
+}
+
+.yl-hiz {
+  display: inline-flex;
+  border: 1.5px solid var(--line);
+  border-radius: 999px;
+  padding: 3px;
+  background: #fff
+}
+
+.yl-hiz button {
+  border: 0;
+  background: none;
+  border-radius: 999px;
+  padding: 6px 11px;
+  min-height: 32px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--soft)
+}
+
+.yl-hiz button.on {
+  background: var(--yl-navy);
+  color: #fff
+}
+
+.yl-hiz-ek {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  color: var(--soft)
+}
 
 /* ---------- alistirma ekranlari ---------- */
-.yl-qq{margin-top:14px}
-.yl-qb{font-size:12px !important;font-weight:800 !important;letter-spacing:.06em;text-transform:uppercase;color:var(--blue);margin-bottom:6px !important}
-.yl-bosluk{font-size:18px !important;font-weight:600 !important;line-height:1.5;margin:4px 0 14px !important}
-.yl-cozum{margin-top:12px;padding:11px 14px;border-radius:10px;background:var(--bg);font-size:14px;display:flex;flex-direction:column;gap:2px}
-.yl-cozum.ok{background:var(--green-soft)}
-.yl-cozum.no{background:var(--red-soft)}
-.yl-cozum i{font-style:normal;color:var(--soft);font-size:13px}
-.yl-ileri .startquiz{margin-top:14px}
-.yl-sonuc{padding:24px 20px;text-align:center}
-.yl-sonuc-n{font-family:'Fraunces',Georgia,serif;font-size:34px;font-weight:700;color:var(--blue)}
-.yl-sonuc .yl-btns{justify-content:center}
-.yl-seviye{text-align:start;margin-top:14px}
-.yl-sv-row{display:grid;grid-template-columns:minmax(0,1.4fr) 1fr auto;align-items:center;gap:10px;font-size:13.5px;padding:6px 0}
-.yl-seviye .yl-btn{margin-top:14px;width:100%}
-.yl-kart{padding:22px 20px;text-align:center;position:relative}
-.yl-kart .yl-ses{justify-content:center}
-.yl-kart .qq{text-align:start;border:0;padding:0;margin:0}
-.yl-durum{position:absolute;top:12px;right:12px;font-size:11px;font-weight:800;padding:3px 9px;border-radius:999px}
-.yl-d-yeni{background:var(--bg);color:var(--soft)}
-.yl-d-ogreniliyor{background:var(--blue-soft);color:var(--blue)}
-.yl-d-tekrar{background:var(--amber-soft);color:var(--amber)}
-.yl-d-ogrenildi{background:var(--green-soft);color:var(--green)}
-.yl-emo{font-size:44px;line-height:1.2;margin-top:8px}
-.yl-kelime{font-family:'Fraunces',Georgia,serif;font-size:clamp(30px,8vw,40px);font-weight:700;margin:6px 0 2px;overflow-wrap:anywhere}
-.yl-anlam{font-size:20px;font-weight:700;color:var(--green);margin:4px 0 6px}
-.yl-not{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:14px}
-.yl-not button{min-height:48px;border-radius:12px;font-weight:700;font-size:14px;border:1.5px solid var(--line);background:#fff}
-.yl-not .yl-zor{color:var(--amber);border-color:var(--amber-soft);background:var(--amber-soft)}
-.yl-not .fc-again{color:var(--red);border-color:var(--red-soft);background:var(--red-soft)}
-.yl-not .fc-good{color:#fff;border-color:var(--green);background:var(--green)}
-.yl-golge{font-size:21px;font-weight:700;line-height:1.4;margin:6px 0 4px}
-.yl-golge.gizli{filter:blur(7px);user-select:none}
-.yl-anlam-k{color:var(--soft);font-size:14.5px;margin-bottom:10px}
-.yl-kart .mic{margin:14px auto 6px}
-.yl-kart .chip{margin-top:2px}
+.yl-qq {
+  margin-top: 14px
+}
+
+.yl-qb {
+  font-size: 12px !important;
+  font-weight: 800 !important;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 6px !important
+}
+
+.yl-bosluk {
+  font-size: 18px !important;
+  font-weight: 600 !important;
+  line-height: 1.5;
+  margin: 4px 0 14px !important
+}
+
+.yl-cozum {
+  margin-top: 12px;
+  padding: 11px 14px;
+  border-radius: 10px;
+  background: var(--bg);
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px
+}
+
+.yl-cozum.ok {
+  background: var(--green-soft)
+}
+
+.yl-cozum.no {
+  background: var(--red-soft)
+}
+
+.yl-cozum i {
+  font-style: normal;
+  color: var(--soft);
+  font-size: 13px
+}
+
+.yl-ileri .startquiz {
+  margin-top: 14px
+}
+
+.yl-sonuc {
+  padding: 24px 20px;
+  text-align: center
+}
+
+.yl-sonuc-n {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 34px;
+  font-weight: 700;
+  color: var(--blue)
+}
+
+.yl-sonuc .yl-btns {
+  justify-content: center
+}
+
+.yl-seviye {
+  text-align: start;
+  margin-top: 14px
+}
+
+.yl-sv-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) 1fr auto;
+  align-items: center;
+  gap: 10px;
+  font-size: 13.5px;
+  padding: 6px 0
+}
+
+.yl-seviye .yl-btn {
+  margin-top: 14px;
+  width: 100%
+}
+
+.yl-kart {
+  padding: 22px 20px;
+  text-align: center;
+  position: relative
+}
+
+.yl-kart .yl-ses {
+  justify-content: center
+}
+
+.yl-kart .qq {
+  text-align: start;
+  border: 0;
+  padding: 0;
+  margin: 0
+}
+
+.yl-durum {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 3px 9px;
+  border-radius: 999px
+}
+
+.yl-d-yeni {
+  background: var(--bg);
+  color: var(--soft)
+}
+
+.yl-d-ogreniliyor {
+  background: var(--blue-soft);
+  color: var(--blue)
+}
+
+.yl-d-tekrar {
+  background: var(--amber-soft);
+  color: var(--amber)
+}
+
+.yl-d-ogrenildi {
+  background: var(--green-soft);
+  color: var(--green)
+}
+
+.yl-emo {
+  font-size: 44px;
+  line-height: 1.2;
+  margin-top: 8px
+}
+
+.yl-kelime {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: clamp(30px, 8vw, 40px);
+  font-weight: 700;
+  margin: 6px 0 2px;
+  overflow-wrap: anywhere
+}
+
+.yl-anlam {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--green);
+  margin: 4px 0 6px
+}
+
+.yl-not {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  margin-top: 14px
+}
+
+.yl-not button {
+  min-height: 48px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 14px;
+  border: 1.5px solid var(--line);
+  background: #fff
+}
+
+.yl-not .yl-zor {
+  color: var(--amber);
+  border-color: var(--amber-soft);
+  background: var(--amber-soft)
+}
+
+.yl-not .fc-again {
+  color: var(--red);
+  border-color: var(--red-soft);
+  background: var(--red-soft)
+}
+
+.yl-not .fc-good {
+  color: #fff;
+  border-color: var(--green);
+  background: var(--green)
+}
+
+.yl-golge {
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1.4;
+  margin: 6px 0 4px
+}
+
+.yl-golge.gizli {
+  filter: blur(7px);
+  user-select: none
+}
+
+.yl-anlam-k {
+  color: var(--soft);
+  font-size: 14.5px;
+  margin-bottom: 10px
+}
+
+.yl-kart .mic {
+  margin: 14px auto 6px
+}
+
+.yl-kart .chip {
+  margin-top: 2px
+}
 
 /* ---------- mobil ---------- */
-@media(max-width:640px){
-  .yl-hero{padding:22px 18px 18px;border-radius:18px}
-  .yl-cta .yl-btn{flex:1 1 100%}
-  .yl-lvls{grid-template-columns:1fr;gap:14px}
-  .yl-stats{grid-template-columns:1fr 1fr;gap:10px}
-  .yl-tk-ust .yl-btns{width:100%}
-  .yl-tk-ust .yl-btns .yl-btn{flex:1 1 140px}
-  .yl-bolum summary{gap:11px;padding:14px 12px}
-  .yl-bolum:not(:last-child)::after{left:29px}
-  .yl-ogeler{padding:2px 8px 10px}
-  .yl-oge{gap:10px;padding:10px 4px}
-  .yl-oi{width:32px;height:32px;font-size:15px}
-  .yl-hiz-ek>span{display:none}
-  .yl-msg{max-width:96%}
-  .yl-sv-row{grid-template-columns:1fr 70px auto}
+@media(max-width:640px) {
+  .yl-hero {
+    padding: 22px 18px 18px;
+    border-radius: 18px
+  }
+
+  .yl-cta .yl-btn {
+    flex: 1 1 100%
+  }
+
+  .yl-lvls {
+    grid-template-columns: 1fr;
+    gap: 14px
+  }
+
+  .yl-stats {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px
+  }
+
+  .yl-tk-ust .yl-btns {
+    width: 100%
+  }
+
+  .yl-tk-ust .yl-btns .yl-btn {
+    flex: 1 1 140px
+  }
+
+  .yl-bolum summary {
+    gap: 11px;
+    padding: 14px 12px
+  }
+
+  .yl-bolum:not(:last-child)::after {
+    left: 29px
+  }
+
+  .yl-ogeler {
+    padding: 2px 8px 10px
+  }
+
+  .yl-oge {
+    gap: 10px;
+    padding: 10px 4px
+  }
+
+  .yl-oi {
+    width: 32px;
+    height: 32px;
+    font-size: 15px
+  }
+
+  .yl-hiz-ek>span {
+    display: none
+  }
+
+  .yl-msg {
+    max-width: 96%
+  }
+
+  .yl-sv-row {
+    grid-template-columns: 1fr 70px auto
+  }
 }
-@media(max-width:360px){
-  .yl-hero h2{font-size:21px}
-  .yl-stat b{font-size:21px}
-  .yl-not{grid-template-columns:1fr 1fr}
-  .yl-not .fc-good{grid-column:1 / -1}
-  .yl-giris{flex-wrap:wrap}
-  .yl-giris input{flex:1 1 100%}
-  .yl-giris .yl-btn{flex:1}
+
+@media(max-width:360px) {
+  .yl-hero h2 {
+    font-size: 21px
+  }
+
+  .yl-stat b {
+    font-size: 21px
+  }
+
+  .yl-not {
+    grid-template-columns: 1fr 1fr
+  }
+
+  .yl-not .fc-good {
+    grid-column: 1 / -1
+  }
+
+  .yl-giris {
+    flex-wrap: wrap
+  }
+
+  .yl-giris input {
+    flex: 1 1 100%
+  }
+
+  .yl-giris .yl-btn {
+    flex: 1
+  }
 }
 
 /* ---------- v3.1: diyalog, telaffuz, shadowing, dinleme testi, pratik modulleri ---------- */
-.yl-grup{font-family:'Inter',system-ui,sans-serif;font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);margin:22px 0 10px}
-.yl-soru{font-size:15.5px !important;font-weight:700 !important;margin:2px 0 12px !important;color:var(--ink)}
-.yl-kisiler{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;color:var(--soft);margin:-8px 0 12px}
-.yl-kisiler b{color:var(--ink)}
-.yl-diyalog{max-height:none}
-.yl-kim{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--blue)}
-.yl-msg.sen .yl-kim{color:var(--green)}
-.yl-msg.sen .spk{flex:none;width:34px;height:34px;border-radius:50%;border:1.5px solid var(--line);background:#fff;color:var(--green);display:flex;align-items:center;justify-content:center}
-.yl-msg.sen .spk svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.yl-simdi>div{box-shadow:0 0 0 2px rgba(59,120,242,.55)}
-.yl-bitti{font-weight:700;color:var(--green);font-size:14px;padding:0 6px}
-.yl-ipa{font-family:'Inter',system-ui,sans-serif;font-size:20px;font-weight:800;color:var(--blue)}
-.yl-kelimeler{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
-.yl-kk{display:flex;align-items:center;gap:10px;padding:10px 12px}
-.yl-kk>span{flex:1;min-width:0;display:flex;flex-direction:column}
-.yl-kk b{font-size:16px}
-.yl-kk i{font-style:normal;font-size:12.5px;color:var(--soft)}
-.yl-kk .spk,.yl-cift .spk{flex:none;width:34px;height:34px;border-radius:50%;border:1.5px solid var(--line);background:#fff;color:var(--blue);display:flex;align-items:center;justify-content:center}
-.yl-kk .spk svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.yl-tekrar-et{min-height:36px !important;padding:6px 11px !important;font-size:12.5px !important;flex:none}
-.exline .yl-tekrar-et{margin-inline-start:auto}
-.yl-ciftler{display:flex;flex-direction:column;gap:10px}
-.yl-cift{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:12px}
-.yl-cift>.yl-btn{min-height:42px;padding:8px 14px}
-.yl-cift>.yl-btn svg{width:16px;height:16px}
-.yl-cift small{flex:1 1 100%;color:var(--soft);font-size:12.5px}
-.yl-vs{font-weight:800;color:var(--soft)}
-.yl-kars{margin-inline-start:auto;color:var(--blue)}
-.yl-quiz{padding:16px;margin-top:12px}
-.yl-quiz .qq{border:0;padding:0;margin:8px 0}
-.yl-quiz .opts{grid-template-columns:1fr 1fr}
-.yl-kayit-k{padding:14px 16px;margin:14px 0 4px}
-.yl-kayit-b{display:block;font-size:18px;margin-bottom:2px}
-.yl-kayit .yl-btns{margin-top:8px}
-.yl-kayit-on{background:var(--red-soft);border-color:var(--red);color:var(--red)}
-.yl-kart .yl-kayit{text-align:start;margin-top:10px;padding-top:10px;border-top:1px solid var(--line)}
-.yl-adimlar{list-style:none;display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 12px;padding:0;counter-reset:a}
-.yl-adimlar li{counter-increment:a;font-size:12px;font-weight:700;color:var(--soft);background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:4px 10px}
-.yl-adimlar li::before{content:counter(a) ". "}
-.yl-adimlar li.on{background:var(--blue-soft);border-color:transparent;color:var(--blue)}
-.yl-pratik{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;margin-bottom:6px}
-.yl-pk{display:flex;flex-direction:column;align-items:flex-start;gap:3px;text-align:start;padding:16px;font:inherit;color:inherit;cursor:pointer;min-height:118px}
-.yl-pk:hover{border-color:var(--blue)}
-.yl-pk>span{font-size:24px}
-.yl-pk b{font-size:15.5px}
-.yl-pk small{color:var(--soft);font-size:13px;line-height:1.4}
-.yl-pk em{font-style:normal;margin-top:auto;padding-top:6px;font-size:12.5px;font-weight:700;color:var(--blue)}
-.yl-tablo-k{padding:4px;overflow-x:auto}
-.yl-tablo{width:100%;border-collapse:collapse;font-size:13.5px}
-.yl-tablo th,.yl-tablo td{text-align:start;padding:9px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
-.yl-tablo td:nth-child(2){white-space:normal;min-width:150px}
-.yl-tablo th{font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--soft)}
-@media(max-width:640px){
-  .yl-kelimeler{grid-template-columns:1fr}
-  .yl-pratik{grid-template-columns:1fr 1fr;gap:10px}
-  .yl-pk{min-height:0;padding:14px 12px}
-  .yl-kars{margin-inline-start:0}
+.yl-grup {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--soft);
+  margin: 22px 0 10px
 }
-@media(max-width:380px){ .yl-pratik{grid-template-columns:1fr} }
+
+.yl-soru {
+  font-size: 15.5px !important;
+  font-weight: 700 !important;
+  margin: 2px 0 12px !important;
+  color: var(--ink)
+}
+
+.yl-kisiler {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  font-size: 13px;
+  color: var(--soft);
+  margin: -8px 0 12px
+}
+
+.yl-kisiler b {
+  color: var(--ink)
+}
+
+.yl-diyalog {
+  max-height: none
+}
+
+.yl-kim {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--blue)
+}
+
+.yl-msg.sen .yl-kim {
+  color: var(--green)
+}
+
+.yl-msg.sen .spk {
+  flex: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1.5px solid var(--line);
+  background: #fff;
+  color: var(--green);
+  display: flex;
+  align-items: center;
+  justify-content: center
+}
+
+.yl-msg.sen .spk svg {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round
+}
+
+.yl-simdi>div {
+  box-shadow: 0 0 0 2px rgba(59, 120, 242, .55)
+}
+
+.yl-bitti {
+  font-weight: 700;
+  color: var(--green);
+  font-size: 14px;
+  padding: 0 6px
+}
+
+.yl-ipa {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--blue)
+}
+
+.yl-kelimeler {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 10px
+}
+
+.yl-kk {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px
+}
+
+.yl-kk>span {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column
+}
+
+.yl-kk b {
+  font-size: 16px
+}
+
+.yl-kk i {
+  font-style: normal;
+  font-size: 12.5px;
+  color: var(--soft)
+}
+
+.yl-kk .spk,
+.yl-cift .spk {
+  flex: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1.5px solid var(--line);
+  background: #fff;
+  color: var(--blue);
+  display: flex;
+  align-items: center;
+  justify-content: center
+}
+
+.yl-kk .spk svg {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round
+}
+
+.yl-tekrar-et {
+  min-height: 36px !important;
+  padding: 6px 11px !important;
+  font-size: 12.5px !important;
+  flex: none
+}
+
+.exline .yl-tekrar-et {
+  margin-inline-start: auto
+}
+
+.yl-ciftler {
+  display: flex;
+  flex-direction: column;
+  gap: 10px
+}
+
+.yl-cift {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 12px
+}
+
+.yl-cift>.yl-btn {
+  min-height: 42px;
+  padding: 8px 14px
+}
+
+.yl-cift>.yl-btn svg {
+  width: 16px;
+  height: 16px
+}
+
+.yl-cift small {
+  flex: 1 1 100%;
+  color: var(--soft);
+  font-size: 12.5px
+}
+
+.yl-vs {
+  font-weight: 800;
+  color: var(--soft)
+}
+
+.yl-kars {
+  margin-inline-start: auto;
+  color: var(--blue)
+}
+
+.yl-quiz {
+  padding: 16px;
+  margin-top: 12px
+}
+
+.yl-quiz .qq {
+  border: 0;
+  padding: 0;
+  margin: 8px 0
+}
+
+.yl-quiz .opts {
+  grid-template-columns: 1fr 1fr
+}
+
+.yl-kayit-k {
+  padding: 14px 16px;
+  margin: 14px 0 4px
+}
+
+.yl-kayit-b {
+  display: block;
+  font-size: 18px;
+  margin-bottom: 2px
+}
+
+.yl-kayit .yl-btns {
+  margin-top: 8px
+}
+
+.yl-kayit-on {
+  background: var(--red-soft);
+  border-color: var(--red);
+  color: var(--red)
+}
+
+.yl-kart .yl-kayit {
+  text-align: start;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--line)
+}
+
+.yl-adimlar {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 4px 0 12px;
+  padding: 0;
+  counter-reset: a
+}
+
+.yl-adimlar li {
+  counter-increment: a;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--soft);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 4px 10px
+}
+
+.yl-adimlar li::before {
+  content: counter(a) ". "
+}
+
+.yl-adimlar li.on {
+  background: var(--blue-soft);
+  border-color: transparent;
+  color: var(--blue)
+}
+
+.yl-pratik {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 12px;
+  margin-bottom: 6px
+}
+
+.yl-pk {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3px;
+  text-align: start;
+  padding: 16px;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  min-height: 118px
+}
+
+.yl-pk:hover {
+  border-color: var(--blue)
+}
+
+.yl-pk>span {
+  font-size: 24px
+}
+
+.yl-pk b {
+  font-size: 15.5px
+}
+
+.yl-pk small {
+  color: var(--soft);
+  font-size: 13px;
+  line-height: 1.4
+}
+
+.yl-pk em {
+  font-style: normal;
+  margin-top: auto;
+  padding-top: 6px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--blue)
+}
+
+.yl-tablo-k {
+  padding: 4px;
+  overflow-x: auto
+}
+
+.yl-tablo {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px
+}
+
+.yl-tablo th,
+.yl-tablo td {
+  text-align: start;
+  padding: 9px 10px;
+  border-bottom: 1px solid var(--line);
+  white-space: nowrap
+}
+
+.yl-tablo td:nth-child(2) {
+  white-space: normal;
+  min-width: 150px
+}
+
+.yl-tablo th {
+  font-size: 11.5px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--soft)
+}
+
+@media(max-width:640px) {
+  .yl-kelimeler {
+    grid-template-columns: 1fr
+  }
+
+  .yl-pratik {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px
+  }
+
+  .yl-pk {
+    min-height: 0;
+    padding: 14px 12px
+  }
+
+  .yl-kars {
+    margin-inline-start: 0
+  }
+}
+
+@media(max-width:380px) {
+  .yl-pratik {
+    grid-template-columns: 1fr
+  }
+}
 
 /* ---------- v3.2 kalite turu ---------- */
 /* Turkce sayfada CSS buyuk harf, etikette gecen INGILIZCE kelimeyi bozuyordu ("is" -> "İS", "Simple" -> "SİMPLE"). */
-.yl-qb{text-transform:none !important;letter-spacing:.02em !important;font-size:12.5px !important}
-/* Ek pratik baglantilari: 21px yerine rahat dokunma alani */
-.yl-ek .yl-link{display:inline-flex;align-items:center;min-height:36px;padding:4px 12px;margin:3px 2px;border:1.5px solid var(--line);border-radius:999px;background:#fff;text-decoration:none;font-size:13px}
-/* Uygulama ile altindaki tanitim metni gorsel olarak ayrilsin */
-.sx{border-top:1px solid var(--line);padding-top:30px;margin-top:48px}
-@media(max-width:640px){
-  /* Panel disindaki ekranlarda buyuk baslik ilk ekrani yemesin (h1 DOM'da kalir, yalniz kuculur) */
-  body.yl-ic .top{padding-top:14px;padding-bottom:14px}
-  body.yl-ic .top h1,body.yl-ic .top .top-h{font-size:18px;margin:10px auto 0}
-  body.yl-ic .top>p:not(.top-h){display:none}
+.yl-qb {
+  text-transform: none !important;
+  letter-spacing: .02em !important;
+  font-size: 12.5px !important
 }
-@media(max-width:759px){
+
+/* Ek pratik baglantilari: 21px yerine rahat dokunma alani */
+.yl-ek .yl-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 4px 12px;
+  margin: 3px 2px;
+  border: 1.5px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
+  text-decoration: none;
+  font-size: 13px
+}
+
+/* Uygulama ile altindaki tanitim metni gorsel olarak ayrilsin */
+.sx {
+  border-top: 1px solid var(--line);
+  padding-top: 30px;
+  margin-top: 48px
+}
+
+@media(max-width:640px) {
+
+  /* Panel disindaki ekranlarda buyuk baslik ilk ekrani yemesin (h1 DOM'da kalir, yalniz kuculur) */
+  body.yl-ic .top {
+    padding-top: 14px;
+    padding-bottom: 14px
+  }
+
+  body.yl-ic .top h1,
+  body.yl-ic .top .top-h {
+    font-size: 18px;
+    margin: 10px auto 0
+  }
+
+  body.yl-ic .top>p:not(.top-h) {
+    display: none
+  }
+}
+
+@media(max-width:759px) {
+
   /* Alt menude sagda baska sekme oldugu belli olsun */
-  .nav.yl-dahavar{-webkit-mask-image:linear-gradient(to right,#000 80%,transparent);mask-image:linear-gradient(to right,#000 80%,transparent)}
-  .dict-pages button{min-height:36px}
+  .nav.yl-dahavar {
+    -webkit-mask-image: linear-gradient(to right, #000 80%, transparent);
+    mask-image: linear-gradient(to right, #000 80%, transparent)
+  }
+
+  .dict-pages button {
+    min-height: 36px
+  }
 }
 
 /* ---------- v3.3 panel hiyerarsisi: CTA -> bugun -> yol -> pratik -> ilerleme ---------- */
-.yl-hero-ilerleme{margin-top:14px !important}
-.yl-siradaki{width:100%;display:flex;align-items:center;gap:12px;text-align:start;padding:14px 16px;margin-bottom:12px;font:inherit;color:var(--ink);cursor:pointer;border-color:rgba(59,120,242,.45)}
-.yl-siradaki:hover{border-color:var(--blue)}
-.yl-siradaki .yl-oi{background:var(--blue-soft)}
-.yl-siradaki .yl-od{background:linear-gradient(135deg,var(--yl-btn1),var(--yl-btn2));color:#fff}
-.yl-ilerleme{padding:18px 20px;margin-bottom:12px}
-.yl-ilerleme .yl-lvls{margin-top:0;padding-top:0;border-top:0}
-.yl-ilerleme .yl-lvl b{color:var(--ink)}
-.yl-ilerleme .yl-lvl span,.yl-ilerleme .yl-lvl small{color:var(--soft)}
-.yl-ilerleme .yl-hero-hiz{color:var(--soft);padding-top:14px;border-top:1px solid var(--line)}
-@media(prefers-reduced-motion:reduce){.yl-bar i,.yl-ok{transition:none}}
+.yl-hero-ilerleme {
+  margin-top: 14px !important
+}
+
+.yl-siradaki {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: start;
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  font: inherit;
+  color: var(--ink);
+  cursor: pointer;
+  border-color: rgba(59, 120, 242, .45)
+}
+
+.yl-siradaki:hover {
+  border-color: var(--blue)
+}
+
+.yl-siradaki .yl-oi {
+  background: var(--blue-soft)
+}
+
+.yl-siradaki .yl-od {
+  background: linear-gradient(135deg, var(--yl-btn1), var(--yl-btn2));
+  color: #fff
+}
+
+.yl-ilerleme {
+  padding: 18px 20px;
+  margin-bottom: 12px
+}
+
+.yl-ilerleme .yl-lvls {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0
+}
+
+.yl-ilerleme .yl-lvl b {
+  color: var(--ink)
+}
+
+.yl-ilerleme .yl-lvl span,
+.yl-ilerleme .yl-lvl small {
+  color: var(--soft)
+}
+
+.yl-ilerleme .yl-hero-hiz {
+  color: var(--soft);
+  padding-top: 14px;
+  border-top: 1px solid var(--line)
+}
+
+@media(prefers-reduced-motion:reduce) {
+
+  .yl-bar i,
+  .yl-ok {
+    transition: none
+  }
+}
