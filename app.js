@@ -38,7 +38,7 @@ S.games.rounds = S.games.rounds || 0;
     S.streak.last = today;
     store.write(S);
   }
-  $("#streak").textContent = " " + S.streak.count + " gün";
+  const streakLabel = $("#streak .streak-count") || $("#streak"); streakLabel.textContent = S.streak.count + " gün";
 })();
 
 /* ---------- ses (speechSynthesis) ---------- */
@@ -979,7 +979,7 @@ function touchStreak() {
   S.streak.count = (S.streak.last === dun) ? S.streak.count + 1 : 1;
   S.streak.last = bugun;
   store.write(S);
-  const el = $("#streak"); if (el) el.textContent = " " + S.streak.count + " gün";
+  const el = $("#streak .streak-count") || $("#streak"); if (el) el.textContent = S.streak.count + " gün";
 }
 function gTurBitti() { S.games.rounds = (S.games.rounds || 0) + 1; store.write(S); touchStreak(); }
 
