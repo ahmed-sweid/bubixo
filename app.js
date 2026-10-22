@@ -67,7 +67,7 @@ const SPK = '<svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="
 
 /* ---------- gezinme: dört ana sekme, özellikler alt ekranlarda ---------- */
 const TAB_GROUP = {
-  dersler:"dersler", kelime:"kelime", pratik:"pratik", kesfet:"kesfet",
+  yol:"yol", dersler:"dersler", kelime:"kelime", pratik:"pratik", kesfet:"kesfet",
   gramer:"pratik", telaffuz:"pratik", kur:"pratik", oyun:"pratik",
   hikaye:"kesfet", gunluk:"kesfet"
 };
