@@ -131,6 +131,8 @@ function renderHub(id) {
   target.querySelectorAll("[data-open]").forEach(b=>b.onclick=()=>showView(b.dataset.open));
 }
 function showView(v, options) {
+  const view = $("#v-" + v);
+  if (!view) return;
   options = options || {};
   const isMainTab = MAIN_TABS.includes(v);
   if (v !== bxCurrentView && !options.replace && !isMainTab && bxCurrentView) bxRouteStack.push(bxCurrentView);
@@ -140,8 +142,6 @@ function showView(v, options) {
   const group = TAB_GROUP[v] || "yol";
   document.querySelectorAll("#nav button").forEach(b => b.classList.toggle("on", b.dataset.v === group));
   document.querySelectorAll(".view").forEach(x => x.classList.remove("on"));
-  const view = $("#v-" + v);
-  if (!view) return;
   view.classList.add("on");
   window.scrollTo({ top: 0 });
   if (v === "dersler") renderUnits();
