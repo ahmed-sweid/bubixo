@@ -2246,3 +2246,8 @@ h1, h2, h3, .serif, .fcard .w, .pr-word { font-family: 'WF Visual Sans Variable'
   box-shadow: none;
 }
 .yl-ana:hover { filter: none; background: #222; }
+
+
+/* Discover now has one focused daily-content entry; use the available width intentionally. */
+#v-kesfet .hub-grid { grid-template-columns: minmax(0, 1fr); }
+#v-kesfet .hub-item { width: 100%; max-width: 760px; }
