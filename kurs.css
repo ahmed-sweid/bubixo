@@ -2401,3 +2401,82 @@ h1, h2, h3, .serif, .fcard .w, .pr-word { font-family: 'WF Visual Sans Variable'
 @media (prefers-reduced-motion: reduce) {
   #v-kelime .words-searchbox, #v-kelime .dict-levels .lvl, #v-kelime .dict-row, #v-kelime .words-deck { transition: none; }
 }
+
+
+/* App header — restrained wordmark and compact learning streak. */
+.top {
+  padding: 15px clamp(18px, 4vw, 36px);
+  background: var(--bg);
+  color: var(--ink);
+  border-bottom: 1px solid var(--line);
+}
+.top-row {
+  max-width: 1080px;
+  min-height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.top .brand {
+  display: inline-flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 9px;
+  color: var(--ink);
+  text-decoration: none;
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: normal;
+}
+.top .brand-wordmark {
+  color: var(--ink);
+  font-size: 23px;
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: -.075em;
+}
+.top .brand-period { color: var(--green); }
+.top .brand-caption {
+  color: var(--soft);
+  font-size: 10px;
+  line-height: 1;
+  font-weight: 500;
+  letter-spacing: .09em;
+}
+.top .streak {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 34px;
+  padding: 7px 11px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: #fff;
+  color: var(--ink);
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 500;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.top .streak svg {
+  display: block;
+  width: 15px;
+  height: 15px;
+  fill: none;
+  stroke: var(--green);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.top .streak-count { display: inline-block; }
+@media (max-width: 480px) {
+  .top { padding: 13px 16px; }
+  .top-row { gap: 10px; }
+  .top .brand { gap: 7px; }
+  .top .brand-wordmark { font-size: 21px; }
+  .top .brand-caption { font-size: 9px; }
+  .top .streak { min-height: 32px; padding: 7px 9px; gap: 6px; }
+}
