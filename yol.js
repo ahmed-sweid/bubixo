@@ -264,10 +264,11 @@
   var yolIc = false;
   function yolGoster(fn) { yolIc = true; try { showView("yol"); } finally { yolIc = false; } if (fn) { document.body.classList.add("yl-ic"); fn(); } }
   function git(tip, id) {
-    if (tip === "ders") { showView("dersler"); renderLesson(id); }
-    else if (tip === "gramer") { showView("gramer"); renderTense(id); }
-    else if (tip === "hikaye") { showView("hikaye"); openStory(id); }
-    else if (tip === "deste") { showView("kelime"); startDeck(id); }
+    /* Derin bağlantılarda kaynağı koru: detay ekranından geri dönüş Öğren'e gider. */
+    if (tip === "ders") { showView("dersler"); renderLesson(id, "yol"); }
+    else if (tip === "gramer") { showView("gramer"); renderTense(id, "yol"); }
+    else if (tip === "hikaye") { showView("hikaye"); openStory(id, "yol"); }
+    else if (tip === "deste") { showView("kelime"); startDeck(id, "yol"); }
     else if (tip === "kur") { var p = id.split("-"); S.kur.cat = p[0]; S.kur.lvl = +p[1]; kaydet(); showView("kur"); }
     else if (tip === "dinleme") { var b1 = BOLUM(id); if (b1) dinlemeAc(b1); }
     else if (tip === "konusma") { var b2 = BOLUM(id); if (b2) konusmaAc(b2); }
