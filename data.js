@@ -237,7 +237,7 @@ const DECKS = [
       { en: "how", tr: "nasıl", ex: "How are you today?", xt: "Bugün nasılsın?" }]
   },
   {
-    id: "d2", em: "🍽", title: "Yemek ve İçecek", words: [
+    id: "d2", em: "", title: "Yemek ve İçecek", words: [
       { en: "water", tr: "su", ex: "A glass of water, please.", xt: "Bir bardak su, lütfen." },
       { en: "bread", tr: "ekmek", ex: "The bread is fresh.", xt: "Ekmek taze." },
       { en: "tea", tr: "çay", ex: "Turkish tea is famous.", xt: "Türk çayı meşhurdur." },
@@ -284,7 +284,7 @@ const DECKS = [
       { en: "late", tr: "geç", ex: "Don't be late!", xt: "Geç kalma!" }]
   },
   {
-    id: "d5", em: "🏙", title: "Şehirde", words: [
+    id: "d5", em: "", title: "Şehirde", words: [
       { en: "street", tr: "cadde, sokak", ex: "The hotel is on this street.", xt: "Otel bu caddede." },
       { en: "bus station", tr: "otobüs durağı", ex: "Where is the bus station?", xt: "Otobüs durağı nerede?" },
       { en: "airport", tr: "havalimanı", ex: "The airport is far from here.", xt: "Havalimanı buraya uzak." },
@@ -329,7 +329,7 @@ const DECKS = [
       { en: "tired", tr: "yorgun", ex: "I am tired after work.", xt: "İşten sonra yorgunum." }]
   },
   {
-    id: "d8", em: "✈", title: "Seyahat", words: [
+    id: "d8", em: "", title: "Seyahat", words: [
       { en: "ticket", tr: "bilet", ex: "Two tickets, please.", xt: "İki bilet, lütfen." },
       { en: "passport", tr: "pasaport", ex: "Here is my passport.", xt: "İşte pasaportum." },
       { en: "hotel", tr: "otel", ex: "The hotel has a pool.", xt: "Otelin havuzu var." },
