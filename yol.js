@@ -77,7 +77,7 @@
   var STORY = function (id) { return STORIES.find(function (x) { return x.id === id; }); };
   var KUR_AD = { question: "Soru", present: "Geniş Zaman", past: "Geçmiş Zaman", future: "Gelecek Zaman" };
   var SEV_AD = ["", "Kolay", "Orta", "Zor"];
-  var HOP = typeof SPK === "string" ? SPK : "🔊";
+  var HOP = typeof SPK === "string" ? SPK : "";
 
   /* ======================= OGRENME YOLU TANIMI =======================
      Mevcut icerigin TAMAMI bes bolume dagitildi (10 ders, 10 deste, 6 gramer,
@@ -521,7 +521,7 @@
           '<div class="opts">' + q.o.map(function (o, oi) { return '<button data-o="' + oi + '">' + h(o) + '</button>'; }).join("") + '</div>' +
           '<div class="expl">' + h(q.e) + '</div></div>';
       } else {
-        govde = '<div class="qq yl-qq"><p class="yl-qb">🎧 ' + h(q.baslik) + '</p>' + sesCubugu() +
+        govde = '<div class="qq yl-qq"><p class="yl-qb"> ' + h(q.baslik) + '</p>' + sesCubugu() +
           (q.soru && q.tip !== "mc" ? '<p class="yl-soru">' + h(q.soru) + '</p>' : "") +
           (q.tip === "bosluk" ? '<p class="yl-bosluk" lang="en">' + h(q.gosterim) + '</p>' : "") +
           (q.tip === "sirala"
@@ -581,7 +581,7 @@
       var ek = opt.bitince ? opt.bitince(dogru, sorular.length, oran) : "";
       kutu.innerHTML = ust() +
         '<div class="card yl-sonuc"><div class="yl-sonuc-n">' + dogru + '/' + sorular.length + '</div>' +
-        (opt.puanYok ? "" : '<p>' + (oran >= 0.7 ? "🎉 Geçtin! Bu adım tamamlandı." : "Geçmek için %70 gerekiyor. İlgili dersleri tekrar edip yeniden dene.") + '</p>') + (ek || "") +
+        (opt.puanYok ? "" : '<p>' + (oran >= 0.7 ? " Geçtin! Bu adım tamamlandı." : "Geçmek için %70 gerekiyor. İlgili dersleri tekrar edip yeniden dene.") + '</p>') + (ek || "") +
         '<div class="yl-btns"><button class="yl-btn yl-ana" id="yltekrar">Tekrar dene</button><button class="yl-btn" id="ylpanel">' + (opt.geri ? "Geri dön" : "Panele dön") + '</button></div></div></div>';
       $q("#ylgeri").onclick = opt.geri || panel; $q("#ylpanel").onclick = opt.geri || panel;
       $q("#yltekrar").onclick = opt.yeniden;
@@ -680,7 +680,7 @@
       }
       function ciz() {
         if (!kuyruk.length) {
-          kutu.innerHTML = ust() + '<div class="card yl-sonuc"><p>' + (mod === "tekrar" ? "Bugün tekrar edilecek kelimen yok. 👏" : "Bu aralıkta çalışılmamış kelime kalmadı. 👏") + '</p>' +
+          kutu.innerHTML = ust() + '<div class="card yl-sonuc"><p>' + (mod === "tekrar" ? "Bugün tekrar edilecek kelimen yok. " : "Bu aralıkta çalışılmamış kelime kalmadı. ") + '</p>' +
             '<div class="yl-btns"><button class="yl-btn yl-ana" id="ylyeni">Yeni kelime öğren</button><button class="yl-btn" id="ylpanel">Panele dön</button></div></div></div>';
           bagla(); $q("#ylpanel").onclick = panel; $q("#ylyeni").onclick = function () { tekrarAc({ mod: "yeni" }); };
           return;
@@ -701,7 +701,7 @@
           var yanlisT = sec(WORDS.filter(function (x) { return x.t !== w.t; }).slice(0, 1500).map(function (x) { return x.t; }), 3);
           var o = karistir(yanlisT.concat([w.t]));
           kart = '<div class="card yl-kart"><span class="yl-durum yl-d-' + durum + '">' + etiket + '</span>' +
-            '<p class="yl-qb">🎧 Dinle ve anlamını seç</p>' + sesCubugu() +
+            '<p class="yl-qb"> Dinle ve anlamını seç</p>' + sesCubugu() +
             '<div class="qq"><div class="opts">' + o.map(function (t, oi) { return '<button data-o="' + oi + '" data-t="' + h(t) + '">' + h(t) + '</button>'; }).join("") + '</div></div>' +
             '<div class="yl-cozum" id="ylcozum" hidden></div><button class="startquiz" id="yldevam" hidden>Devam →</button></div>';
         }
@@ -764,7 +764,7 @@
         if (pos >= liste.length) {
           Y.konus[b.id] = 1; kaydet();
           kutu.innerHTML = '<div class="yl-sub"><div class="lesson-head"><button class="backbtn" id="ylgeri">← Panel</button></div>' +
-            '<div class="card yl-sonuc"><div class="yl-sonuc-n">🎙️ 5/5</div><p>Konuşma adımı tamamlandı. Aynı cümleleri yarın metne bakmadan tekrar etmeyi dene.</p>' +
+            '<div class="card yl-sonuc"><div class="yl-sonuc-n">🎙 5/5</div><p>Konuşma adımı tamamlandı. Aynı cümleleri yarın metne bakmadan tekrar etmeyi dene.</p>' +
             '<div class="yl-btns"><button class="yl-btn yl-ana" id="yltekrar">Yeni 5 cümle</button><button class="yl-btn" id="ylpanel">Panele dön</button></div></div></div>';
           $q("#ylgeri").onclick = panel; $q("#ylpanel").onclick = panel; $q("#yltekrar").onclick = function () { konusmaAc(b); };
           return;
@@ -835,7 +835,7 @@
   };
   var SENARYO = [
     {
-      id: "kafe", em: "☕", ad: "Kafede sipariş ver", rol: "Barista", hedef: "Bir içecek ve atıştırmalık sipariş et, sonra ödemeyi yap.",
+      id: "kafe", em: "", ad: "Kafede sipariş ver", rol: "Barista", hedef: "Bir içecek ve atıştırmalık sipariş et, sonra ödemeyi yap.",
       adimlar: [
         { ai: "Hi there! What can I get you?", tr: "Merhaba! Ne alırsınız?", gorev: "Bir kahve iste (latte, cappuccino ya da sade kahve).", anahtar: [["coffee", "latte", "cappuccino", "americano", "espresso", "tea"]], ornek: "Can I have a latte, please?" },
         { ai: "Sure. What size would you like: small, medium or large?", tr: "Tabii. Hangi boy olsun: küçük, orta ya da büyük?", gorev: "Boyutu söyle.", anahtar: [["small", "medium", "large", "regular", "big"]], ornek: "Medium, please." },
@@ -845,7 +845,7 @@
       son: { ai: "Thank you! Your drink will be ready in a minute.", tr: "Teşekkürler! İçeceğiniz bir dakika içinde hazır olur." }
     },
     {
-      id: "otel", em: "🏨", ad: "Otelde oda ayırt", rol: "Resepsiyonist", hedef: "Oda ayırt, kaç gece kalacağını söyle ve kahvaltı saatini sor.",
+      id: "otel", em: "", ad: "Otelde oda ayırt", rol: "Resepsiyonist", hedef: "Oda ayırt, kaç gece kalacağını söyle ve kahvaltı saatini sor.",
       adimlar: [
         { ai: "Good evening, welcome to the Park Hotel. How can I help you?", tr: "İyi akşamlar, Park Otel'e hoş geldiniz. Nasıl yardımcı olabilirim?", gorev: "Bir oda ayırtmak istediğini söyle.", anahtar: [["room"]], ornek: "I'd like to book a room, please." },
         { ai: "Of course. For how many nights?", tr: "Tabii. Kaç gece için?", gorev: "Kaç gece kalacağını söyle.", anahtar: [["one", "two", "three", "four", "five", "six", "seven", "night", "nights", "week", "1", "2", "3", "4", "5", "6", "7"]], ornek: "For three nights." },
@@ -855,7 +855,7 @@
       son: { ai: "Breakfast is from seven to ten. Enjoy your stay!", tr: "Kahvaltı yediden ona kadar. İyi konaklamalar!" }
     },
     {
-      id: "tanisma", em: "👋", ad: "Kendini tanıt", rol: "Yeni bir arkadaş (Emma)", hedef: "Adını, nereli olduğunu, ne iş yaptığını ve bir hobini söyle.",
+      id: "tanisma", em: "", ad: "Kendini tanıt", rol: "Yeni bir arkadaş (Emma)", hedef: "Adını, nereli olduğunu, ne iş yaptığını ve bir hobini söyle.",
       adimlar: [
         { ai: "Hi! I'm Emma. What's your name?", tr: "Merhaba! Ben Emma. Senin adın ne?", gorev: "Adını söyle.", anahtar: [["name", "im", "i am", "call"]], ornek: "Hi Emma, my name is Deniz." },
         { ai: "Nice to meet you! Where are you from?", tr: "Tanıştığımıza memnun oldum! Nerelisin?", gorev: "Nereli olduğunu söyle.", anahtar: [["from", "turkey", "turkiye", "istanbul", "ankara", "izmir"]], ornek: "I'm from Turkey. I live in Izmir." },
@@ -864,7 +864,7 @@
       son: { ai: "That sounds fun! It was nice talking to you.", tr: "Kulağa eğlenceli geliyor! Seninle konuşmak güzeldi." }
     },
     {
-      id: "yol", em: "🧭", ad: "Yol sor", rol: "Yoldan geçen biri", hedef: "İstasyonun yerini sor, uzak olup olmadığını öğren ve teşekkür et.",
+      id: "yol", em: "", ad: "Yol sor", rol: "Yoldan geçen biri", hedef: "İstasyonun yerini sor, uzak olup olmadığını öğren ve teşekkür et.",
       adimlar: [
         { ai: "Hello! You look a little lost. Can I help you?", tr: "Merhaba! Biraz kaybolmuş gibisiniz. Yardım edebilir miyim?", gorev: "Tren istasyonunun nerede olduğunu sor.", anahtar: [["station"]], ornek: "Yes, please. Where is the train station?" },
         { ai: "Go straight ahead and turn left at the traffic lights.", tr: "Düz gidin ve trafik ışıklarından sola dönün.", gorev: "Uzak olup olmadığını sor.", anahtar: [["far", "long", "minutes", "walk", "near", "close"]], ornek: "Is it far?" },
@@ -873,7 +873,7 @@
       son: { ai: "You're welcome. Have a nice day!", tr: "Rica ederim. İyi günler!" }
     },
     {
-      id: "alisveris", em: "🛍️", ad: "Alışveriş yap", rol: "Satış görevlisi", hedef: "Tişört ara, bedenini söyle, deneyip fiyatını sor ve satın al.",
+      id: "alisveris", em: "🛍", ad: "Alışveriş yap", rol: "Satış görevlisi", hedef: "Tişört ara, bedenini söyle, deneyip fiyatını sor ve satın al.",
       adimlar: [
         { ai: "Hi, can I help you?", tr: "Merhaba, yardımcı olabilir miyim?", gorev: "Bir tişört aradığını söyle.", anahtar: [["t shirt", "tshirt", "shirt"]], ornek: "Yes, I'm looking for a T-shirt." },
         { ai: "What size are you?", tr: "Bedeniniz ne?", gorev: "Bedenini söyle.", anahtar: [["small", "medium", "large", "s", "m", "l", "xl"]], ornek: "Medium, please." },
@@ -910,7 +910,7 @@
       function balon(m) {
         if (m.k === "ai") return '<div class="yl-msg ai"><button class="spk" data-say="' + h(m.en) + '" aria-label="Dinle">' + HOP + '</button><div><b lang="en">' + h(m.en) + '</b><i>' + h(m.tr) + '</i></div></div>';
         if (m.k === "sen") return '<div class="yl-msg sen' + (m.ok ? "" : " no") + '"><div><b lang="en">' + h(m.en) + '</b>' + (m.ok ? "" : '<i>Tam anlaşılmadı — ipucuna bak, tekrar dene.</i>') + '</div></div>';
-        return '<div class="yl-msg ip"><div>💡 Örnek cevap: <b lang="en">' + h(m.en) + '</b></div></div>';
+        return '<div class="yl-msg ip"><div> Örnek cevap: <b lang="en">' + h(m.en) + '</b></div></div>';
       }
       function ciz() {
         var gorev = bitti ? "" : sc.adimlar[adim].gorev;
@@ -918,12 +918,12 @@
           '<p class="yl-kicker">' + sc.em + ' ' + h(sc.rol) + ' · cihazda çalışır</p><h2 class="sec-title">' + h(sc.ad) + '</h2><p class="sec-sub">' + h(sc.hedef) + '</p>' +
           '<div class="card yl-sohbet" id="ylsohbet">' + gecmis.map(balon).join("") + '</div>' +
           (bitti
-            ? '<div class="card yl-sonuc"><p>🎉 Senaryoyu tamamladın.</p><div class="yl-btns"><button class="yl-btn yl-ana" id="ylbastan">Baştan oyna</button><button class="yl-btn" id="yldiger">Başka senaryo</button></div></div>'
+            ? '<div class="card yl-sonuc"><p> Senaryoyu tamamladın.</p><div class="yl-btns"><button class="yl-btn yl-ana" id="ylbastan">Baştan oyna</button><button class="yl-btn" id="yldiger">Başka senaryo</button></div></div>'
             : '<div class="yl-gorev"><b>Görevin:</b> ' + h(gorev) + '</div>' +
             '<form class="yl-giris" id="ylform"><input id="ylin" lang="en" autocomplete="off" maxlength="200" placeholder="İngilizce yaz…" aria-label="Cevabın">' +
-            (SR_ ? '<button type="button" class="yl-btn" id="ylmic" aria-label="Söyle" title="Konuşma tanıma tarayıcının kendi hizmetiyle yapılır">🎤</button>' : "") +
+            (SR_ ? '<button type="button" class="yl-btn" id="ylmic" aria-label="Söyle" title="Konuşma tanıma tarayıcının kendi hizmetiyle yapılır"></button>' : "") +
             '<button class="yl-btn yl-ana" type="submit">Gönder</button></form>' +
-            '<div class="yl-btns yl-kucuk"><button class="yl-btn" id="ylipucu">💡 İpucu</button><button class="yl-btn" id="ylgec">Geç →</button></div>') +
+            '<div class="yl-btns yl-kucuk"><button class="yl-btn" id="ylipucu"> İpucu</button><button class="yl-btn" id="ylgec">Geç →</button></div>') +
           (sesAdresi(sc.adimlar[0].ai, aiG) ? "" : '<p class="yl-mini">Partnerin replikleri için kayıtlı ses henüz yok; şimdilik tarayıcının İngilizce sesiyle okunuyor.</p>') + '</div>';
         $q("#ylgeri").onclick = function () { if (rec) { try { rec.stop(); } catch (e) { } } sesDurdur(); aiListe(); };
         hizBagla(kutu);
@@ -1231,13 +1231,13 @@
         var oran = dogru / N, p = Y.pron[t.id] = Y.pron[t.id] || {};
         if (p.quiz == null || oran > p.quiz) p.quiz = oran;
         p.calisildi = 1; p.t = Date.now(); kaydet();
-        kok.innerHTML = '<p class="yl-qb">🎧 Hangisini duydun?</p><p><b>' + dogru + '/' + N + '</b> doğru ayırt ettin. ' + (oran >= 0.8 ? "Kulağın bu farkı yakalıyor." : "Çiftleri birkaç kez karşılaştırıp yeniden dene.") + '</p><button class="yl-btn" id="ylqyeni">Yeniden dene</button>';
+        kok.innerHTML = '<p class="yl-qb"> Hangisini duydun?</p><p><b>' + dogru + '/' + N + '</b> doğru ayırt ettin. ' + (oran >= 0.8 ? "Kulağın bu farkı yakalıyor." : "Çiftleri birkaç kez karşılaştırıp yeniden dene.") + '</p><button class="yl-btn" id="ylqyeni">Yeniden dene</button>';
         $q("#ylqyeni").onclick = function () { tur = 0; dogru = 0; yeni(); };
         return;
       }
       var c = t.cift[Math.floor(Math.random() * t.cift.length)], hangi = Math.random() < 0.5 ? 0 : 1;
       cevap = c[hangi];
-      kok.innerHTML = '<p class="yl-qb">🎧 Hangisini duydun? · ' + (tur + 1) + '/' + N + '</p>' +
+      kok.innerHTML = '<p class="yl-qb"> Hangisini duydun? · ' + (tur + 1) + '/' + N + '</p>' +
         '<div class="yl-btns yl-kucuk"><button class="yl-btn" id="ylqcal">' + HOP + ' Dinle</button></div>' +
         '<div class="qq"><div class="opts" lang="en">' + [c[0], c[1]].map(function (w) { return '<button data-w="' + h(w) + '">' + h(w) + '</button>'; }).join("") + '</div></div>' +
         '<div id="ylqsonuc"></div>';
@@ -1254,7 +1254,7 @@
         };
       });
     }
-    kok.innerHTML = '<p class="yl-qb">🎧 Hangisini duydun?</p><p class="yl-mini">' + N + ' tur: bir kelime çalınır, çiftin hangisi olduğunu seç. Bu bir dinleme (ayırt etme) testidir, telaffuz puanı değildir.</p><button class="yl-btn yl-ana" id="ylqbasla">Başla</button>';
+    kok.innerHTML = '<p class="yl-qb"> Hangisini duydun?</p><p class="yl-mini">' + N + ' tur: bir kelime çalınır, çiftin hangisi olduğunu seç. Bu bir dinleme (ayırt etme) testidir, telaffuz puanı değildir.</p><button class="yl-btn yl-ana" id="ylqbasla">Başla</button>';
     $q("#ylqbasla").onclick = function () { yeni(); oynat(cevap, "f"); };
   }
 
@@ -1294,7 +1294,7 @@
           var sb = $q("#ylsonraki"); if (sb) sb.onclick = function () {
             bitenler[pos] = 1; kaydet(); sesDurdur(); kayitDurdur();
             if (pos + 1 >= L.length) {
-              kutu.innerHTML = '<div class="yl-sub">' + ustBaslik("Panel", "Shadowing " + lv, "Set bitti 🎉", "") +
+              kutu.innerHTML = '<div class="yl-sub">' + ustBaslik("Panel", "Shadowing " + lv, "Set bitti ", "") +
                 '<div class="card yl-sonuc"><p>' + sayac(lv) + '/' + L.length + ' cümle tamamlandı. Yarın aynı cümleleri metne bakmadan, 1x hızda dene.</p>' +
                 '<div class="yl-btns"><button class="yl-btn yl-ana" id="ylbas">Baştan</button>' + (lv === "A1" ? '<button class="yl-btn" id="ylA2">A2 setine geç</button>' : "") + '<button class="yl-btn" id="ylpanel">Panele dön</button></div></div></div>';
               hizBagla(kutu); $q("#ylgeri").onclick = panel; $q("#ylpanel").onclick = panel;
@@ -1358,7 +1358,7 @@
         var kutu = $q("#v-yol");
         var kart = function (lv, alt) {
           var r = Y.dtest[lv];
-          return '<button class="card yl-ai-kart" data-l="' + lv + '"><span class="yl-ai-em">🎧</span><b>Dinleme testi ' + lv + '</b><small>' + alt + '</small>' +
+          return '<button class="card yl-ai-kart" data-l="' + lv + '"><span class="yl-ai-em"></span><b>Dinleme testi ' + lv + '</b><small>' + alt + '</small>' +
             (r ? '<span class="due" style="background:var(--green-soft);color:var(--green)">en iyi %' + Math.round(r.en_iyi * 100) + ' · son: ' + r.son.dogru + '/' + r.son.toplam + '</span>' : '<span class="due">10 soru</span>') + '</button>';
         };
         kutu.innerHTML = '<div class="yl-sub">' + ustBaslik("Panel", "Dinleme", "Dinleme testleri",
@@ -1383,7 +1383,7 @@
             r.en_iyi = Math.max(r.en_iyi || 0, oran);
             r.gecmis = (r.gecmis || []).concat([r.son]).slice(-50);
             kaydet();
-            return '<p>' + (oran >= 0.8 ? "🎉 Çok iyi — kulağın bu seviyeye alışmış." : oran >= 0.5 ? "İyi gidiyor. Kaçırdığın soruları 0.75x ile tekrar dinle." : "Önce diyalogları ve shadowing'i çalış, sonra yeniden dene.") +
+            return '<p>' + (oran >= 0.8 ? " Çok iyi — kulağın bu seviyeye alışmış." : oran >= 0.5 ? "İyi gidiyor. Kaçırdığın soruları 0.75x ile tekrar dinle." : "Önce diyalogları ve shadowing'i çalış, sonra yeniden dene.") +
               '</p><p class="yl-mini">Sonuç kaydedildi · en iyi: %' + Math.round(r.en_iyi * 100) + '</p>';
           },
           yeniden: function () { dtestAc(lv); }
@@ -1409,7 +1409,7 @@
   }
 
   /* ======================= PANEL ======================= */
-  var IKON = { ders: "📘", kelime: "🗂️", gramer: "🧩", dinleme: "🎧", cumle: "🔤", hikaye: "📖", konusma: "🎙️", test: "✅" };
+  var IKON = { ders: "", kelime: "🗂", gramer: "", dinleme: "", cumle: "", hikaye: "", konusma: "🎙", test: "" };
   var TIP_AD = { ders: "Ders", kelime: "Kelime", gramer: "Gramer", dinleme: "Dinleme", cumle: "Cümle kur", hikaye: "Hikâye", konusma: "Konuşma", test: "Mini test" };
   function panel(acik) {
     if (!$q("#v-yol").classList.contains("on")) { yolGoster(function () { panel(acik); }); return; }
@@ -1453,7 +1453,7 @@
     var tekrar =
       '<section class="card yl-tekrar-k">' +
       '<div class="yl-tk-ust"><div><p class="yl-kicker">Kelime tekrar sistemi</p>' +
-      '<h3>' + (vade ? 'Bugün tekrar etmen gereken <b>' + vade + '</b> kelime var' : (Object.keys(Y.vocab).length ? "Bugünkü tekrarların bitti 👏" : "3000 kelimelik sözlükle başla")) + '</h3>' +
+      '<h3>' + (vade ? 'Bugün tekrar etmen gereken <b>' + vade + '</b> kelime var' : (Object.keys(Y.vocab).length ? "Bugünkü tekrarların bitti " : "3000 kelimelik sözlükle başla")) + '</h3>' +
       '<p class="yl-mini">Yanlış bildiğin kelime daha sık, doğru bildiğin daha seyrek gelir.</p></div>' +
       '<div class="yl-btns">' + (vade ? '<button class="yl-btn yl-ana" id="yltekrarbas">Tekrara başla</button>' : "") + '<button class="yl-btn' + (vade ? "" : " yl-ana") + '" id="ylyeni">10 yeni kelime</button></div></div>' +
       '<div class="yl-vbar" aria-hidden="true">' +
