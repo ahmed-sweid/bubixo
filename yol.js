@@ -764,7 +764,7 @@
         if (pos >= liste.length) {
           Y.konus[b.id] = 1; kaydet();
           kutu.innerHTML = '<div class="yl-sub"><div class="lesson-head"><button class="backbtn" id="ylgeri">← Panel</button></div>' +
-            '<div class="card yl-sonuc"><div class="yl-sonuc-n">🎙 5/5</div><p>Konuşma adımı tamamlandı. Aynı cümleleri yarın metne bakmadan tekrar etmeyi dene.</p>' +
+            '<div class="card yl-sonuc"><div class="yl-sonuc-n"> 5/5</div><p>Konuşma adımı tamamlandı. Aynı cümleleri yarın metne bakmadan tekrar etmeyi dene.</p>' +
             '<div class="yl-btns"><button class="yl-btn yl-ana" id="yltekrar">Yeni 5 cümle</button><button class="yl-btn" id="ylpanel">Panele dön</button></div></div></div>';
           $q("#ylgeri").onclick = panel; $q("#ylpanel").onclick = panel; $q("#yltekrar").onclick = function () { konusmaAc(b); };
           return;
@@ -873,7 +873,7 @@
       son: { ai: "You're welcome. Have a nice day!", tr: "Rica ederim. İyi günler!" }
     },
     {
-      id: "alisveris", em: "🛍", ad: "Alışveriş yap", rol: "Satış görevlisi", hedef: "Tişört ara, bedenini söyle, deneyip fiyatını sor ve satın al.",
+      id: "alisveris", em: "", ad: "Alışveriş yap", rol: "Satış görevlisi", hedef: "Tişört ara, bedenini söyle, deneyip fiyatını sor ve satın al.",
       adimlar: [
         { ai: "Hi, can I help you?", tr: "Merhaba, yardımcı olabilir miyim?", gorev: "Bir tişört aradığını söyle.", anahtar: [["t shirt", "tshirt", "shirt"]], ornek: "Yes, I'm looking for a T-shirt." },
         { ai: "What size are you?", tr: "Bedeniniz ne?", gorev: "Bedenini söyle.", anahtar: [["small", "medium", "large", "s", "m", "l", "xl"]], ornek: "Medium, please." },
@@ -1061,7 +1061,7 @@
         '<button class="yl-btn" data-k="ornek">' + HOP + ' Örneği dinle</button>' +
         (destek ? (durum === "kayit"
           ? '<button class="yl-btn yl-kayit-on" data-k="dur">⏹ Durdur</button>'
-          : '<button class="yl-btn yl-ana" data-k="kaydet">🎙 Tekrar et (kaydet)</button>') : "") +
+          : '<button class="yl-btn yl-ana" data-k="kaydet"> Tekrar et (kaydet)</button>') : "") +
         (url ? '<button class="yl-btn" data-k="dinle">▶ Kaydımı dinle</button>' : "") + '</div>' +
         '<p class="yl-mini">' + (mesaj || (destek
           ? "Telaffuz puanı vermiyoruz: güvenilir bir puanlama servisi yok. Kaydını dinle ve örnekle karşılaştır — ünlünün uzunluğu, dudak ve dil konumu aynı mı? Kayıt cihazından çıkmaz."
@@ -1409,7 +1409,7 @@
   }
 
   /* ======================= PANEL ======================= */
-  var IKON = { ders: "", kelime: "🗂", gramer: "", dinleme: "", cumle: "", hikaye: "", konusma: "🎙", test: "" };
+  var IKON = { ders: "", kelime: "", gramer: "", dinleme: "", cumle: "", hikaye: "", konusma: "", test: "" };
   var TIP_AD = { ders: "Ders", kelime: "Kelime", gramer: "Gramer", dinleme: "Dinleme", cumle: "Cümle kur", hikaye: "Hikâye", konusma: "Konuşma", test: "Mini test" };
   function panel(acik) {
     if (!$q("#v-yol").classList.contains("on")) { yolGoster(function () { panel(acik); }); return; }
