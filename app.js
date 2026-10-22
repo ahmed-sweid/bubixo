@@ -63,7 +63,7 @@ function speak(text, opt) {
   } catch (e) { }
 }
 function stopSpeak() { try { if ("speechSynthesis" in window) speechSynthesis.cancel(); } catch (e) { } }
-const SPK = '<svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11"/></svg>';
+const SPK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg>';
 
 /* ---------- gezinme: dört ana sekme, özellikler alt ekranlarda ---------- */
 const MAIN_TABS = ["yol", "kelime", "pratik", "kesfet"];
@@ -98,16 +98,18 @@ if (bxMain && "MutationObserver" in window) {
 document.querySelectorAll("#nav button").forEach(b => b.onclick = () => showView(b.dataset.v));
 function lineIcon(name) {
   const paths = {
-    ders: '<path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21z"/><path d="M4 5.5V21"/>',
-    kelime: '<rect x="4" y="5" width="13" height="15" rx="2"/><path d="M8 5V3.5A1.5 1.5 0 0 1 9.5 2H19a2 2 0 0 1 2 2v13"/>',
-    pratik: '<path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h5"/>',
+    ders: '<path d="M3.5 5.5A2.5 2.5 0 0 1 6 3h14.5v16H6a2.5 2.5 0 0 0-2.5 2.5z"/><path d="M7.5 7h8M7.5 11h8M7.5 15h5"/>',
+    kelime: '<path d="M8 5.5H19a2 2 0 0 1 2 2V20H8a3 3 0 0 1-3-3V8.5a3 3 0 0 1 3-3Z"/><path d="M8 5.5V3h10v2.5M8 10h9M8 14h7"/>',
+    pratik: '<rect x="3" y="4" width="18" height="16" rx="3"/><path d="m10 9 5 3-5 3z"/>',
     kesfet: '<circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/>',
-    telaffuz: '<path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16 9a4 4 0 0 1 0 6"/>',
-    oyun: '<rect x="3" y="5" width="18" height="14" rx="3"/><path d="M8 9v6M5 12h6M16 10h.01M18 14h.01"/>',
-    hikaye: '<path d="M5 4.5A2.5 2.5 0 0 1 7.5 2H20v17H7.5A2.5 2.5 0 0 0 5 21z"/><path d="M5 4.5V21M9 7h7M9 11h7"/>',
-    gunluk: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'
+    telaffuz: '<path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/>',
+    oyun: '<path d="M7 8h10a4 4 0 0 1 3.9 4.9l-.7 3.1a2.5 2.5 0 0 1-4.1 1.2L14 15H10l-2.1 2.2a2.5 2.5 0 0 1-4.1-1.2l-.7-3.1A4 4 0 0 1 7 8Z"/><path d="M8 10v4M6 12h4M16 11h.01M18 13h.01"/>',
+    hikaye: '<path d="M3.5 5.5A2.5 2.5 0 0 1 6 3h14.5v16H6a2.5 2.5 0 0 0-2.5 2.5z"/><path d="M7.5 7h8M7.5 11h8M7.5 15h5"/>',
+    gunluk: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+    gramer: '<path d="M5 4h14v16H5z"/><path d="M8 8h8M8 12h8M8 16h5"/>',
+    kur: '<path d="M7 7h13M16 3l4 4-4 4M17 17H4M8 13l-4 4 4 4"/>'
   };
-  return '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">' + (paths[name] || paths.pratik) + '</svg>';
+  return '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">' + (paths[name] || paths.pratik) + '</svg>';
 }
 
 function renderHub(id) {
@@ -257,7 +259,7 @@ function renderDecks() {
           <span class="words-section-note">İngilizce veya Türkçe</span>
         </div>
         <label class="words-searchbox" for="dsearch">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 4.5 4.5"></path></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 4.5 4.5"></path></svg>
           <input id="dsearch" type="search" autocomplete="off" placeholder="Örn. journey, yolculuk, look after">
           <span class="words-search-hint">Ara</span>
         </label>
@@ -374,7 +376,7 @@ function renderPron() {
       <div class="pr-word">${esc(item.en)}</div>
       <div class="pr-tr">${esc(item.tr)}</div>
       ${SR ? `
-        <button class="mic" id="mic" aria-label="Konuş"><svg viewBox="0 0 24 24"><rect x="9" y="2.5" width="6" height="11.5" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3.5M8.5 21.5h7"/></svg></button>
+        <button class="mic" id="mic" aria-label="Konuş"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3M9 21h6"/></svg></button>
         <div class="pr-result" id="prres">Mikrofona bas ve söyle</div>`
       : `<div class="pr-warn"><b>Bu tarayıcıda konuşma tanıma yok.</b> Telaffuz pratiği için telefon ya da bilgisayarda <b>Chrome</b> veya <b>Edge</b> kullan. Yine de dinleyip tekrar edebilirsin — sesli tekrar tek başına bile çok etkilidir.</div>`}
       <div class="pr-nav">
