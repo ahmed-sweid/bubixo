@@ -72,6 +72,20 @@ const TAB_GROUP = {
   hikaye:"kesfet", gunluk:"kesfet"
 };
 document.querySelectorAll("#nav button").forEach(b => b.onclick = () => showView(b.dataset.v));
+function lineIcon(name) {
+  const paths = {
+    ders: '<path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21z"/><path d="M4 5.5V21"/>',
+    kelime: '<rect x="4" y="5" width="13" height="15" rx="2"/><path d="M8 5V3.5A1.5 1.5 0 0 1 9.5 2H19a2 2 0 0 1 2 2v13"/>',
+    pratik: '<path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h5"/>',
+    kesfet: '<circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/>',
+    telaffuz: '<path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16 9a4 4 0 0 1 0 6"/>',
+    oyun: '<rect x="3" y="5" width="18" height="14" rx="3"/><path d="M8 9v6M5 12h6M16 10h.01M18 14h.01"/>',
+    hikaye: '<path d="M5 4.5A2.5 2.5 0 0 1 7.5 2H20v17H7.5A2.5 2.5 0 0 0 5 21z"/><path d="M5 4.5V21M9 7h7M9 11h7"/>',
+    gunluk: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'
+  };
+  return '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">' + (paths[name] || paths.pratik) + '</svg>';
+}
+
 function renderHub(id) {
   const hubs = {
     pratik: {title:"Pratik", subtitle:"Öğrendiklerini farklı yollarla pekiştir.", items:[
@@ -88,7 +102,7 @@ function renderHub(id) {
   const hub=hubs[id], target=$("#v-"+id);
   target.innerHTML=`<h2 class="sec-title">${hub.title}</h2><p class="sec-sub">${hub.subtitle}</p>
     <div class="hub-grid">${hub.items.map(item=>`<button class="card hub-item" data-open="${item[0]}">
-      <span class="hub-icon" aria-hidden="true">${item[3]}</span><span class="hub-copy"><b>${item[1]}</b><small>${item[2]}</small></span>
+      <span class="hub-icon" aria-hidden="true">${lineIcon(item[0])}</span><span class="hub-copy"><b>${item[1]}</b><small>${item[2]}</small></span>
       <span class="hub-arrow" aria-hidden="true">›</span></button>`).join("")}</div>`;
   target.querySelectorAll("[data-open]").forEach(b=>b.onclick=()=>showView(b.dataset.open));
 }
@@ -202,7 +216,7 @@ function renderDecks() {
       ${DECKS.map(d => {
     const due = dueCount(d);
     return `<div class="card deck" data-d="${d.id}" tabindex="0" role="button">
-          <div class="em">${d.em}</div><b>${esc(d.title)}</b>
+          <b>${esc(d.title)}</b>
           <small>${d.words.length} kelime</small>
           ${due ? `<span class="due">${due} kart hazır</span>` : `<span class="due" style="background:var(--green-soft);color:var(--green)">✓ güncel</span>`}
         </div>`;
@@ -592,7 +606,6 @@ function renderStories() {
     <div class="deckgrid">
       ${list.map(s => `
         <div class="card deck st-card" data-s="${s.id}" tabindex="0" role="button">
-          <div class="em">${s.em}</div>
           <b>${esc(s.title)}</b>
           <small>${esc(s.titleTr)}</small>
           <small>${s.lines.length} satır · ${s.words} kelime</small>
@@ -917,7 +930,7 @@ function renderGames() {
     <div class="deckgrid">
       ${GAMES.map(g => `
         <div class="card deck st-card" data-g="${g.k}" tabindex="0" role="button">
-          <div class="em">${g.em}</div>
+          <span class="game-icon" aria-hidden="true">${lineIcon(g.k === "match" ? "hikaye" : g.k === "mem" ? "kelime" : g.k === "spell" ? "pratik" : "gunluk")}</span>
           <b>${g.ad}</b>
           <small>${g.alt}</small>
           <span class="due" style="background:var(--green-soft);color:var(--green)">${enIyi[g.k]}</span>
