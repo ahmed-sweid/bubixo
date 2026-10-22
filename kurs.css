@@ -2207,3 +2207,42 @@ h1, h2, h3, .serif { font-family: "WF Visual Sans Variable", Inter, system-ui, s
 }
 .gimg-fallback.small { width: 48px; height: 48px; font-size: 20px; }
 .gimg-fallback.tiny { width: 36px; height: 36px; font-size: 16px; }
+
+
+/* Final surface pass: align the app shell with DESIGN-webflow.md. */
+body { font-family: 'WF Visual Sans Variable', Inter, system-ui, -apple-system, sans-serif; }
+h1, h2, h3, .serif, .fcard .w, .pr-word { font-family: 'WF Visual Sans Variable', Inter, system-ui, sans-serif; }
+.top {
+  background: #fff;
+  color: var(--ink);
+  padding: 14px clamp(16px, 4vw, 32px);
+  border-bottom: 1px solid var(--line);
+}
+.top-row { max-width: 960px; }
+.brand { color: var(--ink); font-weight: 600; }
+.brand .logo {
+  background: var(--ink);
+  color: #fff;
+  border-radius: 4px;
+  font-family: inherit;
+  font-weight: 600;
+}
+.streak {
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+.nav { box-shadow: none; }
+.card { box-shadow: none; border-radius: 8px; }
+.unit, .deck, .qq, .lesson .intro, .tipbox, .fc-btns button,
+.backbtn, .qq .opts button, .dict-search, .dict-row, .hub-item {
+  border-radius: 4px;
+}
+.yl-ana {
+  background: #080808;
+  color: #fff;
+  border-color: #080808;
+  box-shadow: none;
+}
+.yl-ana:hover { filter: none; background: #222; }
