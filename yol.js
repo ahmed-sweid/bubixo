@@ -1417,24 +1417,22 @@
     document.body.classList.remove("yl-ic");
     var kutu = $q("#v-yol");
     var a1 = seviyeDurum("A1"), a2 = seviyeDurum("A2");
-    var dersBitti = UNITS.filter(function (u) { return S.units[u.id] && S.units[u.id].done; }).length;
-    var okunan = STORIES.filter(function (s) { return S.tales[s.id]; }).length;
-    var vs = vSayim(), vade = vadesiGelen().length, ogr = ogrenilenSayisi();
+    var vs = vSayim(), vade = vadesiGelen().length;
     var basladi = basladiMi(), aktif = aktifBolum(), acikId = acik || aktif.id;
     var son = sonEtiket(Y.last);
     var siradaki = bolumDurum(aktif).L.find(function (o) { return !o.done; });
     var sv = Y.seviye && BOLUM(Y.seviye.bolum);
 
     var hero =
-      '<section class="yl-hero">' +
-      '<div class="yl-pills"><span>İngilizce</span><span>A1 → A2</span><span>Türkçe anlatımlı</span><span class="yl-free">Ücretsiz</span></div>' +
+      '<section class="yl-hero yl-app-home">' +
+      '<div class="yl-pills"><span>A1 → A2</span></div>' +
       (basladi
-        ? '<h2>Kaldığın yerden devam et</h2>' + (son ? '<p class="yl-son">Son kaldığın yer: <b>' + h(son) + '</b></p>' : '<p class="yl-son">Öğrenme yolunda ' + h(bolumAd(aktif)) + ' bölümündesin.</p>') +
-        '<div class="yl-cta"><button class="yl-btn yl-ana" id="yldevam">Devam Et →</button><button class="yl-btn yl-hayalet" id="ylseviye">Seviye Testi</button></div>'
-        : '<h2>Sıfırdan İngilizce öğren</h2><p class="yl-son">Dinleme, konuşma, kelime, gramer ve interaktif hikâyelerle adım adım ilerle.</p>' +
-        '<div class="yl-cta"><button class="yl-btn yl-ana" id="ylsifir">Sıfırdan Başla →</button><button class="yl-btn yl-hayalet" id="ylseviye">Seviye Testi</button></div>') +
-      (sv ? '<p class="yl-mini yl-sv">Seviye testi önerisi: <b>' + h(bolumAd(sv)) + '</b></p>' : "") +
-      (basladi ? '<p class="yl-mini yl-hero-ilerleme">A1 <b>%' + a1.p + '</b> · A2 <b>%' + a2.p + '</b> tamamlandı</p>' : "") +
+        ? '<h2>Öğrenmeye devam et</h2>' + (son ? '<p class="yl-son">Son çalışma: <b>' + h(son) + '</b></p>' : '<p class="yl-son">' + h(bolumAd(aktif)) + ' bölümündesin.</p>') +
+        '<div class="yl-cta"><button class="yl-btn yl-ana" id="yldevam">Devam et <span aria-hidden="true">→</span></button><button class="yl-btn yl-hayalet" id="ylseviye">Seviye testi</button></div>'
+        : '<h2>İlk dersine başla</h2><p class="yl-son">Kısa bir dersle İngilizce öğrenmeye başlayabilirsin.</p>' +
+        '<div class="yl-cta"><button class="yl-btn yl-ana" id="ylsifir">İlk derse başla <span aria-hidden="true">→</span></button><button class="yl-btn yl-hayalet" id="ylseviye">Seviye testi</button></div>') +
+      (sv ? '<p class="yl-mini yl-sv">Önerilen başlangıç: <b>' + h(bolumAd(sv)) + '</b></p>' : "") +
+      (basladi ? '<p class="yl-mini yl-hero-ilerleme">A1 <b>%' + a1.p + '</b> · A2 <b>%' + a2.p + '</b></p>' : "") +
       '</section>';
 
     /* 2) Bugunku calisma: siradaki adim + kelime tekrari */
@@ -1450,14 +1448,6 @@
       '</div>' +
       '<div class="yl-hero-hiz"><span>Ses hızı (tüm kurs)</span>' + hizSecici() + '</div>' +
       '</section>';
-
-    var stats =
-      '<div class="yl-stats">' +
-      '<div class="card yl-stat"><b>' + ogr + '</b><small>kelime öğrenildi</small></div>' +
-      '<div class="card yl-stat"><b>' + dersBitti + '/' + UNITS.length + '</b><small>ders tamamlandı</small></div>' +
-      '<div class="card yl-stat"><b>' + okunan + '/' + STORIES.length + '</b><small>hikâye okundu</small></div>' +
-      '<div class="card yl-stat"><b>' + (S.streak.count || 0) + '</b><small>günlük seri 🔥</small></div>' +
-      '</div>';
 
     var toplamV = WORDS.length;
     var tekrar =
@@ -1492,23 +1482,7 @@
           '</details></li>';
       }).join("") + '</ol>';
 
-    var ai = '<section class="card yl-ai" id="ai-konusma"><div><p class="yl-kicker">Konuşma</p><h3>AI Konuşma Pratiği – Cihazda Çalışır</h3>' +
-      '<p class="yl-mini">Gerçek hayattan beş senaryoda karşındaki role İngilizce cevap ver. Bu alıştırmada yazdığın cevaplar sunucuya gönderilmez.</p></div>' +
-      '<div class="yl-ai-chips">' + SENARYO.map(function (s) { return '<button class="chip" data-ai="' + s.id + '">' + s.em + ' ' + h(s.ad) + (Y.ai[s.id] ? " ✓" : "") + '</button>'; }).join("") + '</div></section>';
-
-    var dSay = Object.keys(Y.dialog || {}).length, pSay = Object.keys(Y.pron || {}).filter(function (k) { return Y.pron[k].calisildi; }).length;
-    var gS = function (l) { return Object.keys((Y.golge || {})[l] || {}).length; };
-    var dt = function (l) { var r = (Y.dtest || {})[l]; return r ? "%" + Math.round(r.en_iyi * 100) : "—"; };
-    var gg = Y.gramerGecmis || [], gSon = gg[gg.length - 1];
-    var pratik = '<h2 class="sec-title yl-yol-b">Pratik modülleri</h2><p class="sec-sub">Yoldan bağımsız, istediğin zaman: gerçek hayat diyalogları, Türk öğrencilerin zorlandığı sesler, shadowing ve dinleme testleri.</p>' +
-      '<div class="yl-pratik">' +
-      '<button class="card yl-pk" data-pk="diyalog"><span>💬</span><b>Diyaloglar</b><small>10 durum · A1 ve A2</small><em>' + dSay + '/10 dinlendi</em></button>' +
-      '<button class="card yl-pk" data-pk="telaffuz"><span>🗣️</span><b>Telaffuz Çalışması</b><small>th, w/v, æ, schwa, ship/sheep…</small><em>' + pSay + '/9 set çalışıldı</em></button>' +
-      '<button class="card yl-pk" data-pk="golge"><span>🔁</span><b>Shadowing</b><small>Dinle → tekrar et → cümleyi gör</small><em>A1 ' + gS("A1") + '/10 · A2 ' + gS("A2") + '/10</em></button>' +
-      '<button class="card yl-pk" data-pk="dtest"><span>🎧</span><b>Dinleme testleri</b><small>4 soru türü, sonuç kaydedilir</small><em>en iyi: A1 ' + dt("A1") + ' · A2 ' + dt("A2") + '</em></button>' +
-      '<button class="card yl-pk" data-pk="gramer"><span>📝</span><b>Gramer test geçmişi</b><small>Tarih, konu, doğru/yanlış, yüzde</small><em>' + (gSon ? gg.length + " test · son: %" + gSon.yuzde : "henüz test yok") + '</em></button>' +
-      '</div>';
-    kutu.innerHTML = '<div class="yl">' + hero + bugun + yol + pratik + ai + ilerleme + stats + '</div>';
+    kutu.innerHTML = '<div class="yl">' + hero + bugun + yol + ilerleme + '</div>';
 
     /* ---- baglantilar ---- */
     hizBagla(kutu);
@@ -1526,14 +1500,6 @@
       };
     });
     kutu.querySelectorAll("[data-git]").forEach(function (b) { b.onclick = function () { showView(b.dataset.git); }; });
-    kutu.querySelectorAll("[data-ai]").forEach(function (b) { b.onclick = function () { aiAc(b.dataset.ai); }; });
-    kutu.querySelectorAll("[data-pk]").forEach(function (b) {
-      b.onclick = function () {
-        var k = b.dataset.pk;
-        if (k === "diyalog") diyalogListe(); else if (k === "telaffuz") telaffuzListe(); else if (k === "golge") golgeAc((Y.golge && Y.golge.A1 && Object.keys(Y.golge.A1).length >= 10) ? "A2" : "A1");
-        else if (k === "dtest") dtestListe(); else if (k === "gramer") gramerGecmisi();
-      };
-    });
     if (acik) { var el = document.getElementById("yl-" + acik); if (el) setTimeout(function () { el.scrollIntoView({ block: "start", behavior: "smooth" }); }, 50); }
   }
   function devam() {
