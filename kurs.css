@@ -2189,3 +2189,21 @@ h1, h2, h3, .serif { font-family: "WF Visual Sans Variable", Inter, system-ui, s
 .deck .em:empty { display: none; }
 .deck:has(.em:empty) b { margin-top: 0; }
 .deck .em { line-height: 1; }
+
+
+.gimg-fallback {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #f7f7f7;
+  color: var(--ink);
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1;
+}
+.gimg-fallback.small { width: 48px; height: 48px; font-size: 20px; }
+.gimg-fallback.tiny { width: 36px; height: 36px; font-size: 16px; }
