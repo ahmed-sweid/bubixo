@@ -257,6 +257,10 @@ Arayüz geliştirmelerinde `DESIGN-webflow.md` dosyasını temel alın.
 
 Tasarım değişikliklerinde hedef yalnızca daha yeni görünen bir arayüz değil; kullanıcının ne yapacağını daha kolay anlaması ve öğrenme akışını kaybetmemesidir.
 
+## Veri ve içerik kaynakları
+
+Derslerin, sözlüğün, gramerin, hikâyelerin, oyun verilerinin, ses dosyalarının, çeviri servisinin ve yerel kullanıcı verilerinin nereden geldiğini açıklayan ayrıntılı inceleme: [Bubixo — Veri ve İçerik Kaynakları](docs/BUBIXO-VERI-VE-ICERIK-KAYNAKLARI.md). Belge, depoda doğrulanabilen kaynaklarla henüz kaynağı doğrulanamayan içerikleri birbirinden ayırır.
+
 ## Bilinen sınırlar
 
 - İlerleme varsayılan olarak yerel tarayıcı depolamasına dayanır; hesap tabanlı senkronizasyon belgelenmiş bir özellik değildir.
