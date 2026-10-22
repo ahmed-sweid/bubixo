@@ -54,42 +54,14 @@
       Türkçe anlatımlı, üyeliksiz.</p>
   </header>
 
-  <nav class="nav" id="nav">
-    <button data-v="dersler" class="on"><svg viewBox="0 0 24 24">
-        <path d="M4 19V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zm0 0a2 2 0 0 0 2 2h13" />
-      </svg>Dersler</button>
-    <button data-v="kelime"><svg viewBox="0 0 24 24">
-        <rect x="3" y="5" width="13" height="15" rx="2" />
-        <path d="M8 5V3.5A1.5 1.5 0 0 1 9.5 2H19a2 2 0 0 1 2 2v13" />
-      </svg>Kelimeler</button>
-    <button data-v="hikaye"><svg viewBox="0 0 24 24">
-        <path d="M12 6.5C10.5 5 8 4.5 4 4.5v13c4 0 6.5.5 8 2 1.5-1.5 4-2 8-2v-13c-4 0-6.5.5-8 2z" />
-        <path d="M12 6.5v13" />
-      </svg>Hikayeler</button>
-    <button data-v="kur"><svg viewBox="0 0 24 24">
-        <rect x="2.5" y="8" width="8" height="8" rx="2" />
-        <rect x="13.5" y="8" width="8" height="8" rx="2" />
-        <path d="M10.5 12h3" />
-      </svg>Cümle Kur</button>
-    <button data-v="oyun"><svg viewBox="0 0 24 24">
-        <rect x="2" y="7" width="20" height="11" rx="4" />
-        <path d="M7 10.5v3M5.5 12h3M15.8 11h.01M18.3 14h.01" />
-      </svg>Oyunlar</button>
-    <button data-v="gramer"><svg viewBox="0 0 24 24">
-        <path d="M4 6h16M4 12h10M4 18h7" />
-        <path d="M17 14l2.5 2.5L17 19M21 16.5h-4" />
-      </svg>Gramer</button>
-    <button data-v="telaffuz"><svg viewBox="0 0 24 24">
-        <rect x="9" y="2.5" width="6" height="11.5" rx="3" />
-        <path d="M5 11a7 7 0 0 0 14 0M12 18v3.5M8.5 21.5h7" />
-      </svg>Telaffuz</button>
-    <button data-v="gunluk"><svg viewBox="0 0 24 24">
-        <circle cx="12" cy="12" r="9" />
-        <path d="M12 7v5l3.5 2" />
-      </svg>Günlük</button>
-  </nav>
-
-  <main class="wrap">
+  <nav class="nav" id="nav" aria-label="Ana gezinme">
+    <button data-v="dersler" class="on" aria-label="Öğren"><svg viewBox="0 0 24 24"><path d="M4 19V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zm0 0a2 2 0 0 0 2 2h13"/></svg>Öğren</button>
+    <button data-v="kelime" aria-label="Kelimeler"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="13" height="15" rx="2"/><path d="M8 5V3.5A1.5 1.5 0 0 1 9.5 2H19a2 2 0 0 1 2 2v13"/></svg>Kelimeler</button>
+    <button data-v="pratik" aria-label="Pratik"><svg viewBox="0 0 24 24"><path d="M4 5h16v14H4zM8 9h8M8 13h5"/></svg>Pratik</button>
+    <button data-v="kesfet" aria-label="Keşfet"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/></svg>Keşfet</button>
+  </nav>  <main class="wrap">
+    <section class="view" id="v-pratik"></section>
+    <section class="view" id="v-kesfet"></section>
     <section class="view on" id="v-dersler"></section>
     <section class="view" id="v-kelime"></section>
     <section class="view" id="v-gramer"></section>
