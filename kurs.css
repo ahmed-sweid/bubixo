@@ -2086,3 +2086,13 @@ ol.sx-list .sx-m {
     font-size: 20px
   }
 }
+/* Four-tab information architecture */
+.hub-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr)); gap:12px; }
+.hub-item { display:flex; align-items:center; gap:14px; width:100%; padding:17px; text-align:start; color:var(--ink); cursor:pointer; transition:border-color .15s,transform .15s; }
+.hub-item:hover { border-color:var(--green); transform:translateY(-2px); }
+.hub-icon { display:grid; place-items:center; flex:none; width:44px; height:44px; border-radius:13px; background:var(--green-soft); color:var(--green); font-size:22px; font-weight:700; }
+.hub-copy { display:flex; flex:1; flex-direction:column; gap:3px; }
+.hub-copy b { font-size:15px; }
+.hub-copy small { color:var(--soft); font-size:12.5px; line-height:1.45; }
+.hub-arrow { color:var(--soft); font-size:24px; }
+.subview-return { margin-bottom:16px; }
