@@ -2411,7 +2411,9 @@ h1, h2, h3, .serif, .fcard .w, .pr-word { font-family: 'WF Visual Sans Variable'
   border-bottom: 1px solid var(--line);
 }
 .top-row {
+  width: 100%;
   max-width: 1080px;
+  margin-inline: auto;
   min-height: 34px;
   display: flex;
   align-items: center;
@@ -2445,6 +2447,8 @@ h1, h2, h3, .serif, .fcard .w, .pr-word { font-family: 'WF Visual Sans Variable'
   letter-spacing: .09em;
 }
 .top .streak {
+  margin-left: auto;
+  flex-shrink: 0;
   display: inline-flex;
   align-items: center;
   justify-content: center;
