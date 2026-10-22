@@ -66,11 +66,20 @@ function stopSpeak() { try { if ("speechSynthesis" in window) speechSynthesis.ca
 const SPK = '<svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11"/></svg>';
 
 /* ---------- gezinme: dört ana sekme, özellikler alt ekranlarda ---------- */
+const MAIN_TABS = ["yol", "kelime", "pratik", "kesfet"];
 const TAB_GROUP = {
-  yol:"yol", dersler:"dersler", kelime:"kelime", pratik:"pratik", kesfet:"kesfet",
+  yol:"yol", dersler:"yol", kelime:"kelime", pratik:"pratik", kesfet:"kesfet",
   gramer:"pratik", telaffuz:"pratik", kur:"pratik", oyun:"pratik",
   hikaye:"pratik", gunluk:"kesfet"
 };
+let bxCurrentView = null;
+const bxRouteStack = [];
+function bxGoBack(fallback) {
+  const previous = bxRouteStack.pop();
+  const target = previous || fallback || TAB_GROUP[bxCurrentView] || "yol";
+  showView(target, { replace: true });
+}
+window.bxGoBack = bxGoBack;
 document.querySelectorAll("#nav button").forEach(b => b.onclick = () => showView(b.dataset.v));
 function lineIcon(name) {
   const paths = {
@@ -106,26 +115,34 @@ function renderHub(id) {
       <span class="hub-arrow" aria-hidden="true">›</span></button>`).join("")}</div>`;
   target.querySelectorAll("[data-open]").forEach(b=>b.onclick=()=>showView(b.dataset.open));
 }
-function showView(v) {
+function showView(v, options) {
+  options = options || {};
+  const isMainTab = MAIN_TABS.includes(v);
+  if (v !== bxCurrentView && !options.replace && !isMainTab && bxCurrentView) bxRouteStack.push(bxCurrentView);
+  if (isMainTab && !options.keepStack) bxRouteStack.length = 0;
+  bxCurrentView = v;
   tale.stop(); gStop();
-  const group=TAB_GROUP[v]||"dersler";
-  document.querySelectorAll("#nav button").forEach(b=>b.classList.toggle("on",b.dataset.v===group));
-  document.querySelectorAll(".view").forEach(x=>x.classList.remove("on"));
-  const view=$("#v-"+v); if(!view)return;
-  view.classList.add("on"); window.scrollTo({top:0});
-  if(v==="dersler")renderUnits();
-  if(v==="kelime")renderDecks();
-  if(v==="gramer")renderGramer();
-  if(v==="telaffuz")renderPron();
-  if(v==="gunluk")renderDaily();
-  if(v==="hikaye")renderStories();
-  if(v==="kur")renderKur();
-  if(v==="oyun")renderGames();
-  if(v==="pratik"||v==="kesfet")renderHub(v);
-  if(!["dersler","kelime","pratik","kesfet"].includes(v)){
-    const label=group==="pratik"?"← Pratik":"← Keşfet";
-    view.insertAdjacentHTML("afterbegin",`<div class="subview-return"><button class="backbtn" data-return="${group}">${label}</button></div>`);
-    view.querySelector("[data-return]").onclick=()=>showView(group);
+  const group = TAB_GROUP[v] || "yol";
+  document.querySelectorAll("#nav button").forEach(b => b.classList.toggle("on", b.dataset.v === group));
+  document.querySelectorAll(".view").forEach(x => x.classList.remove("on"));
+  const view = $("#v-" + v);
+  if (!view) return;
+  view.classList.add("on");
+  window.scrollTo({ top: 0 });
+  if (v === "dersler") renderUnits();
+  if (v === "kelime") renderDecks();
+  if (v === "gramer") renderGramer();
+  if (v === "telaffuz") renderPron();
+  if (v === "gunluk") renderDaily();
+  if (v === "hikaye") renderStories();
+  if (v === "kur") renderKur();
+  if (v === "oyun") renderGames();
+  if (v === "pratik" || v === "kesfet") renderHub(v);
+  if (!MAIN_TABS.includes(v)) {
+    const label = group === "yol" ? "← Öğren" : group === "kelime" ? "← Kelimeler" : group === "pratik" ? "← Pratik" : "← Keşfet";
+    view.insertAdjacentHTML("afterbegin", '<div class="subview-return"><button class="backbtn" data-return="' + group + '">' + label + '</button></div>');
+    const back = view.querySelector("[data-return]");
+    if (back) back.onclick = () => bxGoBack(group);
   }
 }
 /* ================== 1) DERSLER ================== */
@@ -148,7 +165,7 @@ function renderUnits() {
   });
 }
 
-function renderLesson(id) {
+function renderLesson(id, returnTo) {
   const u = UNITS.find(x => x.id === id);
   $("#v-dersler").innerHTML = `
     <div class="lesson">
@@ -169,7 +186,7 @@ function renderLesson(id) {
         <div class="qscore" id="qscore"></div>
       </div>
     </div>`;
-  $("#lback").onclick = renderUnits;
+  $("#lback").onclick = () => returnTo ? bxGoBack(returnTo) : renderUnits();
   document.querySelectorAll("[data-say]").forEach(b => b.onclick = () => speak(b.dataset.say));
 
   let answered = 0, correct = 0;
@@ -234,12 +251,12 @@ function renderDecks() {
   });
 }
 let run = null;
-function startDeck(id) {
+function startDeck(id, returnTo) {
   const d = DECKS.find(x => x.id === id);
   const now = Date.now();
   let idxs = d.words.map((w, i) => i).filter(i => { const st = wordState(id + ":" + i); return st.box === 0 || st.due <= now; });
   if (!idxs.length) idxs = d.words.map((w, i) => i);
-  run = { deck: d, idxs, pos: 0, flipped: false };
+  run = { deck: d, idxs, pos: 0, flipped: false, returnTo: returnTo || null };
   drawCard();
 }
 function drawCard() {
@@ -254,7 +271,7 @@ function drawCard() {
           <button class="startquiz" id="backdecks">Destelere dön</button>
         </div>
       </div>`;
-    $("#backdecks").onclick = renderDecks;
+    $("#backdecks").onclick = () => run && run.returnTo ? bxGoBack(run.returnTo) : renderDecks();
     return;
   }
   const w = deck.words[idxs[pos]];
@@ -276,7 +293,7 @@ function drawCard() {
       </div>
       <div class="fc-prog">${pos + 1} / ${idxs.length}</div>
     </div>`;
-  $("#fback").onclick = renderDecks;
+  $("#fback").onclick = () => run && run.returnTo ? bxGoBack(run.returnTo) : renderDecks();
   $("#fspk").onclick = e => { e.stopPropagation(); speak(w.en); };
   speak(w.en);
   $("#fcard").onclick = () => {
@@ -492,7 +509,7 @@ function renderGramer() {
   });
   $("#sbstart").onclick = () => startSB();
 }
-function renderTense(id) {
+function renderTense(id, returnTo) {
   const t = TENSES.find(x => x.id === id);
   $("#v-gramer").innerHTML = `
     <div class="lesson">
@@ -509,7 +526,7 @@ function renderTense(id) {
       </div>
       <div class="qbox"><h3>Mini test</h3><div id="gquiz"></div><div class="qscore" id="gscore"></div></div>
     </div>`;
-  $("#gback").onclick = renderGramer;
+  $("#gback").onclick = () => returnTo ? bxGoBack(returnTo) : renderGramer();
   document.querySelectorAll("#v-gramer [data-say]").forEach(b => b.onclick = () => speak(b.dataset.say));
   let answered = 0, correct = 0;
   $("#gquiz").innerHTML = t.quiz.map((q, qi) => `
@@ -636,7 +653,7 @@ function stKomsu(idx) {
   };
 }
 
-function openStory(id) {
+function openStory(id, returnTo) {
   tale.stop();
   stIdx = STORIES.findIndex(s => s.id === id);
   const s = STORIES[stIdx];
@@ -674,7 +691,7 @@ function openStory(id) {
       </div>
     </div>`;
   const hiz = () => stSlow ? 0.65 : 0.95;
-  $("#stback").onclick = () => { tale.stop(); renderStories(); };
+  $("#stback").onclick = () => { tale.stop(); returnTo ? bxGoBack(returnTo) : renderStories(); };
   document.querySelectorAll("#stbody .wg").forEach(el => el.onclick = () => {
     tale.stop(); speak(el.dataset.say, { rate: hiz() });
   });
