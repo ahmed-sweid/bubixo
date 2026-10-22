@@ -778,7 +778,7 @@
           '<div class="card yl-kart">' + sesCubugu() +
           '<div class="yl-golge' + (metinGizli ? " gizli" : "") + '" lang="en">' + h(x.en) + '</div><div class="yl-anlam-k">' + h(x.tr) + '</div>' +
           '<button class="chip" id="ylgizle">' + (metinGizli ? "Metni göster" : "Metni gizle") + '</button>' +
-          (SR_ ? '<button class="mic" id="ylmic" aria-label="Söyle"><svg viewBox="0 0 24 24"><rect x="9" y="2.5" width="6" height="11.5" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3.5M8.5 21.5h7"/></svg></button><div class="pr-result" id="ylsonuc">Mikrofona bas ve söyle — ya da sesli tekrar edip aşağıdaki düğmeye bas.</div>'
+          (SR_ ? '<button class="mic" id="ylmic" aria-label="Söyle"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3M9 21h6"/></svg></button><div class="pr-result" id="ylsonuc">Mikrofona bas ve söyle — ya da sesli tekrar edip aşağıdaki düğmeye bas.</div>'
             : '<div class="pr-warn">Bu tarayıcıda konuşma tanıma yok; dinle, sesli tekrar et ve düğmeye bas. Sesli tekrar tek başına da çok etkilidir.</div>') +
           '<button class="startquiz" id="ylsoyledim">✓ Tekrar ettim, sonraki</button></div></div>';
         $q("#ylgeri").onclick = function () { if (rec) { try { rec.stop(); } catch (e) { } } sesDurdur(); panel(); };
@@ -1525,7 +1525,7 @@
       nav.insertBefore(homeButton, nav.firstChild);
     }
     homeButton.setAttribute("aria-label", "Öğren");
-    homeButton.innerHTML = '<svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9.5h13V10"/><path d="M10 19.5v-5h4v5"/></svg>Öğren';
+    homeButton.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m3 10 9-7 9 7"/><path d="M5 9v12h14V9M9 21v-7h6v7"/></svg>Öğren';
     homeButton.onclick = function () { showView("yol"); };
     /* mobil alt menu yatay kayar: sagda gizli sekme varsa kenar solsun */
     var ipucu = function () { try { nav.classList.toggle("yl-dahavar", nav.scrollLeft + nav.clientWidth < nav.scrollWidth - 4); } catch (e) { } };
