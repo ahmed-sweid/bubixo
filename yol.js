@@ -1551,13 +1551,15 @@
       var sec_ = document.createElement("section"); sec_.className = "view"; sec_.id = "v-yol";
       main.insertBefore(sec_, main.firstChild);
     }
-    if (!nav.querySelector('[data-v="yol"]')) {
-      var b = document.createElement("button");
-      b.dataset.v = "yol";
-      b.innerHTML = '<svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9.5h13V10"/><path d="M10 19.5v-5h4v5"/></svg>Panel';
-      nav.insertBefore(b, nav.firstChild);
-      b.onclick = function () { showView("yol"); };
+    var homeButton = nav.querySelector('[data-v="yol"]');
+    if (!homeButton) {
+      homeButton = document.createElement("button");
+      homeButton.dataset.v = "yol";
+      nav.insertBefore(homeButton, nav.firstChild);
     }
+    homeButton.setAttribute("aria-label", "Öğren");
+    homeButton.innerHTML = '<svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9.5h13V10"/><path d="M10 19.5v-5h4v5"/></svg>Öğren';
+    homeButton.onclick = function () { showView("yol"); };
     /* mobil alt menu yatay kayar: sagda gizli sekme varsa kenar solsun */
     var ipucu = function () { try { nav.classList.toggle("yl-dahavar", nav.scrollLeft + nav.clientWidth < nav.scrollWidth - 4); } catch (e) { } };
     nav.addEventListener("scroll", ipucu, { passive: true }); addEventListener("resize", ipucu); setTimeout(ipucu, 0);
