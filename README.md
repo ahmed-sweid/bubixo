@@ -24,6 +24,7 @@ Bubixo, Türkçe konuşan başlangıç düzeyindeki öğrencilerin İngilizceyi 
 - [Tasarım ilkeleri](#tasarım-ilkeleri)
 - [Bilinen sınırlar](#bilinen-sınırlar)
 - [Veri ve içerik kaynakları](#veri-ve-içerik-kaynakları)
+- [Ürün fikri ve vizyonu](#ürün-fikri-ve-vizyonu)
 - [Katkıda bulunma](#katkıda-bulunma)
 
 ## Öne çıkan özellikler
@@ -257,6 +258,10 @@ Arayüz geliştirmelerinde `DESIGN-webflow.md` dosyasını temel alın.
 - Mevcut düzeni değiştiren büyük refaktörler yerine küçük, test edilebilir değişiklikler.
 
 Tasarım değişikliklerinde hedef yalnızca daha yeni görünen bir arayüz değil; kullanıcının ne yapacağını daha kolay anlaması ve öğrenme akışını kaybetmemesidir.
+
+## Ürün fikri ve vizyonu
+
+Bubixo'nun henüz geliştirilecek uygulama fikrini, hedef kullanıcılarını, öğrenme yaklaşımını, ana bölümlerini, ilk sürüm kapsamını ve ürün yol haritasını açıklayan konsept belgesi: [Bubixo — Ürün Fikri ve Uygulama Vizyonu](docs/BUBIXO-URUN-FIKRI-VE-VIZYONU.md). Bu belge ürün vizyonunu tanımlar; tamamlanmış mobil uygulama veya doğrulanmış öğrenme sonuçları iddiası taşımaz.
 
 ## Veri ve içerik kaynakları
 
