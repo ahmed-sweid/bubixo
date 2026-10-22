@@ -30,10 +30,14 @@ S.games.rounds = S.games.rounds || 0;
 
 /* ---------- seri (streak) ---------- */
 (function () {
-  const today = new Date().toISOString().slice(0, 10);
+  const dateKey = d => d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+  const now = new Date();
+  const today = dateKey(now);
   const last = S.streak.last;
   if (last !== today) {
-    const y = new Date(Date.now() - 864e5).toISOString().slice(0, 10);
+    const yesterday = new Date(now);
+    yesterday.setDate(yesterday.getDate() - 1);
+    const y = dateKey(yesterday);
     S.streak.count = (last === y) ? S.streak.count + 1 : 1;
     S.streak.last = today;
     store.write(S);
