@@ -2160,3 +2160,32 @@ h1, h2, h3, .serif { font-family: "WF Visual Sans Variable", Inter, system-ui, s
 @media(prefers-reduced-motion:reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
 }
+
+
+/* Icon cleanup: replace removed emoji placeholders with compact line icons. */
+.hub-icon,
+.game-icon {
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink);
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+.hub-icon svg,
+.game-icon svg {
+  width: 21px;
+  height: 21px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.65;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.deck .em:empty { display: none; }
+.deck:has(.em:empty) b { margin-top: 0; }
+.deck .em { line-height: 1; }
