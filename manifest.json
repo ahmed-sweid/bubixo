@@ -6,8 +6,8 @@
   "scope": "/ingilizce/",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#0f5132",
-  "theme_color": "#166f4d",
+  "background_color": "#080808",
+  "theme_color": "#080808",
   "lang": "tr",
   "dir": "ltr",
   "categories": [
