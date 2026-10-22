@@ -80,6 +80,21 @@ function bxGoBack(fallback) {
   showView(target, { replace: true });
 }
 window.bxGoBack = bxGoBack;
+function bxSyncRouteBack() {
+  const view = document.querySelector(".view.on");
+  if (!view || MAIN_TABS.includes(bxCurrentView) || view.querySelector(".backbtn")) return;
+  const group = TAB_GROUP[bxCurrentView] || "yol";
+  const label = group === "yol" ? "← Öğren" : group === "kelime" ? "← Kelimeler" : group === "pratik" ? "← Pratik" : "← Keşfet";
+  const wrap = document.createElement("div");
+  wrap.className = "subview-return";
+  wrap.innerHTML = '<button class="backbtn" type="button" data-route-back>' + label + '</button>';
+  wrap.querySelector("button").onclick = () => bxGoBack(group);
+  view.insertBefore(wrap, view.firstChild);
+}
+const bxMain = document.querySelector("main.wrap");
+if (bxMain && "MutationObserver" in window) {
+  new MutationObserver(() => bxSyncRouteBack()).observe(bxMain, { childList: true, subtree: true });
+}
 document.querySelectorAll("#nav button").forEach(b => b.onclick = () => showView(b.dataset.v));
 function lineIcon(name) {
   const paths = {
@@ -138,12 +153,7 @@ function showView(v, options) {
   if (v === "kur") renderKur();
   if (v === "oyun") renderGames();
   if (v === "pratik" || v === "kesfet") renderHub(v);
-  if (!MAIN_TABS.includes(v)) {
-    const label = group === "yol" ? "← Öğren" : group === "kelime" ? "← Kelimeler" : group === "pratik" ? "← Pratik" : "← Keşfet";
-    view.insertAdjacentHTML("afterbegin", '<div class="subview-return"><button class="backbtn" data-return="' + group + '">' + label + '</button></div>');
-    const back = view.querySelector("[data-return]");
-    if (back) back.onclick = () => bxGoBack(group);
-  }
+  bxSyncRouteBack();
 }
 /* ================== 1) DERSLER ================== */
 function renderUnits() {
