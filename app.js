@@ -532,8 +532,7 @@ function drawDict() {
   }
   listEl.innerHTML = items.map(w => `
     <div class="dict-row">
-      <span class="dm">${w.m || "•"}</span>
-      <span style="cursor:pointer" data-say="${esc(w.e)}"><b>${esc(w.e)}</b><i>${esc(w.t)}</i></span>
+      <span class="dict-word" style="cursor:pointer" data-say="${esc(w.e)}"><b>${esc(w.e)}</b><i>${esc(w.t)}</i></span>
       <button class="spk" data-say="${esc(w.e)}" aria-label="Dinle">${SPK}</button>
     </div>`).join("") || `<div style="padding:18px;color:var(--soft)">Sonuç yok — başka bir kelime dene.</div>`;
   listEl.querySelectorAll("[data-say]").forEach(el => el.onclick = () => speak(el.dataset.say));
