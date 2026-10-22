@@ -1358,7 +1358,7 @@
         var kutu = $q("#v-yol");
         var kart = function (lv, alt) {
           var r = Y.dtest[lv];
-          return '<button class="card yl-ai-kart" data-l="' + lv + '"><span class="yl-ai-em"></span><b>Dinleme testi ' + lv + '</b><small>' + alt + '</small>' +
+          return '<button class="card yl-ai-kart" data-l="' + lv + '"><b>Dinleme testi ' + lv + '</b><small>' + alt + '</small>' +
             (r ? '<span class="due" style="background:var(--green-soft);color:var(--green)">en iyi %' + Math.round(r.en_iyi * 100) + ' · son: ' + r.son.dogru + '/' + r.son.toplam + '</span>' : '<span class="due">10 soru</span>') + '</button>';
         };
         kutu.innerHTML = '<div class="yl-sub">' + ustBaslik("Panel", "Dinleme", "Dinleme testleri",
