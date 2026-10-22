@@ -9,7 +9,7 @@
     content="Sıfırdan A1–A2 İngilizce: Türkçe anlatımlı 10 ders, 3000 kelimelik sesli sözlük, dinleme ve konuşma pratiği. Üyelik yok, reklam yok, tamamen ücretsiz.">
   <link rel="canonical" href="https://www.bubixo.com/ingilizce/">
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#166f4d">
+  <meta name="theme-color" content="#080808">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -21,7 +21,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
     rel="stylesheet">
   <meta property="og:url" content="https://www.bubixo.com/ingilizce/">
   <meta property="og:type" content="website">
@@ -30,14 +30,14 @@
   <meta property="og:title" content="Ücretsiz İngilizce Kursu — Sıfırdan 3000 Sesli Kelime">
   <meta property="og:description"
     content="Türkçe anlatımlı 10 ders, 12 sesli hikâye, 120 cümle kurma alıştırması, 4 resimli kelime oyunu ve 3000 kelimelik sesli sözlük. Üyelik yok, ücret yok.">
-  <meta property="og:image" content="assets/ingilizce-kapak-v2.jpg">
-  <meta property="og:image:secure_url" content="assets/ingilizce-kapak-v2.jpg">
+  <meta property="og:image" content="https://www.bubixo.com/ingilizce/assets/ingilizce-kapak-v2.jpg">
+  <meta property="og:image:secure_url" content="https://www.bubixo.com/ingilizce/assets/ingilizce-kapak-v2.jpg">
   <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Bubixo İngilizce — sıfırdan İngilizce, üyelik olmadan">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="assets/ingilizce-kapak-v2.jpg">
+  <meta name="twitter:image" content="https://www.bubixo.com/ingilizce/assets/ingilizce-kapak-v2.jpg">
   <link rel="stylesheet" href="kurs.css">
   <link rel="stylesheet" href="yol.css">
 </head>
@@ -46,50 +46,24 @@
 
   <header class="top">
     <div class="top-row">
-      <div class="brand"><span class="logo">B</span> Bubixo İngilizce</div>
-      <div class="streak" id="streak">🔥 0 gün</div>
+      <a class="brand" href="#" aria-label="Bubixo ana sayfa" onclick="event.preventDefault();showView('yol')">
+        <span class="brand-wordmark">bubixo<span class="brand-period">.</span></span>
+      </a>
+      <div class="streak" id="streak" aria-label="Günlük öğrenme serisi">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21c4.2 0 7-2.8 7-6.6 0-2.5-1.2-4.4-3.8-6.8.1 2.2-1 3.1-2 3.7C13.1 7.6 11 4.9 8.1 3 8.8 7 6 9.2 5.1 12.1 3.8 16.5 6.5 21 12 21Z"/><path d="M12 21c-2 0-3.3-1.4-3.3-3.2 0-1.4.8-2.6 2.4-4.1.2 1.4 1.1 2.1 1.8 2.5 1.3 1.6.7 4.8-.9 4.8Z"/></svg>
+        <span class="streak-count">0 gün</span>
+      </div>
     </div>
-    <h1>Ücretsiz Online İngilizce Kursu – A1 ve A2</h1>
-    <p>Sıfırdan İngilizce öğren. <b>Dinleme, konuşma, kelime, gramer ve interaktif hikâyelerle</b> adım adım ilerle —
-      Türkçe anlatımlı, üyeliksiz.</p>
   </header>
 
-  <nav class="nav" id="nav">
-    <button data-v="dersler" class="on"><svg viewBox="0 0 24 24">
-        <path d="M4 19V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zm0 0a2 2 0 0 0 2 2h13" />
-      </svg>Dersler</button>
-    <button data-v="kelime"><svg viewBox="0 0 24 24">
-        <rect x="3" y="5" width="13" height="15" rx="2" />
-        <path d="M8 5V3.5A1.5 1.5 0 0 1 9.5 2H19a2 2 0 0 1 2 2v13" />
-      </svg>Kelimeler</button>
-    <button data-v="hikaye"><svg viewBox="0 0 24 24">
-        <path d="M12 6.5C10.5 5 8 4.5 4 4.5v13c4 0 6.5.5 8 2 1.5-1.5 4-2 8-2v-13c-4 0-6.5.5-8 2z" />
-        <path d="M12 6.5v13" />
-      </svg>Hikayeler</button>
-    <button data-v="kur"><svg viewBox="0 0 24 24">
-        <rect x="2.5" y="8" width="8" height="8" rx="2" />
-        <rect x="13.5" y="8" width="8" height="8" rx="2" />
-        <path d="M10.5 12h3" />
-      </svg>Cümle Kur</button>
-    <button data-v="oyun"><svg viewBox="0 0 24 24">
-        <rect x="2" y="7" width="20" height="11" rx="4" />
-        <path d="M7 10.5v3M5.5 12h3M15.8 11h.01M18.3 14h.01" />
-      </svg>Oyunlar</button>
-    <button data-v="gramer"><svg viewBox="0 0 24 24">
-        <path d="M4 6h16M4 12h10M4 18h7" />
-        <path d="M17 14l2.5 2.5L17 19M21 16.5h-4" />
-      </svg>Gramer</button>
-    <button data-v="telaffuz"><svg viewBox="0 0 24 24">
-        <rect x="9" y="2.5" width="6" height="11.5" rx="3" />
-        <path d="M5 11a7 7 0 0 0 14 0M12 18v3.5M8.5 21.5h7" />
-      </svg>Telaffuz</button>
-    <button data-v="gunluk"><svg viewBox="0 0 24 24">
-        <circle cx="12" cy="12" r="9" />
-        <path d="M12 7v5l3.5 2" />
-      </svg>Günlük</button>
-  </nav>
-
-  <main class="wrap">
+  <nav class="nav" id="nav" aria-label="Ana gezinme">
+    <button data-v="yol" class="on" aria-label="Öğren"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 5.5A2.5 2.5 0 0 1 6 3h14.5v16H6a2.5 2.5 0 0 0-2.5 2.5z"/><path d="M7.5 7h8M7.5 11h8M7.5 15h5"/></svg>Öğren</button>
+    <button data-v="kelime" aria-label="Kelimeler"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5H19a2 2 0 0 1 2 2V20H8a3 3 0 0 1-3-3V8.5a3 3 0 0 1 3-3Z"/><path d="M8 5.5V3h10v2.5M8 10h9M8 14h7"/></svg>Kelimeler</button>
+    <button data-v="pratik" aria-label="Pratik"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="m10 9 5 3-5 3z"/></svg>Pratik</button>
+    <button data-v="kesfet" aria-label="Keşfet"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/></svg>Keşfet</button>
+  </nav>  <main class="wrap">
+    <section class="view" id="v-pratik"></section>
+    <section class="view" id="v-kesfet"></section>
     <section class="view on" id="v-dersler"></section>
     <section class="view" id="v-kelime"></section>
     <section class="view" id="v-gramer"></section>
@@ -361,7 +335,7 @@
   <script src="stat.js"></script>
   <script src="yol.js"></script>
   <script>
-    window.BX_PWA_SURUM = "2";
+    window.BX_PWA_SURUM = "3";
     window.BX_VARLIK_KOK = "./";
     window.BX_STORE_KEY = "bx-eng";
     window.BX_KABUK = ["app.js", "ceviri.js", "stat.js", "ses.js", "data.js", "data2.js", "data5.js", "data6.js", "data7.js", "yol.js", "yol.css"];
@@ -384,7 +358,7 @@
   </script>
   <script src="pwa.js"></script>
   <script
-    type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Course","@id":"https://www.bubixo.com/ingilizce/#course","name":"Ücretsiz İngilizce Kursu — Sıfırdan A1–A2","description":"Türkçe anlatımlı, tamamen ücretsiz İngilizce kursu: A1'den A2'ye beş bölümlük öğrenme yolu, 10 ders, 6 gramer konusu, 12 sesli hikâye, 120 cümle kurma alıştırması, 240 resimli kelimeyle 4 kelime oyunu, dinleme ve konuşma alıştırmaları, aralıklı tekrarlı 3000 kelimelik sesli sözlük. Üyelik ve ödeme yok.","url":"https://www.bubixo.com/ingilizce/","image":"assets/ingilizce-kapak-v2.jpg","inLanguage":"tr","teaches":["İngilizce","İngilizce kelime bilgisi","İngilizce gramer","İngilizce dinleme","İngilizce konuşma","İngilizce telaffuz"],"educationalLevel":"Başlangıç (A1–A2)","isAccessibleForFree":true,"isFamilyFriendly":true,"learningResourceType":["Ders","Alıştırma","Sözlük","Oyun","Hikâye","Dinleme alıştırması"],"courseCode":"BX-EN-A1A2","timeRequired":"PT110M","provider":{"@type":"Organization","name":"Bubixo","url":"https://www.bubixo.com/"},"offers":{"@type":"Offer","price":"0","priceCurrency":"TRY","availability":"https://schema.org/InStock","category":"Free","url":"https://www.bubixo.com/ingilizce/"},"hasCourseInstance":{"@type":"CourseInstance","courseMode":"online","courseWorkload":"PT110M","inLanguage":"tr","location":{"@type":"VirtualLocation","url":"https://www.bubixo.com/ingilizce/"},"instructor":{"@type":"Organization","name":"Bubixo"}},"syllabusSections":[{"@type":"Syllabus","position":1,"name":"Alfabe ve Telaffuzun Temelleri","timeRequired":"PT8M"},{"@type":"Syllabus","position":2,"name":"Selamlaşma ve Tanışma","timeRequired":"PT10M"},{"@type":"Syllabus","position":3,"name":"am / is / are — Olmak Fiili","timeRequired":"PT12M"},{"@type":"Syllabus","position":4,"name":"Sayılar, Günler ve Saat","timeRequired":"PT12M"},{"@type":"Syllabus","position":5,"name":"Ailem ve Sahiplik: my, your, have got","timeRequired":"PT11M"},{"@type":"Syllabus","position":6,"name":"Günlük Rutin — Geniş Zaman","timeRequired":"PT13M"},{"@type":"Syllabus","position":7,"name":"Restoranda: Sipariş ve Rica","timeRequired":"PT11M"},{"@type":"Syllabus","position":8,"name":"Yol Sorma ve Yön Tarifi","timeRequired":"PT11M"},{"@type":"Syllabus","position":9,"name":"Alışveriş: Fiyat Sorma ve Beden","timeRequired":"PT10M"},{"@type":"Syllabus","position":10,"name":"Geçmişten Bahsetme: was / were","timeRequired":"PT12M"}],"hasPart":[{"@type":"LearningResource","name":"3000 kelimelik sesli İngilizce sözlük","url":"https://www.bubixo.com/ingilizce/kelimeler/","learningResourceType":"Sözlük","isAccessibleForFree":true},{"@type":"LearningResource","name":"Cümle Kur — 120 İngilizce cümle","url":"https://www.bubixo.com/ingilizce/cumle-kur/","learningResourceType":"Alıştırma","educationalLevel":"A1–A2","isAccessibleForFree":true},{"@type":"LearningResource","name":"Kelime oyunları — 240 resimli kelime","url":"https://www.bubixo.com/ingilizce/oyunlar/","learningResourceType":"Oyun","educationalLevel":"A1","isAccessibleForFree":true},{"@type":"LearningResource","name":"İngilizce telaffuz pratiği","url":"https://www.bubixo.com/ingilizce/telaffuz/","learningResourceType":"Alıştırma","isAccessibleForFree":true},{"@type":"LearningResource","name":"Her gün bir İngilizce cümle","url":"https://www.bubixo.com/ingilizce/her-gun/","learningResourceType":"Alıştırma","isAccessibleForFree":true}]},{"@type":"FAQPage","@id":"https://www.bubixo.com/ingilizce/#faq","mainEntity":[{"@type":"Question","name":"İngilizce kursu gerçekten ücretsiz mi?","acceptedAnswer":{"@type":"Answer","text":"Evet. Kursun tamamı — 10 ders, 3000 kelimelik sesli sözlük, gramer anlatımları, oyunlar ve telaffuz pratiği — ücretsizdir. Deneme süresi, kredi kartı, gizli paket ya da \"premium\" kilidi yoktur. Sayfada reklam da göstermiyoruz."}},{"@type":"Question","name":"Üye olmam ya da e-posta vermem gerekiyor mu?","acceptedAnswer":{"@type":"Answer","text":"Hayır. Kayıt ekranı yoktur; sayfayı açtığınız anda derse başlayabilirsiniz. Sizden ad, e-posta veya telefon istemiyoruz."}},{"@type":"Question","name":"İlerlemem nerede saklanıyor?","acceptedAnswer":{"@type":"Answer","text":"İlerlemeniz sunucuda değil, kullandığınız tarayıcının kendi hafızasında (localStorage) tutulur. Bu yüzden aynı cihaz ve aynı tarayıcıyla devam ettiğinizde kaldığınız yerden ilerlersiniz; başka bir cihaza otomatik aktarılmaz. Tarayıcı verilerini temizlerseniz ilerleme de silinir."}},{"@type":"Question","name":"Kelimelerin sesi nereden geliyor?","acceptedAnswer":{"@type":"Answer","text":"Kursun cümleleri, hikâyeleri ve 3000 kelimelik sözlüğün tamamı önceden kaydedilmiş doğal İngilizce seslerle seslendirildi; bağlantı yavaşsa ya da bir kayıt yüklenemezse tarayıcının kendi İngilizce seslendirmesi devreye girer. Her seste hızı 0.75x'e düşürebilirsiniz. Telaffuz pratiği bölümünde mikrofonla söylediğiniz kelimeyi tarayıcı tanımaya çalışır."}},{"@type":"Question","name":"Seviyemi nasıl belirlerim?","acceptedAnswer":{"@type":"Answer","text":"Kursun panelindeki “Seviye Testi” 15 sorudan oluşur ve beş bölümün her birinden kolaydan zora sorular sorar. Sonuç ilerlemenize işlenmez; yalnızca hangi bölümden başlamanın mantıklı olduğunu önerir. Testi istediğiniz zaman yeniden çözebilirsiniz."}},{"@type":"Question","name":"Kurs hangi seviyeye kadar götürüyor?","acceptedAnswer":{"@type":"Answer","text":"Hedef seviye A1–A2, yani başlangıç ve temel seviyedir. Sıfırdan başlayan biri; kendini tanıtacak, saat ve fiyat soracak, yol tarifi isteyecek, restoranda sipariş verecek ve geçmişten basit cümlelerle bahsedecek düzeye gelir."}},{"@type":"Question","name":"Ne kadar sürede bitirebilirim?","acceptedAnswer":{"@type":"Answer","text":"Derslerin toplam anlatım süresi yaklaşık 110 dakikadır. Günde 10 dakika ayıran biri dersleri iki haftada bitirir; asıl zaman 3000 kelimelik sözlükte ve tekrar yaparken geçer. Acele etmeden, her gün az ve düzenli çalışmak en iyi sonucu verir."}},{"@type":"Question","name":"Telefonda çalışır mı, uygulama indirmem gerekir mi?","acceptedAnswer":{"@type":"Answer","text":"Telefon, tablet ve bilgisayarda tarayıcıdan çalışır. İndirilecek bir uygulama yoktur; adresi açmanız yeterli."}},{"@type":"Question","name":"Sertifika veriliyor mu?","acceptedAnswer":{"@type":"Answer","text":"Hayır. Bu kurs sertifika vermez; amacı sınav belgesi değil, günlük hayatta kullanabileceğiniz temel İngilizceyi ücretsiz kazandırmaktır."}}]},{"@type":"BreadcrumbList","@id":"https://www.bubixo.com/ingilizce/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Bubixo","item":"https://www.bubixo.com/"},{"@type":"ListItem","position":2,"name":"Ücretsiz İngilizce Kursu","item":"https://www.bubixo.com/ingilizce/"}]},{"@type":"WebPage","@id":"https://www.bubixo.com/ingilizce/#webpage","url":"https://www.bubixo.com/ingilizce/","name":"Ücretsiz İngilizce Kursu","inLanguage":"tr","isPartOf":{"@type":"WebSite","name":"Bubixo","url":"https://www.bubixo.com/"},"primaryImageOfPage":{"@type":"ImageObject","url":"assets/ingilizce-kapak-v2.jpg","width":1200,"height":630},"about":{"@id":"https://www.bubixo.com/ingilizce/#course"}}]}</script>
+    type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Course","@id":"https://www.bubixo.com/ingilizce/#course","name":"Ücretsiz İngilizce Kursu — Sıfırdan A1–A2","description":"Türkçe anlatımlı, tamamen ücretsiz İngilizce kursu: A1'den A2'ye beş bölümlük öğrenme yolu, 10 ders, 6 gramer konusu, 12 sesli hikâye, 120 cümle kurma alıştırması, 240 resimli kelimeyle 4 kelime oyunu, dinleme ve konuşma alıştırmaları, aralıklı tekrarlı 3000 kelimelik sesli sözlük. Üyelik ve ödeme yok.","url":"https://www.bubixo.com/ingilizce/","image":"https://www.bubixo.com/ingilizce/assets/ingilizce-kapak-v2.jpg","inLanguage":"tr","teaches":["İngilizce","İngilizce kelime bilgisi","İngilizce gramer","İngilizce dinleme","İngilizce konuşma","İngilizce telaffuz"],"educationalLevel":"Başlangıç (A1–A2)","isAccessibleForFree":true,"isFamilyFriendly":true,"learningResourceType":["Ders","Alıştırma","Sözlük","Oyun","Hikâye","Dinleme alıştırması"],"courseCode":"BX-EN-A1A2","timeRequired":"PT110M","provider":{"@type":"Organization","name":"Bubixo","url":"https://www.bubixo.com/"},"offers":{"@type":"Offer","price":"0","priceCurrency":"TRY","availability":"https://schema.org/InStock","category":"Free","url":"https://www.bubixo.com/ingilizce/"},"hasCourseInstance":{"@type":"CourseInstance","courseMode":"online","courseWorkload":"PT110M","inLanguage":"tr","location":{"@type":"VirtualLocation","url":"https://www.bubixo.com/ingilizce/"},"instructor":{"@type":"Organization","name":"Bubixo"}},"syllabusSections":[{"@type":"Syllabus","position":1,"name":"Alfabe ve Telaffuzun Temelleri","timeRequired":"PT8M"},{"@type":"Syllabus","position":2,"name":"Selamlaşma ve Tanışma","timeRequired":"PT10M"},{"@type":"Syllabus","position":3,"name":"am / is / are — Olmak Fiili","timeRequired":"PT12M"},{"@type":"Syllabus","position":4,"name":"Sayılar, Günler ve Saat","timeRequired":"PT12M"},{"@type":"Syllabus","position":5,"name":"Ailem ve Sahiplik: my, your, have got","timeRequired":"PT11M"},{"@type":"Syllabus","position":6,"name":"Günlük Rutin — Geniş Zaman","timeRequired":"PT13M"},{"@type":"Syllabus","position":7,"name":"Restoranda: Sipariş ve Rica","timeRequired":"PT11M"},{"@type":"Syllabus","position":8,"name":"Yol Sorma ve Yön Tarifi","timeRequired":"PT11M"},{"@type":"Syllabus","position":9,"name":"Alışveriş: Fiyat Sorma ve Beden","timeRequired":"PT10M"},{"@type":"Syllabus","position":10,"name":"Geçmişten Bahsetme: was / were","timeRequired":"PT12M"}],"hasPart":[{"@type":"LearningResource","name":"3000 kelimelik sesli İngilizce sözlük","url":"https://www.bubixo.com/ingilizce/kelimeler/","learningResourceType":"Sözlük","isAccessibleForFree":true},{"@type":"LearningResource","name":"Cümle Kur — 120 İngilizce cümle","url":"https://www.bubixo.com/ingilizce/cumle-kur/","learningResourceType":"Alıştırma","educationalLevel":"A1–A2","isAccessibleForFree":true},{"@type":"LearningResource","name":"Kelime oyunları — 240 resimli kelime","url":"https://www.bubixo.com/ingilizce/oyunlar/","learningResourceType":"Oyun","educationalLevel":"A1","isAccessibleForFree":true},{"@type":"LearningResource","name":"İngilizce telaffuz pratiği","url":"https://www.bubixo.com/ingilizce/telaffuz/","learningResourceType":"Alıştırma","isAccessibleForFree":true},{"@type":"LearningResource","name":"Her gün bir İngilizce cümle","url":"https://www.bubixo.com/ingilizce/her-gun/","learningResourceType":"Alıştırma","isAccessibleForFree":true}]},{"@type":"FAQPage","@id":"https://www.bubixo.com/ingilizce/#faq","mainEntity":[{"@type":"Question","name":"İngilizce kursu gerçekten ücretsiz mi?","acceptedAnswer":{"@type":"Answer","text":"Evet. Kursun tamamı — 10 ders, 3000 kelimelik sesli sözlük, gramer anlatımları, oyunlar ve telaffuz pratiği — ücretsizdir. Deneme süresi, kredi kartı, gizli paket ya da \"premium\" kilidi yoktur. Sayfada reklam da göstermiyoruz."}},{"@type":"Question","name":"Üye olmam ya da e-posta vermem gerekiyor mu?","acceptedAnswer":{"@type":"Answer","text":"Hayır. Kayıt ekranı yoktur; sayfayı açtığınız anda derse başlayabilirsiniz. Sizden ad, e-posta veya telefon istemiyoruz."}},{"@type":"Question","name":"İlerlemem nerede saklanıyor?","acceptedAnswer":{"@type":"Answer","text":"İlerlemeniz sunucuda değil, kullandığınız tarayıcının kendi hafızasında (localStorage) tutulur. Bu yüzden aynı cihaz ve aynı tarayıcıyla devam ettiğinizde kaldığınız yerden ilerlersiniz; başka bir cihaza otomatik aktarılmaz. Tarayıcı verilerini temizlerseniz ilerleme de silinir."}},{"@type":"Question","name":"Kelimelerin sesi nereden geliyor?","acceptedAnswer":{"@type":"Answer","text":"Kursun cümleleri, hikâyeleri ve 3000 kelimelik sözlüğün tamamı önceden kaydedilmiş doğal İngilizce seslerle seslendirildi; bağlantı yavaşsa ya da bir kayıt yüklenemezse tarayıcının kendi İngilizce seslendirmesi devreye girer. Her seste hızı 0.75x'e düşürebilirsiniz. Telaffuz pratiği bölümünde mikrofonla söylediğiniz kelimeyi tarayıcı tanımaya çalışır."}},{"@type":"Question","name":"Seviyemi nasıl belirlerim?","acceptedAnswer":{"@type":"Answer","text":"Kursun panelindeki “Seviye Testi” 15 sorudan oluşur ve beş bölümün her birinden kolaydan zora sorular sorar. Sonuç ilerlemenize işlenmez; yalnızca hangi bölümden başlamanın mantıklı olduğunu önerir. Testi istediğiniz zaman yeniden çözebilirsiniz."}},{"@type":"Question","name":"Kurs hangi seviyeye kadar götürüyor?","acceptedAnswer":{"@type":"Answer","text":"Hedef seviye A1–A2, yani başlangıç ve temel seviyedir. Sıfırdan başlayan biri; kendini tanıtacak, saat ve fiyat soracak, yol tarifi isteyecek, restoranda sipariş verecek ve geçmişten basit cümlelerle bahsedecek düzeye gelir."}},{"@type":"Question","name":"Ne kadar sürede bitirebilirim?","acceptedAnswer":{"@type":"Answer","text":"Derslerin toplam anlatım süresi yaklaşık 110 dakikadır. Günde 10 dakika ayıran biri dersleri iki haftada bitirir; asıl zaman 3000 kelimelik sözlükte ve tekrar yaparken geçer. Acele etmeden, her gün az ve düzenli çalışmak en iyi sonucu verir."}},{"@type":"Question","name":"Telefonda çalışır mı, uygulama indirmem gerekir mi?","acceptedAnswer":{"@type":"Answer","text":"Telefon, tablet ve bilgisayarda tarayıcıdan çalışır. İndirilecek bir uygulama yoktur; adresi açmanız yeterli."}},{"@type":"Question","name":"Sertifika veriliyor mu?","acceptedAnswer":{"@type":"Answer","text":"Hayır. Bu kurs sertifika vermez; amacı sınav belgesi değil, günlük hayatta kullanabileceğiniz temel İngilizceyi ücretsiz kazandırmaktır."}}]},{"@type":"BreadcrumbList","@id":"https://www.bubixo.com/ingilizce/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Bubixo","item":"https://www.bubixo.com/"},{"@type":"ListItem","position":2,"name":"Ücretsiz İngilizce Kursu","item":"https://www.bubixo.com/ingilizce/"}]},{"@type":"WebPage","@id":"https://www.bubixo.com/ingilizce/#webpage","url":"https://www.bubixo.com/ingilizce/","name":"Ücretsiz İngilizce Kursu","inLanguage":"tr","isPartOf":{"@type":"WebSite","name":"Bubixo","url":"https://www.bubixo.com/"},"primaryImageOfPage":{"@type":"ImageObject","url":"https://www.bubixo.com/ingilizce/assets/ingilizce-kapak-v2.jpg","width":1200,"height":630},"about":{"@id":"https://www.bubixo.com/ingilizce/#course"}}]}</script>
   <!-- bx-cartoon v1 ins=0 skip=2 --><!-- bx-eqrow v1 ins=0 skip=2 --><!-- bx-strow v1 ins=0 skip=2 --><!-- bx-ptrow v1 ins=0 skip=2 --><!-- bx-iqrow v1 ins=0 skip=2 --><!-- bx-passportrow v1 ins=0 skip=2 --><!-- bx-newrows v1 ins=0 skip=3 --><!-- bx-calccat v1 ins=0 anchor0 --><!-- bx-tools3 v1 ins=0 --><!-- bx-vidcrop v1 ran=1 len=31518 ins=0 anchor0 --><!-- bx-spellcheck v1 ran=1 len=31570 ins=0 anchor0 --><!-- bx-translate v1 ran=1 len=31625 ins=0 anchor0 --><!-- bx-meme v1 ran=1 len=31679 ins=0 anchor0 --><!-- bx-collage v1 ran=1 len=31728 ins=0 anchor0 --><!-- bx-videogif v1 ran=1 len=31780 ins=0 anchor0 --><!-- bx-audiocutter v1 ran=1 len=31833 ins=0 anchor0 --><!-- bx-signpdf v1 ran=1 len=31889 ins=0 anchor0 --><!-- bx-upscaler v1 ran=1 len=31941 ins=0 anchor0 --><!-- bx-ocrvocal v1 ran=1 len=31994 ins=0 c5_t=anchor0 c4_t=anchor0 c2_t=anchor0 --><!-- bx-imgtools v1 ran=1 len=32078 anchor=0 ins=0 --><!-- bx-vstools2 v1 ran=1 len=32132 anchor=0 ins=0 --><!-- bx-vstools v2 ran=1 len=32186 anchor=0 ins=0 --><!-- bx-paudio v1 ran=1 len=32239 anchor=0 ins=0 --><!-- bx-vcomp v4 ran=1 len=32291 match=0 ins=0 --><!-- bx-agrow v1 ins=0 skip=2 -->
 </body>
 

@@ -30,15 +30,19 @@ S.games.rounds = S.games.rounds || 0;
 
 /* ---------- seri (streak) ---------- */
 (function () {
-  const today = new Date().toISOString().slice(0, 10);
+  const dateKey = d => d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+  const now = new Date();
+  const today = dateKey(now);
   const last = S.streak.last;
   if (last !== today) {
-    const y = new Date(Date.now() - 864e5).toISOString().slice(0, 10);
+    const yesterday = new Date(now);
+    yesterday.setDate(yesterday.getDate() - 1);
+    const y = dateKey(yesterday);
     S.streak.count = (last === y) ? S.streak.count + 1 : 1;
     S.streak.last = today;
     store.write(S);
   }
-  $("#streak").textContent = "🔥 " + S.streak.count + " gün";
+  const streakLabel = $("#streak .streak-count") || $("#streak"); streakLabel.textContent = S.streak.count + " gün";
 })();
 
 /* ---------- ses (speechSynthesis) ---------- */
@@ -63,16 +67,88 @@ function speak(text, opt) {
   } catch (e) { }
 }
 function stopSpeak() { try { if ("speechSynthesis" in window) speechSynthesis.cancel(); } catch (e) { } }
-const SPK = '<svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11"/></svg>';
+const SPK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg>';
 
-/* ---------- gezinme ---------- */
-document.querySelectorAll(".nav button").forEach(b => b.onclick = () => showView(b.dataset.v));
-function showView(v) {
-  tale.stop();
-  gStop();
-  document.querySelectorAll(".nav button").forEach(b => b.classList.toggle("on", b.dataset.v === v));
+/* ---------- gezinme: dört ana sekme, özellikler alt ekranlarda ---------- */
+const MAIN_TABS = ["yol", "kelime", "pratik", "kesfet"];
+const TAB_GROUP = {
+  yol:"yol", dersler:"yol", kelime:"kelime", pratik:"pratik", kesfet:"kesfet",
+  gramer:"pratik", telaffuz:"pratik", kur:"pratik", oyun:"pratik",
+  hikaye:"pratik", gunluk:"kesfet"
+};
+let bxCurrentView = null;
+const bxRouteStack = [];
+function bxGoBack(fallback) {
+  const previous = bxRouteStack.pop();
+  const target = previous || fallback || TAB_GROUP[bxCurrentView] || "yol";
+  showView(target, { replace: true });
+}
+window.bxGoBack = bxGoBack;
+function bxSyncRouteBack() {
+  const view = document.querySelector(".view.on");
+  if (!view || MAIN_TABS.includes(bxCurrentView) || view.querySelector(".backbtn")) return;
+  const group = TAB_GROUP[bxCurrentView] || "yol";
+  const label = group === "yol" ? "← Öğren" : group === "kelime" ? "← Kelimeler" : group === "pratik" ? "← Pratik" : "← Keşfet";
+  const wrap = document.createElement("div");
+  wrap.className = "subview-return";
+  wrap.innerHTML = '<button class="backbtn" type="button" data-route-back>' + label + '</button>';
+  wrap.querySelector("button").onclick = () => bxGoBack(group);
+  view.insertBefore(wrap, view.firstChild);
+}
+const bxMain = document.querySelector("main.wrap");
+if (bxMain && "MutationObserver" in window) {
+  new MutationObserver(() => bxSyncRouteBack()).observe(bxMain, { childList: true, subtree: true });
+}
+document.querySelectorAll("#nav button").forEach(b => b.onclick = () => showView(b.dataset.v));
+function lineIcon(name) {
+  const paths = {
+    ders: '<path d="M3.5 5.5A2.5 2.5 0 0 1 6 3h14.5v16H6a2.5 2.5 0 0 0-2.5 2.5z"/><path d="M7.5 7h8M7.5 11h8M7.5 15h5"/>',
+    kelime: '<path d="M8 5.5H19a2 2 0 0 1 2 2V20H8a3 3 0 0 1-3-3V8.5a3 3 0 0 1 3-3Z"/><path d="M8 5.5V3h10v2.5M8 10h9M8 14h7"/>',
+    pratik: '<rect x="3" y="4" width="18" height="16" rx="3"/><path d="m10 9 5 3-5 3z"/>',
+    kesfet: '<circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/>',
+    telaffuz: '<path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/>',
+    oyun: '<path d="M7 8h10a4 4 0 0 1 3.9 4.9l-.7 3.1a2.5 2.5 0 0 1-4.1 1.2L14 15H10l-2.1 2.2a2.5 2.5 0 0 1-4.1-1.2l-.7-3.1A4 4 0 0 1 7 8Z"/><path d="M8 10v4M6 12h4M16 11h.01M18 13h.01"/>',
+    hikaye: '<path d="M3.5 5.5A2.5 2.5 0 0 1 6 3h14.5v16H6a2.5 2.5 0 0 0-2.5 2.5z"/><path d="M7.5 7h8M7.5 11h8M7.5 15h5"/>',
+    gunluk: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+    gramer: '<path d="M5 4h14v16H5z"/><path d="M8 8h8M8 12h8M8 16h5"/>',
+    kur: '<path d="M7 7h13M16 3l4 4-4 4M17 17H4M8 13l-4 4 4 4"/>'
+  };
+  return '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">' + (paths[name] || paths.pratik) + '</svg>';
+}
+
+function renderHub(id) {
+  const hubs = {
+    pratik: {title:"Pratik", subtitle:"Öğrendiklerini farklı yollarla pekiştir.", items:[
+      ["gramer","Gramer","Kuralları örneklerle öğren","Aa"],
+      ["kur","Cümle kur","Kelimeleri doğru sıraya yerleştir","↔"],
+      ["telaffuz","Dinleme ve telaffuz","Dinle ve sesli tekrar yap","♫"],
+      ["oyun","Kelime oyunları","Oyunlarla kelime pratiği yap","✦"],
+      ["hikaye","Hikâyeler","Kısa metinleri oku, dinle ve kelimeleri bağlamında öğren","▤"]
+    ]},
+    kesfet: {title:"Keşfet", subtitle:"Günün cümlesi ve öğrenme ilerlemen.", items:[
+      ["gunluk","Günün içeriği","Günün cümlesini dinle ve öğrenme ilerlemeni gözden geçir","◷"]
+    ]}
+  };
+  const hub=hubs[id], target=$("#v-"+id);
+  target.innerHTML=`<h2 class="sec-title">${hub.title}</h2><p class="sec-sub">${hub.subtitle}</p>
+    <div class="hub-grid">${hub.items.map(item=>`<button class="card hub-item" data-open="${item[0]}">
+      <span class="hub-icon" aria-hidden="true">${lineIcon(item[0])}</span><span class="hub-copy"><b>${item[1]}</b><small>${item[2]}</small></span>
+      <span class="hub-arrow" aria-hidden="true">›</span></button>`).join("")}</div>`;
+  target.querySelectorAll("[data-open]").forEach(b=>b.onclick=()=>showView(b.dataset.open));
+}
+function showView(v, options) {
+  const view = $("#v-" + v);
+  if (!view) return;
+  options = options || {};
+  const isMainTab = MAIN_TABS.includes(v);
+  if (v !== bxCurrentView && !options.replace && !isMainTab && bxCurrentView) bxRouteStack.push(bxCurrentView);
+  if (isMainTab && !options.keepStack) bxRouteStack.length = 0;
+  bxCurrentView = v;
+  tale.stop(); gStop();
+  const group = TAB_GROUP[v] || "yol";
+  document.querySelectorAll("#nav button").forEach(b => b.classList.toggle("on", b.dataset.v === group));
   document.querySelectorAll(".view").forEach(x => x.classList.remove("on"));
-  $("#v-" + v).classList.add("on");
+  view.classList.add("on");
   window.scrollTo({ top: 0 });
   if (v === "dersler") renderUnits();
   if (v === "kelime") renderDecks();
@@ -82,8 +158,9 @@ function showView(v) {
   if (v === "hikaye") renderStories();
   if (v === "kur") renderKur();
   if (v === "oyun") renderGames();
+  if (v === "pratik" || v === "kesfet") renderHub(v);
+  bxSyncRouteBack();
 }
-
 /* ================== 1) DERSLER ================== */
 function renderUnits() {
   const doneCount = UNITS.filter(u => S.units[u.id] && S.units[u.id].done).length;
@@ -104,7 +181,7 @@ function renderUnits() {
   });
 }
 
-function renderLesson(id) {
+function renderLesson(id, returnTo) {
   const u = UNITS.find(x => x.id === id);
   $("#v-dersler").innerHTML = `
     <div class="lesson">
@@ -125,7 +202,7 @@ function renderLesson(id) {
         <div class="qscore" id="qscore"></div>
       </div>
     </div>`;
-  $("#lback").onclick = renderUnits;
+  $("#lback").onclick = () => returnTo ? bxGoBack(returnTo) : renderUnits();
   document.querySelectorAll("[data-say]").forEach(b => b.onclick = () => speak(b.dataset.say));
 
   let answered = 0, correct = 0;
@@ -149,7 +226,7 @@ function renderLesson(id) {
         S.units[u.id] = { score: correct, done: pass || (S.units[u.id] && S.units[u.id].done) };
         store.write(S);
         $("#qscore").textContent = pass
-          ? `🎉 ${correct}/5 — ders tamamlandı!`
+          ? ` ${correct}/5 — ders tamamlandı!`
           : `${correct}/5 — 4 ve üzeri için örnekleri tekrar dinleyip yeniden dene.`;
         $("#qscore").style.color = pass ? "var(--green)" : "var(--amber)";
       }
@@ -165,37 +242,68 @@ function dueCount(d) {
   return d.words.filter((w, i) => { const st = wordState(d.id + ":" + i); return st.box === 0 || st.due <= now; }).length;
 }
 function renderDecks() {
+  const dueTotal = DECKS.reduce((sum, deck) => sum + dueCount(deck), 0);
   $("#v-kelime").innerHTML = `
-    <h2 class="sec-title">Kelime Kartları</h2>
-    <p class="sec-sub">Karta dokun → anlamı gör → dürüstçe işaretle. “Bilemedim” dediklerin daha sık, bildiklerin daha seyrek gelir.</p>
-    <div class="deckgrid">
-      ${DECKS.map(d => {
+    <div class="words-page">
+      <header class="words-heading">
+        <div class="words-heading-copy">
+          <span class="words-eyebrow">KELİME DAĞARCIĞIN</span>
+          <h1>Kelimeler</h1>
+          <p>Yeni kelimeler keşfet, anlamlarını öğren ve öğrendiklerini kalıcı hâle getir.</p>
+        </div>
+        <div class="words-overview" aria-label="Kelime çalışma özeti">
+          <div><strong>${WORDS.length.toLocaleString("tr-TR")}</strong><span>Sözlük kelimesi</span></div>
+          <div><strong>${dueTotal.toLocaleString("tr-TR")}</strong><span>Tekrar kartı</span></div>
+        </div>
+      </header>
+
+      <section class="words-dictionary" aria-labelledby="words-search-title">
+        <div class="words-section-heading">
+          <div><span class="words-eyebrow">SÖZLÜK</span><h2 id="words-search-title">Bir kelime ara</h2></div>
+          <span class="words-section-note">İngilizce veya Türkçe</span>
+        </div>
+        <label class="words-searchbox" for="dsearch">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 4.5 4.5"></path></svg>
+          <input id="dsearch" type="search" autocomplete="off" placeholder="Örn. journey, yolculuk, look after">
+          <span class="words-search-hint">Ara</span>
+        </label>
+        <div class="words-level-label"><span>Seviyeye göre göz at</span><span>A1’den ileri seviyeye</span></div>
+        <div class="dict-levels" id="dlevels"></div>
+        <div class="words-results-bar"><span id="words-list-label">Kelime listesi</span><span id="words-list-help">Bir kelimeye dokunarak dinle</span></div>
+        <div class="dict-pages" id="dpages"></div>
+        <div id="dlist" class="words-list"></div>
+      </section>
+
+      <section class="words-review" aria-labelledby="words-review-title">
+        <div class="words-section-heading">
+          <div><span class="words-eyebrow">AKTİF TEKRAR</span><h2 id="words-review-title">Kelime kartları</h2></div>
+          <p>Hatırladıklarını işaretle; zorlandıkların daha sık karşına çıksın.</p>
+        </div>
+        <div class="deckgrid">
+          ${DECKS.map((d, i) => {
     const due = dueCount(d);
-    return `<div class="card deck" data-d="${d.id}" tabindex="0" role="button">
-          <div class="em">${d.em}</div><b>${esc(d.title)}</b>
-          <small>${d.words.length} kelime</small>
-          ${due ? `<span class="due">${due} kart hazır</span>` : `<span class="due" style="background:var(--green-soft);color:var(--green)">✓ güncel</span>`}
-        </div>`;
+    return `<button class="card deck words-deck" type="button" data-d="${d.id}">
+          <span class="words-deck-index">${String(i + 1).padStart(2, "0")}</span>
+          <span class="words-deck-copy"><b>${esc(d.title)}</b><small>${d.words.length} kelime</small></span>
+          <span class="words-deck-status ${due ? "is-due" : "is-current"}">${due ? due + " hazır" : "Güncel"}</span>
+          <span class="words-deck-arrow" aria-hidden="true">↗</span>
+        </button>`;
   }).join("")}
-    </div>
-    <h2 class="sec-title" style="margin-top:34px">Sözlük: En Sık 3000 Kelime</h2>
-    <p class="sec-sub">Hepsi seslendirmeli. Seviye seç, 100'lük gruplarla gez ya da doğrudan ara — kelimeye dokun, dinle.</p>
-    <input class="dict-search" id="dsearch" type="search" placeholder="3000 kelimede ara… (ör. water, sevmek, get up)">
-    <div class="dict-levels" id="dlevels"></div>\n    <div class="dict-pages" id="dpages"></div>
-    <div class="card" id="dlist" style="overflow:hidden"></div>`;
+        </div>
+      </section>
+    </div>`;
   renderDict();
-  document.querySelectorAll(".deck").forEach(el => {
+  document.querySelectorAll("#v-kelime .deck").forEach(el => {
     el.onclick = () => startDeck(el.dataset.d);
-    el.onkeydown = e => { if (e.key === "Enter") startDeck(el.dataset.d); };
   });
 }
 let run = null;
-function startDeck(id) {
+function startDeck(id, returnTo) {
   const d = DECKS.find(x => x.id === id);
   const now = Date.now();
   let idxs = d.words.map((w, i) => i).filter(i => { const st = wordState(id + ":" + i); return st.box === 0 || st.due <= now; });
   if (!idxs.length) idxs = d.words.map((w, i) => i);
-  run = { deck: d, idxs, pos: 0, flipped: false };
+  run = { deck: d, idxs, pos: 0, flipped: false, returnTo: returnTo || null };
   drawCard();
 }
 function drawCard() {
@@ -205,12 +313,12 @@ function drawCard() {
       <div class="fcstage">
         <div class="card daily-card">
           <div class="daily-lab">Deste bitti</div>
-          <div class="daily-en">🎉 ${idxs.length} kart</div>
+          <div class="daily-en"> ${idxs.length} kart</div>
           <p class="daily-tr">“${esc(deck.title)}” destesindeki hazır kartların hepsini gördün.</p>
           <button class="startquiz" id="backdecks">Destelere dön</button>
         </div>
       </div>`;
-    $("#backdecks").onclick = renderDecks;
+    $("#backdecks").onclick = () => run && run.returnTo ? bxGoBack(run.returnTo) : renderDecks();
     return;
   }
   const w = deck.words[idxs[pos]];
@@ -232,7 +340,7 @@ function drawCard() {
       </div>
       <div class="fc-prog">${pos + 1} / ${idxs.length}</div>
     </div>`;
-  $("#fback").onclick = renderDecks;
+  $("#fback").onclick = () => run && run.returnTo ? bxGoBack(run.returnTo) : renderDecks();
   $("#fspk").onclick = e => { e.stopPropagation(); speak(w.en); };
   speak(w.en);
   $("#fcard").onclick = () => {
@@ -272,7 +380,7 @@ function renderPron() {
       <div class="pr-word">${esc(item.en)}</div>
       <div class="pr-tr">${esc(item.tr)}</div>
       ${SR ? `
-        <button class="mic" id="mic" aria-label="Konuş"><svg viewBox="0 0 24 24"><rect x="9" y="2.5" width="6" height="11.5" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3.5M8.5 21.5h7"/></svg></button>
+        <button class="mic" id="mic" aria-label="Konuş"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3M9 21h6"/></svg></button>
         <div class="pr-result" id="prres">Mikrofona bas ve söyle</div>`
       : `<div class="pr-warn"><b>Bu tarayıcıda konuşma tanıma yok.</b> Telaffuz pratiği için telefon ya da bilgisayarda <b>Chrome</b> veya <b>Edge</b> kullan. Yine de dinleyip tekrar edebilirsin — sesli tekrar tek başına bile çok etkilidir.</div>`}
       <div class="pr-nav">
@@ -326,10 +434,10 @@ function renderDaily() {
       <div class="daily-en">${esc(s.en)}</div>
       <div class="daily-tr">${esc(s.tr)}</div>
       <div style="margin-top:12px"><button class="bigspk" id="dspk" aria-label="Dinle">${SPK}</button></div>
-      <div class="daily-note">💡 ${esc(s.n)}</div>
+      <div class="daily-note"> ${esc(s.n)}</div>
     </div>
     <div class="statgrid">
-      <div class="card stat"><b>${S.streak.count}</b><small>günlük seri 🔥</small></div>
+      <div class="card stat"><b>${S.streak.count}</b><small>günlük seri </small></div>
       <div class="card stat"><b>${done}/10</b><small>tamamlanan ders</small></div>
       <div class="card stat"><b>${learned}</b><small>öğrenilen kelime</small></div>
       <div class="card stat"><b>${S.heard}</b><small>dinlenen ses</small></div>
@@ -352,7 +460,7 @@ function weeklyQuiz() {
     if (i >= pick.length) {
       $("#wqbox").innerHTML = `<div class="card daily-card" style="margin-top:14px">
         <div class="daily-en">${score}/10</div>
-        <p class="daily-tr">${score >= 8 ? "Muhteşem! 🎉" : score >= 5 ? "İyi gidiyor — kartlara devam." : "Kelime destelerine biraz daha zaman ayır."}</p></div>`;
+        <p class="daily-tr">${score >= 8 ? "Muhteşem! " : score >= 5 ? "İyi gidiyor — kartlara devam." : "Kelime destelerine biraz daha zaman ayır."}</p></div>`;
       return;
     }
     const w = pick[i];
@@ -417,10 +525,20 @@ function drawDict() {
     items = WORDS.slice(L.bas + dictPage * 100, Math.min(L.bas + (dictPage + 1) * 100, L.son));
   }
 
+  const resultLabel = $("#words-list-label");
+  const resultHelp = $("#words-list-help");
+  if (resultLabel) resultLabel.textContent = dictQ ? `Arama sonuçları · ${items.length}` : `${LEVELS[dictLevel].ad} kelimeleri`;
+  if (resultHelp) {
+    if (dictQ) resultHelp.textContent = items.length === 80 ? "İlk 80 sonuç gösteriliyor" : "Dinlemek için kelimeyi seç";
+    else {
+      const first = LEVELS[dictLevel].bas + dictPage * 100 + 1;
+      const last = Math.min(LEVELS[dictLevel].bas + (dictPage + 1) * 100, LEVELS[dictLevel].son);
+      resultHelp.textContent = `${first}–${last} · kelimeye dokunarak dinle`;
+    }
+  }
   listEl.innerHTML = items.map(w => `
     <div class="dict-row">
-      <span class="dm">${w.m || "•"}</span>
-      <span style="cursor:pointer" data-say="${esc(w.e)}"><b>${esc(w.e)}</b><i>${esc(w.t)}</i></span>
+      <span class="dict-word" style="cursor:pointer" data-say="${esc(w.e)}"><b>${esc(w.e)}</b><i>${esc(w.t)}</i></span>
       <button class="spk" data-say="${esc(w.e)}" aria-label="Dinle">${SPK}</button>
     </div>`).join("") || `<div style="padding:18px;color:var(--soft)">Sonuç yok — başka bir kelime dene.</div>`;
   listEl.querySelectorAll("[data-say]").forEach(el => el.onclick = () => speak(el.dataset.say));
@@ -437,7 +555,7 @@ function renderGramer() {
         <span><b>${esc(t.title)}</b><small>${esc(t.formula.split("→")[0])}</small></span>
       </div>`).join("")}
     <div class="card" style="padding:20px;margin-top:22px">
-      <h3 class="serif" style="font-size:19px">🧩 Cümle Kurma Oyunu</h3>
+      <h3 class="serif" style="font-size:19px"> Cümle Kurma Oyunu</h3>
       <p style="font-size:13.5px;color:var(--soft);margin:6px 0 14px">Türkçesine bak, İngilizce kelimelere doğru sırayla dokun. Yanlış dizersen kelimeye tekrar dokunup geri alabilirsin.</p>
       <button class="startquiz" id="sbstart" style="margin-top:0">Oyunu başlat</button>
       <div id="sbox"></div>
@@ -448,7 +566,7 @@ function renderGramer() {
   });
   $("#sbstart").onclick = () => startSB();
 }
-function renderTense(id) {
+function renderTense(id, returnTo) {
   const t = TENSES.find(x => x.id === id);
   $("#v-gramer").innerHTML = `
     <div class="lesson">
@@ -465,7 +583,7 @@ function renderTense(id) {
       </div>
       <div class="qbox"><h3>Mini test</h3><div id="gquiz"></div><div class="qscore" id="gscore"></div></div>
     </div>`;
-  $("#gback").onclick = renderGramer;
+  $("#gback").onclick = () => returnTo ? bxGoBack(returnTo) : renderGramer();
   document.querySelectorAll("#v-gramer [data-say]").forEach(b => b.onclick = () => speak(b.dataset.say));
   let answered = 0, correct = 0;
   $("#gquiz").innerHTML = t.quiz.map((q, qi) => `
@@ -483,7 +601,7 @@ function renderTense(id) {
       else { btn.classList.add("no"); qq.querySelectorAll(".opts button")[q.a].classList.add("ok"); }
       qq.querySelector(".expl").style.display = "block";
       if (answered === t.quiz.length) {
-        $("#gscore").textContent = correct === t.quiz.length ? `🎉 ${correct}/${t.quiz.length} — mükemmel!` : `${correct}/${t.quiz.length} — örnekleri tekrar dinle, bir daha dene.`;
+        $("#gscore").textContent = correct === t.quiz.length ? ` ${correct}/${t.quiz.length} — mükemmel!` : `${correct}/${t.quiz.length} — örnekleri tekrar dinle, bir daha dene.`;
         $("#gscore").style.color = correct === t.quiz.length ? "var(--green)" : "var(--amber)";
       }
     });
@@ -499,7 +617,7 @@ function startSB() {
 }
 function drawSB() {
   if (sbCur >= sbOrder.length) {
-    $("#sbox").innerHTML = `<p class="sb-ok" style="margin-top:14px">🎉 Hepsi bitti! Tekrar başlatabilirsin.</p>`;
+    $("#sbox").innerHTML = `<p class="sb-ok" style="margin-top:14px"> Hepsi bitti! Tekrar başlatabilirsin.</p>`;
     return;
   }
   const s = sbOrder[sbCur];
@@ -514,7 +632,7 @@ function drawSB() {
       <div id="sbres" style="min-height:26px"></div>
       <div class="pr-nav" style="justify-content:flex-start">
         <button id="sbcheck">Kontrol et</button>
-        <button id="sbhear">🔊 Dinle</button>
+        <button id="sbhear"> Dinle</button>
         <button id="sbskip">Atla →</button>
       </div>`;
     $("#sbox").querySelectorAll("[data-a]").forEach(b => b.onclick = () => { sbPick.push(pool[+b.dataset.a]); pool.splice(+b.dataset.a, 1); draw(); });
@@ -562,7 +680,6 @@ function renderStories() {
     <div class="deckgrid">
       ${list.map(s => `
         <div class="card deck st-card" data-s="${s.id}" tabindex="0" role="button">
-          <div class="em">${s.em}</div>
           <b>${esc(s.title)}</b>
           <small>${esc(s.titleTr)}</small>
           <small>${s.lines.length} satır · ${s.words} kelime</small>
@@ -593,7 +710,7 @@ function stKomsu(idx) {
   };
 }
 
-function openStory(id) {
+function openStory(id, returnTo) {
   tale.stop();
   stIdx = STORIES.findIndex(s => s.id === id);
   const s = STORIES[stIdx];
@@ -607,9 +724,9 @@ function openStory(id) {
       <div class="intro">${esc(s.intro)}</div>
       <div class="st-bar">
         <button id="stplay">▶︎ Tüm hikayeyi dinle</button>
-        <button id="stslow">🐢 Yavaş oku</button>
-        <button id="sthide">🙈 Çeviriyi gizle</button>
-        <button id="stagain">🔁 Tekrar</button>
+        <button id="stslow"> Yavaş oku</button>
+        <button id="sthide"> Çeviriyi gizle</button>
+        <button id="stagain"> Tekrar</button>
       </div>
       <div class="card" id="stbody">
         ${s.lines.map((l, i) => {
@@ -631,7 +748,7 @@ function openStory(id) {
       </div>
     </div>`;
   const hiz = () => stSlow ? 0.65 : 0.95;
-  $("#stback").onclick = () => { tale.stop(); renderStories(); };
+  $("#stback").onclick = () => { tale.stop(); returnTo ? bxGoBack(returnTo) : renderStories(); };
   document.querySelectorAll("#stbody .wg").forEach(el => el.onclick = () => {
     tale.stop(); speak(el.dataset.say, { rate: hiz() });
   });
@@ -651,7 +768,7 @@ function openStory(id) {
   $("#sthide").onclick = () => {
     const gizli = $("#stbody").classList.toggle("st-hidden");
     $("#sthide").classList.toggle("on", gizli);
-    $("#sthide").innerHTML = gizli ? "🙉 Çeviriyi göster" : "🙈 Çeviriyi gizle";
+    $("#sthide").innerHTML = gizli ? " Çeviriyi göster" : " Çeviriyi gizle";
   };
   const k = stKomsu(stIdx);
   $("#stprev").onclick = () => openStory(STORIES[k.prev].id);
@@ -728,7 +845,7 @@ function drawKur() {
     const son = S.kur.lvl === 3;
     box.innerHTML = `
       <div style="text-align:center">
-        <div class="daily-en">🎉 ${kurScore}/${kurList.length} doğru</div>
+        <div class="daily-en"> ${kurScore}/${kurList.length} doğru</div>
         <p class="daily-tr">${kurScore >= kurList.length - 1 ? "Harika — bu seviyeyi bitirdin." :
         kurScore >= kurList.length / 2 ? "İyi gidiyor. Bir tur daha yaparsan kalıplar oturur." :
           "Açıklamaları tekrar okuyup bir daha dene."}</p>
@@ -769,8 +886,8 @@ function drawKur() {
       <div id="kurres" style="min-height:26px">${sonuc || ""}</div>
       <div class="kur-btns">
         <button class="go" id="kurcheck">Kontrol et</button>
-        <button id="kurhear">🔊 Dinle</button>
-        <button id="kurhint"${kurYanlis >= 2 ? ' class="blink"' : ""}>💡 İpucu</button>
+        <button id="kurhear"> Dinle</button>
+        <button id="kurhint"${kurYanlis >= 2 ? ' class="blink"' : ""}> İpucu</button>
         <button id="kurskip">Geç</button>
       </div>`;
     box.querySelectorAll("[data-a]").forEach(b => b.onclick = () => {
@@ -795,7 +912,7 @@ function drawKur() {
       if (kurPick.map(p => p.w).join(" ") === s.en) {
         if (!kurIpucu) kurScore++;
         speak(s.en);
-        ciz(`<span class="sb-ok">✓ Doğru: ${esc(s.en)}</span><div class="kur-note">💡 ${esc(s.note)}</div>`);
+        ciz(`<span class="sb-ok">✓ Doğru: ${esc(s.en)}</span><div class="kur-note"> ${esc(s.note)}</div>`);
         box.querySelectorAll("button").forEach(b => b.disabled = true);
         setTimeout(() => { kurPos++; drawKur(); }, 1800);
       } else {
@@ -823,10 +940,10 @@ const GTEMA = [
   { k: "feelings", ad: "Duygular ve Yüzler" }
 ];
 const GAMES = [
-  { k: "match", em: "🖼️", ad: "Resim Eşleştirme", alt: "Kelimeyi duy, doğru resmi seç" },
-  { k: "mem", em: "🃏", ad: "Hafıza Kartları", alt: "Resmi kelimesiyle eşleştir" },
-  { k: "spell", em: "🔤", ad: "Harfleri Sırala", alt: "Karışık harflerden kelimeyi kur" },
-  { k: "rush", em: "⚡", ad: "Hız Turu", alt: "60 saniyede kaç kelime?" }
+  { k: "match", em: "", ad: "Resim Eşleştirme", alt: "Kelimeyi duy, doğru resmi seç" },
+  { k: "mem", em: "", ad: "Hafıza Kartları", alt: "Resmi kelimesiyle eşleştir" },
+  { k: "spell", em: "", ad: "Harfleri Sırala", alt: "Karışık harflerden kelimeyi kur" },
+  { k: "rush", em: "", ad: "Hız Turu", alt: "60 saniyede kaç kelime?" }
 ];
 let gTimer = null;
 
@@ -858,7 +975,7 @@ function gCeldirici(w, n) {
 /* img alani ileride doldurulacak; o gun bu satir disinda kod degismeyecek */
 function gGorsel(w, boy) {
   return w.img ? `<img class="gimg ${boy || ""}" src="${esc(w.img)}" alt="${esc(w.t)}" loading="lazy">`
-    : `<span class="emo ${boy || ""}">${w.m}</span>`;
+    : `<span class="gimg-fallback ${boy || ""}" aria-hidden="true">${esc(w.e.slice(0, 1).toUpperCase())}</span>`;
 }
 /* oyun oynamak da gunluk seriyi beslesin (sekme gece yarisini asarak acik kalirsa da) */
 function touchStreak() {
@@ -868,7 +985,7 @@ function touchStreak() {
   S.streak.count = (S.streak.last === dun) ? S.streak.count + 1 : 1;
   S.streak.last = bugun;
   store.write(S);
-  const el = $("#streak"); if (el) el.textContent = "🔥 " + S.streak.count + " gün";
+  const el = $("#streak .streak-count") || $("#streak"); if (el) el.textContent = S.streak.count + " gün";
 }
 function gTurBitti() { S.games.rounds = (S.games.rounds || 0) + 1; store.write(S); touchStreak(); }
 
@@ -887,7 +1004,7 @@ function renderGames() {
     <div class="deckgrid">
       ${GAMES.map(g => `
         <div class="card deck st-card" data-g="${g.k}" tabindex="0" role="button">
-          <div class="em">${g.em}</div>
+          <span class="game-icon" aria-hidden="true">${lineIcon(g.k === "match" ? "hikaye" : g.k === "mem" ? "kelime" : g.k === "spell" ? "pratik" : "gunluk")}</span>
           <b>${g.ad}</b>
           <small>${g.alt}</small>
           <span class="due" style="background:var(--green-soft);color:var(--green)">${enIyi[g.k]}</span>
@@ -914,7 +1031,7 @@ function gBar() {
     <select class="g-theme" id="gtheme" aria-label="Tema seç">
       ${GTEMA.map(t => `<option value="${t.k}"${t.k === S.games.theme ? " selected" : ""}>${t.ad}</option>`).join("")}
     </select>
-    <button class="g-sound${S.games.sound ? " on" : ""}" id="gsound" aria-label="Sesi aç/kapat" title="Oyun sesi">${S.games.sound ? "🔊" : "🔇"}</button>
+    <button class="g-sound${S.games.sound ? " on" : ""}" id="gsound" aria-label="Sesi aç/kapat" title="Oyun sesi">${S.games.sound ? "" : ""}</button>
   </div>`;
 }
 function gBarBind(yeniden) {
@@ -924,12 +1041,12 @@ function gBarBind(yeniden) {
     S.games.sound = !S.games.sound; store.write(S);
     if (!S.games.sound) stopSpeak();
     const b = $("#gsound");
-    b.textContent = S.games.sound ? "🔊" : "🔇";
+    b.textContent = S.games.sound ? "" : "";
     b.classList.toggle("on", S.games.sound);
   };
 }
 function gYanlisListe(liste) {
-  if (!liste.length) return `<p class="sec-sub" style="margin:10px 0 0">Hiç yanlışın yok — tertemiz tur! 🎉</p>`;
+  if (!liste.length) return `<p class="sec-sub" style="margin:10px 0 0">Hiç yanlışın yok — tertemiz tur! </p>`;
   return `<div class="g-wrong"><b>Tekrar bakılacaklar</b>${liste.map(w => `
     <div class="g-wrow">${gGorsel(w, "sm")}<span><b>${esc(w.e)}</b><i>${esc(w.t)}</i></span></div>`).join("")}</div>`;
 }
@@ -996,7 +1113,7 @@ function matchEnd() {
     ${gBar()}
     <div class="card g-end">
       <div class="daily-en">${mt.dogru}/${mt.list.length}</div>
-      <p class="daily-tr">${mt.dogru === mt.list.length ? "Kusursuz! 🎉" : mt.dogru >= 7 ? "İyi gidiyor." : "Yanlışları bir tur daha çalış."}</p>
+      <p class="daily-tr">${mt.dogru === mt.list.length ? "Kusursuz! " : mt.dogru >= 7 ? "İyi gidiyor." : "Yanlışları bir tur daha çalış."}</p>
       ${gYanlisListe(mt.yanlis)}
       <div class="kur-btns" style="justify-content:center">
         <button class="go" id="mag">Tekrar oyna</button>
@@ -1096,7 +1213,7 @@ function memBit() {
       ${gBar()}
       <div class="card g-end">
         <div class="daily-en">${mem.hamle} hamle</div>
-        <p class="daily-tr">${mem.L.cift} çiftin hepsini ${memSure()} içinde buldun.${rekor ? " 🏆 Yeni rekor!" : ""}</p>
+        <p class="daily-tr">${mem.L.cift} çiftin hepsini ${memSure()} içinde buldun.${rekor ? "  Yeni rekor!" : ""}</p>
         <div class="kur-btns" style="justify-content:center">
           <button class="go" id="mem2">Tekrar oyna</button>
           <button id="mem3">Seviye seç</button>
@@ -1160,7 +1277,7 @@ function spellDraw(res) {
     <div id="spres" style="min-height:26px">${res === "no" ? `<span class="sb-bad">Olmadı, tekrar dene.</span>` : res === "ok" ? `<span class="sb-ok">✓ ${esc(w.e)}</span>` : ""}</div>
     <div class="kur-btns">
       <button class="go" id="spcheck">Kontrol et</button>
-      <button id="sphint">💡 İpucu</button>
+      <button id="sphint"> İpucu</button>
       <button id="spskip">Geç</button>
       ${sp.yanlis >= 3 ? `<button id="spshow">Cevabı göster</button>` : ""}
     </div>`;
@@ -1270,7 +1387,7 @@ function rushSoru() {
       <span class="r-track${kalan <= 10000 ? " son" : ""}"><i id="rbar" style="width:${Math.min(100, kalan / 600)}%"></i></span>
       <span class="r-sn"><b id="rsn">${Math.ceil(kalan / 1000)}</b> sn</span>
     </div>
-    ${rs.seri >= 5 ? `<div class="r-seri">🔥 ${rs.seri}x seri${rs.bonus ? " · +2 sn" : ""}</div>` : `<div class="r-seri bos"></div>`}
+    ${rs.seri >= 5 ? `<div class="r-seri"> ${rs.seri}x seri${rs.bonus ? " · +2 sn" : ""}</div>` : `<div class="r-seri bos"></div>`}
     <div class="sp-stage">${gGorsel(w, "big")}</div>
     <div class="g-opts words">${rs.opts.map((o, i) => `
       <button class="g-opt" data-o="${i}"><span class="k">${i + 1}</span><b>${esc(o.e)}</b></button>`).join("")}</div>`;
@@ -1309,7 +1426,7 @@ function rushBit() {
     ${gBar()}
     <div class="card g-end">
       <div class="daily-en">${rs.skor} kelime</div>
-      <p class="daily-tr">En uzun seri: ${rs.enSeri}${rekor ? " · 🏆 Yeni rekor!" : ` · rekor ${S.games.rush.best}`}</p>
+      <p class="daily-tr">En uzun seri: ${rs.enSeri}${rekor ? " ·  Yeni rekor!" : ` · rekor ${S.games.rush.best}`}</p>
       ${gYanlisListe(rs.yanlis)}
       <div class="kur-btns" style="justify-content:center">
         <button class="go" id="r2">Tekrar oyna</button>

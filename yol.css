@@ -1710,3 +1710,28 @@
     transition: none
   }
 }
+
+/* Shared app design system overrides */
+:root {
+  --yl-navy: #080808;
+  --yl-navy2: #222222;
+  --yl-navy3: #363636;
+  --yl-ink: #080808;
+  --yl-soft: #5a5a5a;
+  --yl-blue: #146ef5;
+  --yl-btn1: #080808;
+  --yl-btn2: #222222;
+  --yl-mint: #146ef5;
+}
+.yl-ana {
+  background: #080808;
+  border-color: #080808;
+  color: #fff;
+  border-radius: 4px;
+  box-shadow: none;
+}
+.yl-ana:hover { background: #222; border-color: #222; filter: none; }
+.yl-ai-kart, .yl-kart, .yl-sohbet, .yl-sonuc { border-radius: 8px; box-shadow: none; }
+.yl-ai-kart { padding: 18px; }
+.yl-ai-kart b { display: block; margin-bottom: 6px; }
+.yl-ai-kart small { display: block; line-height: 1.5; }

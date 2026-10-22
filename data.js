@@ -123,7 +123,7 @@ const UNITS = [
       { en: "I don't eat meat.", tr: "Et yemem. (olumsuz: don't)" },
       { en: "She doesn't like coffee.", tr: "O kahve sevmez. (he/she/it: doesn't + yalın fiil)" },
       { en: "Do you speak English? — Yes, a little.", tr: "İngilizce konuşuyor musun? — Evet, biraz." }],
-    tip: "“doesn't” geldiğinde fiildeki -s düşer: “She doesn't likeS” ❌ → “She doesn't like” ✅. -s ya fiilde ya doesn't'ta olur, ikisinde birden asla.",
+    tip: "“doesn't” geldiğinde fiildeki -s düşer: “She doesn't likeS”  → “She doesn't like” . -s ya fiilde ya doesn't'ta olur, ikisinde birden asla.",
     quiz: [
       { q: "“He ___ in a bank.”", o: ["work", "works", "working", "is work"], a: 1, e: "he/she/it → fiile -s: works." },
       { q: "“Et yemem” hangisi?", o: ["I no eat meat", "I don't eat meat", "I doesn't eat meat", "I am not eat meat"], a: 1, e: "I/you/we/they olumsuzu: don't + fiil." },
@@ -222,7 +222,7 @@ const UNITS = [
 /* ================== KELIME DESTELERI ================== */
 const DECKS = [
   {
-    id: "d1", em: "👋", title: "Selamlaşma", words: [
+    id: "d1", em: "", title: "Selamlaşma", words: [
       { en: "hello", tr: "merhaba", ex: "Hello! How are you?", xt: "Merhaba! Nasılsın?" },
       { en: "please", tr: "lütfen", ex: "A coffee, please.", xt: "Bir kahve, lütfen." },
       { en: "thank you", tr: "teşekkür ederim", ex: "Thank you very much!", xt: "Çok teşekkür ederim!" },
@@ -237,7 +237,7 @@ const DECKS = [
       { en: "how", tr: "nasıl", ex: "How are you today?", xt: "Bugün nasılsın?" }]
   },
   {
-    id: "d2", em: "🍽️", title: "Yemek ve İçecek", words: [
+    id: "d2", em: "", title: "Yemek ve İçecek", words: [
       { en: "water", tr: "su", ex: "A glass of water, please.", xt: "Bir bardak su, lütfen." },
       { en: "bread", tr: "ekmek", ex: "The bread is fresh.", xt: "Ekmek taze." },
       { en: "tea", tr: "çay", ex: "Turkish tea is famous.", xt: "Türk çayı meşhurdur." },
@@ -254,7 +254,7 @@ const DECKS = [
       { en: "the bill", tr: "hesap", ex: "The bill, please.", xt: "Hesap, lütfen." }]
   },
   {
-    id: "d3", em: "👨‍👩‍👧", title: "Aile", words: [
+    id: "d3", em: "‍‍", title: "Aile", words: [
       { en: "mother", tr: "anne", ex: "My mother is a teacher.", xt: "Annem öğretmen." },
       { en: "father", tr: "baba", ex: "My father works in a bank.", xt: "Babam bankada çalışıyor." },
       { en: "sister", tr: "kız kardeş / abla", ex: "I have got one sister.", xt: "Bir kız kardeşim var." },
@@ -269,7 +269,7 @@ const DECKS = [
       { en: "family", tr: "aile", ex: "Family is important.", xt: "Aile önemlidir." }]
   },
   {
-    id: "d4", em: "🕐", title: "Zaman", words: [
+    id: "d4", em: "", title: "Zaman", words: [
       { en: "today", tr: "bugün", ex: "Today is Monday.", xt: "Bugün pazartesi." },
       { en: "tomorrow", tr: "yarın", ex: "See you tomorrow!", xt: "Yarın görüşürüz!" },
       { en: "yesterday", tr: "dün", ex: "I was at home yesterday.", xt: "Dün evdeydim." },
@@ -284,7 +284,7 @@ const DECKS = [
       { en: "late", tr: "geç", ex: "Don't be late!", xt: "Geç kalma!" }]
   },
   {
-    id: "d5", em: "🏙️", title: "Şehirde", words: [
+    id: "d5", em: "", title: "Şehirde", words: [
       { en: "street", tr: "cadde, sokak", ex: "The hotel is on this street.", xt: "Otel bu caddede." },
       { en: "bus station", tr: "otobüs durağı", ex: "Where is the bus station?", xt: "Otobüs durağı nerede?" },
       { en: "airport", tr: "havalimanı", ex: "The airport is far from here.", xt: "Havalimanı buraya uzak." },
@@ -299,7 +299,7 @@ const DECKS = [
       { en: "map", tr: "harita", ex: "Look at the map.", xt: "Haritaya bak." }]
   },
   {
-    id: "d6", em: "💼", title: "İş ve Meslekler", words: [
+    id: "d6", em: "", title: "İş ve Meslekler", words: [
       { en: "teacher", tr: "öğretmen", ex: "She is an English teacher.", xt: "O bir İngilizce öğretmeni." },
       { en: "doctor", tr: "doktor", ex: "The doctor is very kind.", xt: "Doktor çok nazik." },
       { en: "engineer", tr: "mühendis", ex: "My brother is an engineer.", xt: "Kardeşim mühendis." },
@@ -314,7 +314,7 @@ const DECKS = [
       { en: "busy", tr: "meşgul", ex: "I am busy on Mondays.", xt: "Pazartesileri meşgulüm." }]
   },
   {
-    id: "d7", em: "🎨", title: "Renkler ve Sıfatlar", words: [
+    id: "d7", em: "", title: "Renkler ve Sıfatlar", words: [
       { en: "red / blue", tr: "kırmızı / mavi", ex: "The Turkish flag is red.", xt: "Türk bayrağı kırmızıdır." },
       { en: "black / white", tr: "siyah / beyaz", ex: "A black coffee, please.", xt: "Sade (siyah) kahve, lütfen." },
       { en: "green / yellow", tr: "yeşil / sarı", ex: "The lights are green.", xt: "Işıklar yeşil." },
@@ -329,7 +329,7 @@ const DECKS = [
       { en: "tired", tr: "yorgun", ex: "I am tired after work.", xt: "İşten sonra yorgunum." }]
   },
   {
-    id: "d8", em: "✈️", title: "Seyahat", words: [
+    id: "d8", em: "", title: "Seyahat", words: [
       { en: "ticket", tr: "bilet", ex: "Two tickets, please.", xt: "İki bilet, lütfen." },
       { en: "passport", tr: "pasaport", ex: "Here is my passport.", xt: "İşte pasaportum." },
       { en: "hotel", tr: "otel", ex: "The hotel has a pool.", xt: "Otelin havuzu var." },
@@ -344,7 +344,7 @@ const DECKS = [
       { en: "open / closed", tr: "açık / kapalı", ex: "The museum is closed today.", xt: "Müze bugün kapalı." }]
   },
   {
-    id: "d9", em: "🏠", title: "Ev ve Eşyalar", words: [
+    id: "d9", em: "", title: "Ev ve Eşyalar", words: [
       { en: "house / home", tr: "ev", ex: "Welcome to my home.", xt: "Evime hoş geldin." },
       { en: "door / window", tr: "kapı / pencere", ex: "Please close the window.", xt: "Lütfen pencereyi kapat." },
       { en: "table / chair", tr: "masa / sandalye", ex: "The keys are on the table.", xt: "Anahtarlar masanın üstünde." },
@@ -359,7 +359,7 @@ const DECKS = [
       { en: "garden", tr: "bahçe", ex: "The children are in the garden.", xt: "Çocuklar bahçede." }]
   },
   {
-    id: "d10", em: "⚡", title: "En Sık 20 Fiil", words: [
+    id: "d10", em: "", title: "En Sık 20 Fiil", words: [
       { en: "be (am/is/are)", tr: "olmak", ex: "I am happy.", xt: "Mutluyum." },
       { en: "have", tr: "sahip olmak", ex: "I have two cats.", xt: "İki kedim var." },
       { en: "go", tr: "gitmek", ex: "I go to work at eight.", xt: "İşe sekizde giderim." },
