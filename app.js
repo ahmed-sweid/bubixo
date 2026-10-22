@@ -853,7 +853,7 @@ const GTEMA = [
   { k: "feelings", ad: "Duygular ve Yüzler" }
 ];
 const GAMES = [
-  { k: "match", em: "🖼", ad: "Resim Eşleştirme", alt: "Kelimeyi duy, doğru resmi seç" },
+  { k: "match", em: "", ad: "Resim Eşleştirme", alt: "Kelimeyi duy, doğru resmi seç" },
   { k: "mem", em: "", ad: "Hafıza Kartları", alt: "Resmi kelimesiyle eşleştir" },
   { k: "spell", em: "", ad: "Harfleri Sırala", alt: "Karışık harflerden kelimeyi kur" },
   { k: "rush", em: "", ad: "Hız Turu", alt: "60 saniyede kaç kelime?" }
