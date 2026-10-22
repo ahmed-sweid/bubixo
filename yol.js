@@ -891,7 +891,7 @@
         '<p class="sec-sub">Bir senaryo seç; karşındaki rolün sorusuna İngilizce yaz ya da söyle. Senaryolar hazır adımlarla ilerler ve cevabın cihazında kontrol edilir: ' +
         '<b>bu alıştırmada yazdığın cevaplar sunucuya gönderilmez.</b> Mikrofonla cevap verirsen sesin, tarayıcının kendi konuşma tanıma hizmetiyle yazıya çevrilir.</p>' +
         '<div class="yl-ai-grid">' + SENARYO.map(function (s) {
-          return '<button class="card yl-ai-kart" data-s="' + s.id + '"><span class="yl-ai-em">' + s.em + '</span><b>' + h(s.ad) + '</b><small>' + h(s.hedef) + '</small>' +
+          return '<button class="card yl-ai-kart" data-s="' + s.id + '"><b>' + h(s.ad) + '</b><small>' + h(s.hedef) + '</small>' +
             (Y.ai[s.id] ? '<span class="due" style="background:var(--green-soft);color:var(--green)">✓ tamamlandı</span>' : '<span class="due">' + s.adimlar.length + ' adım</span>') + '</button>';
         }).join("") + '</div></div>';
       $q("#ylgeri").onclick = panel;
@@ -915,13 +915,13 @@
       function ciz() {
         var gorev = bitti ? "" : sc.adimlar[adim].gorev;
         kutu.innerHTML = '<div class="yl-sub"><div class="lesson-head"><button class="backbtn" id="ylgeri">← Senaryolar</button>' + '<div class="yl-hiz-ek"><span>Ses hızı</span>' + hizSecici() + '</div></div>' +
-          '<p class="yl-kicker">' + sc.em + ' ' + h(sc.rol) + ' · cihazda çalışır</p><h2 class="sec-title">' + h(sc.ad) + '</h2><p class="sec-sub">' + h(sc.hedef) + '</p>' +
+          '<p class="yl-kicker">' + h(sc.rol) + ' · cihazda çalışır</p><h2 class="sec-title">' + h(sc.ad) + '</h2><p class="sec-sub">' + h(sc.hedef) + '</p>' +
           '<div class="card yl-sohbet" id="ylsohbet">' + gecmis.map(balon).join("") + '</div>' +
           (bitti
             ? '<div class="card yl-sonuc"><p> Senaryoyu tamamladın.</p><div class="yl-btns"><button class="yl-btn yl-ana" id="ylbastan">Baştan oyna</button><button class="yl-btn" id="yldiger">Başka senaryo</button></div></div>'
             : '<div class="yl-gorev"><b>Görevin:</b> ' + h(gorev) + '</div>' +
             '<form class="yl-giris" id="ylform"><input id="ylin" lang="en" autocomplete="off" maxlength="200" placeholder="İngilizce yaz…" aria-label="Cevabın">' +
-            (SR_ ? '<button type="button" class="yl-btn" id="ylmic" aria-label="Söyle" title="Konuşma tanıma tarayıcının kendi hizmetiyle yapılır"></button>' : "") +
+            (SR_ ? '<button type="button" class="yl-btn" id="ylmic" aria-label="Söyle" title="Konuşma tanıma tarayıcının kendi hizmetiyle yapılır"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="2.5" width="6" height="11.5" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3.5M8.5 21.5h7"/></svg></button>' : "") +
             '<button class="yl-btn yl-ana" type="submit">Gönder</button></form>' +
             '<div class="yl-btns yl-kucuk"><button class="yl-btn" id="ylipucu"> İpucu</button><button class="yl-btn" id="ylgec">Geç →</button></div>') +
           (sesAdresi(sc.adimlar[0].ai, aiG) ? "" : '<p class="yl-mini">Partnerin replikleri için kayıtlı ses henüz yok; şimdilik tarayıcının İngilizce sesiyle okunuyor.</p>') + '</div>';
