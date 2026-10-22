@@ -65,25 +65,55 @@ function speak(text, opt) {
 function stopSpeak() { try { if ("speechSynthesis" in window) speechSynthesis.cancel(); } catch (e) { } }
 const SPK = '<svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11"/></svg>';
 
-/* ---------- gezinme ---------- */
-document.querySelectorAll(".nav button").forEach(b => b.onclick = () => showView(b.dataset.v));
-function showView(v) {
-  tale.stop();
-  gStop();
-  document.querySelectorAll(".nav button").forEach(b => b.classList.toggle("on", b.dataset.v === v));
-  document.querySelectorAll(".view").forEach(x => x.classList.remove("on"));
-  $("#v-" + v).classList.add("on");
-  window.scrollTo({ top: 0 });
-  if (v === "dersler") renderUnits();
-  if (v === "kelime") renderDecks();
-  if (v === "gramer") renderGramer();
-  if (v === "telaffuz") renderPron();
-  if (v === "gunluk") renderDaily();
-  if (v === "hikaye") renderStories();
-  if (v === "kur") renderKur();
-  if (v === "oyun") renderGames();
+/* ---------- gezinme: dört ana sekme, özellikler alt ekranlarda ---------- */
+const TAB_GROUP = {
+  dersler:"dersler", kelime:"kelime", pratik:"pratik", kesfet:"kesfet",
+  gramer:"pratik", telaffuz:"pratik", kur:"pratik", oyun:"pratik",
+  hikaye:"kesfet", gunluk:"kesfet"
+};
+document.querySelectorAll("#nav button").forEach(b => b.onclick = () => showView(b.dataset.v));
+function renderHub(id) {
+  const hubs = {
+    pratik: {title:"Pratik", subtitle:"Öğrendiklerini farklı yollarla pekiştir.", items:[
+      ["gramer","Gramer","Kuralları örneklerle öğren","Aa"],
+      ["kur","Cümle kur","Kelimeleri doğru sıraya yerleştir","↔"],
+      ["telaffuz","Dinleme ve telaffuz","Dinle ve sesli tekrar yap","♫"],
+      ["oyun","Kelime oyunları","Oyunlarla kelime pratiği yap","✦"]
+    ]},
+    kesfet: {title:"Keşfet", subtitle:"İngilizceyi hikâyeler ve günlük içeriklerle keşfet.", items:[
+      ["hikaye","Hikâyeler","Oku, dinle ve bilmediğin kelimeleri keşfet","▤"],
+      ["gunluk","Günlük içerik","Günün cümlesini ve ilerlemeni gör","◷"]
+    ]}
+  };
+  const hub=hubs[id], target=$("#v-"+id);
+  target.innerHTML=`<h2 class="sec-title">${hub.title}</h2><p class="sec-sub">${hub.subtitle}</p>
+    <div class="hub-grid">${hub.items.map(item=>`<button class="card hub-item" data-open="${item[0]}">
+      <span class="hub-icon" aria-hidden="true">${item[3]}</span><span class="hub-copy"><b>${item[1]}</b><small>${item[2]}</small></span>
+      <span class="hub-arrow" aria-hidden="true">›</span></button>`).join("")}</div>`;
+  target.querySelectorAll("[data-open]").forEach(b=>b.onclick=()=>showView(b.dataset.open));
 }
-
+function showView(v) {
+  tale.stop(); gStop();
+  const group=TAB_GROUP[v]||"dersler";
+  document.querySelectorAll("#nav button").forEach(b=>b.classList.toggle("on",b.dataset.v===group));
+  document.querySelectorAll(".view").forEach(x=>x.classList.remove("on"));
+  const view=$("#v-"+v); if(!view)return;
+  view.classList.add("on"); window.scrollTo({top:0});
+  if(v==="dersler")renderUnits();
+  if(v==="kelime")renderDecks();
+  if(v==="gramer")renderGramer();
+  if(v==="telaffuz")renderPron();
+  if(v==="gunluk")renderDaily();
+  if(v==="hikaye")renderStories();
+  if(v==="kur")renderKur();
+  if(v==="oyun")renderGames();
+  if(v==="pratik"||v==="kesfet")renderHub(v);
+  if(!["dersler","kelime","pratik","kesfet"].includes(v)){
+    const label=group==="pratik"?"← Pratik":"← Keşfet";
+    view.insertAdjacentHTML("afterbegin",`<div class="subview-return"><button class="backbtn" data-return="${group}">${label}</button></div>`);
+    view.querySelector("[data-return]").onclick=()=>showView(group);
+  }
+}
 /* ================== 1) DERSLER ================== */
 function renderUnits() {
   const doneCount = UNITS.filter(u => S.units[u.id] && S.units[u.id].done).length;
