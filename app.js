@@ -69,7 +69,7 @@ const SPK = '<svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="
 const TAB_GROUP = {
   yol:"yol", dersler:"dersler", kelime:"kelime", pratik:"pratik", kesfet:"kesfet",
   gramer:"pratik", telaffuz:"pratik", kur:"pratik", oyun:"pratik",
-  hikaye:"kesfet", gunluk:"kesfet"
+  hikaye:"pratik", gunluk:"kesfet"
 };
 document.querySelectorAll("#nav button").forEach(b => b.onclick = () => showView(b.dataset.v));
 function lineIcon(name) {
@@ -92,11 +92,11 @@ function renderHub(id) {
       ["gramer","Gramer","Kuralları örneklerle öğren","Aa"],
       ["kur","Cümle kur","Kelimeleri doğru sıraya yerleştir","↔"],
       ["telaffuz","Dinleme ve telaffuz","Dinle ve sesli tekrar yap","♫"],
-      ["oyun","Kelime oyunları","Oyunlarla kelime pratiği yap","✦"]
+      ["oyun","Kelime oyunları","Oyunlarla kelime pratiği yap","✦"],
+      ["hikaye","Hikâyeler","Kısa metinleri oku, dinle ve kelimeleri bağlamında öğren","▤"]
     ]},
-    kesfet: {title:"Keşfet", subtitle:"İngilizceyi hikâyeler ve günlük içeriklerle keşfet.", items:[
-      ["hikaye","Hikâyeler","Oku, dinle ve bilmediğin kelimeleri keşfet","▤"],
-      ["gunluk","Günlük içerik","Günün cümlesini ve ilerlemeni gör","◷"]
+    kesfet: {title:"Keşfet", subtitle:"Günün cümlesi ve öğrenme ilerlemen.", items:[
+      ["gunluk","Günün içeriği","Günün cümlesini dinle ve öğrenme ilerlemeni gözden geçir","◷"]
     ]}
   };
   const hub=hubs[id], target=$("#v-"+id);
