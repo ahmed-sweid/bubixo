@@ -519,6 +519,17 @@ function drawDict() {
     items = WORDS.slice(L.bas + dictPage * 100, Math.min(L.bas + (dictPage + 1) * 100, L.son));
   }
 
+  const resultLabel = $("#words-list-label");
+  const resultHelp = $("#words-list-help");
+  if (resultLabel) resultLabel.textContent = dictQ ? `Arama sonuçları · ${items.length}` : `${LEVELS[dictLevel].ad} kelimeleri`;
+  if (resultHelp) {
+    if (dictQ) resultHelp.textContent = items.length === 80 ? "İlk 80 sonuç gösteriliyor" : "Dinlemek için kelimeyi seç";
+    else {
+      const first = LEVELS[dictLevel].bas + dictPage * 100 + 1;
+      const last = Math.min(LEVELS[dictLevel].bas + (dictPage + 1) * 100, LEVELS[dictLevel].son);
+      resultHelp.textContent = `${first}–${last} · kelimeye dokunarak dinle`;
+    }
+  }
   listEl.innerHTML = items.map(w => `
     <div class="dict-row">
       <span class="dm">${w.m || "•"}</span>
