@@ -26,7 +26,7 @@ const KABUK = [
   KOK,                                        /* index.html (kanonik) */
   KOK + "manifest.json",
   KOK + "icon-192.png",
-  KOK + "icon-512.png",
+  KOK + "icon-bubixo.svg",
 ];
 const UZAK = (AYAR.get("f") || "").split(",").filter(Boolean).map(f => VARLIK_KOK + f);
 
