@@ -2045,3 +2045,31 @@ ol.sx-list .sx-m {
 .hub-copy small { color:var(--soft); font-size:12.5px; line-height:1.45; }
 .hub-arrow { color:var(--soft); font-size:24px; }
 .subview-return { margin-bottom:16px; }
+
+
+/* ---------- Uygulama kabuğu: landing-page öğelerini geri plana al ---------- */
+.top {
+  padding: 12px clamp(16px, 4vw, 28px);
+  background: #fff;
+  color: var(--ink);
+  border-bottom: 1px solid var(--line);
+}
+.top-row { max-width: 960px; }
+.brand { color: var(--ink); }
+.brand .logo {
+  background: var(--green);
+  color: #fff;
+  border-radius: 11px;
+}
+.streak {
+  background: var(--green-soft);
+  border-color: transparent;
+  color: var(--green);
+  padding: 7px 12px;
+}
+.top h1, .top > p, .sx, body > footer { display: none !important; }
+.wrap { padding-top: 22px; }
+@media (max-width: 759px) {
+  .top { padding-top: calc(10px + env(safe-area-inset-top, 0px)); }
+  .wrap { padding-top: 18px; padding-bottom: calc(88px + env(safe-area-inset-bottom, 0px)); }
+}
