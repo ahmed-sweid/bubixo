@@ -2484,3 +2484,24 @@ h1, h2, h3, .serif, .fcard .w, .pr-word { font-family: 'WF Visual Sans Variable'
   .top .brand-caption { font-size: 9px; }
   .top .streak { min-height: 32px; padding: 7px 9px; gap: 6px; }
 }
+
+
+/* Iconsax-style outline icon system — consistent stroke and sizing. */
+.top .streak svg,
+.nav button svg,
+.hub-icon svg,
+.game-icon svg,
+.words-searchbox > svg,
+.spk svg,
+.bigspk svg,
+.mic svg,
+.yl-btn svg,
+.yl-mic svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.top .streak svg { stroke: var(--green); }
+.nav button svg { stroke-width: 1.65; }
