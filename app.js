@@ -236,28 +236,59 @@ function dueCount(d) {
   return d.words.filter((w, i) => { const st = wordState(d.id + ":" + i); return st.box === 0 || st.due <= now; }).length;
 }
 function renderDecks() {
+  const dueTotal = DECKS.reduce((sum, deck) => sum + dueCount(deck), 0);
   $("#v-kelime").innerHTML = `
-    <h2 class="sec-title">Kelime Kartları</h2>
-    <p class="sec-sub">Karta dokun → anlamı gör → dürüstçe işaretle. “Bilemedim” dediklerin daha sık, bildiklerin daha seyrek gelir.</p>
-    <div class="deckgrid">
-      ${DECKS.map(d => {
+    <div class="words-page">
+      <header class="words-heading">
+        <div class="words-heading-copy">
+          <span class="words-eyebrow">KELİME DAĞARCIĞIN</span>
+          <h1>Kelimeler</h1>
+          <p>Yeni kelimeler keşfet, anlamlarını öğren ve öğrendiklerini kalıcı hâle getir.</p>
+        </div>
+        <div class="words-overview" aria-label="Kelime çalışma özeti">
+          <div><strong>${WORDS.length.toLocaleString("tr-TR")}</strong><span>Sözlük kelimesi</span></div>
+          <div><strong>${dueTotal.toLocaleString("tr-TR")}</strong><span>Tekrar kartı</span></div>
+        </div>
+      </header>
+
+      <section class="words-dictionary" aria-labelledby="words-search-title">
+        <div class="words-section-heading">
+          <div><span class="words-eyebrow">SÖZLÜK</span><h2 id="words-search-title">Bir kelime ara</h2></div>
+          <span class="words-section-note">İngilizce veya Türkçe</span>
+        </div>
+        <label class="words-searchbox" for="dsearch">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 4.5 4.5"></path></svg>
+          <input id="dsearch" type="search" autocomplete="off" placeholder="Örn. journey, yolculuk, look after">
+          <span class="words-search-hint">Ara</span>
+        </label>
+        <div class="words-level-label"><span>Seviyeye göre göz at</span><span>A1’den ileri seviyeye</span></div>
+        <div class="dict-levels" id="dlevels"></div>
+        <div class="words-results-bar"><span id="words-list-label">Kelime listesi</span><span id="words-list-help">Bir kelimeye dokunarak dinle</span></div>
+        <div class="dict-pages" id="dpages"></div>
+        <div id="dlist" class="words-list"></div>
+      </section>
+
+      <section class="words-review" aria-labelledby="words-review-title">
+        <div class="words-section-heading">
+          <div><span class="words-eyebrow">AKTİF TEKRAR</span><h2 id="words-review-title">Kelime kartları</h2></div>
+          <p>Hatırladıklarını işaretle; zorlandıkların daha sık karşına çıksın.</p>
+        </div>
+        <div class="deckgrid">
+          ${DECKS.map((d, i) => {
     const due = dueCount(d);
-    return `<div class="card deck" data-d="${d.id}" tabindex="0" role="button">
-          <b>${esc(d.title)}</b>
-          <small>${d.words.length} kelime</small>
-          ${due ? `<span class="due">${due} kart hazır</span>` : `<span class="due" style="background:var(--green-soft);color:var(--green)">✓ güncel</span>`}
-        </div>`;
+    return `<button class="card deck words-deck" type="button" data-d="${d.id}">
+          <span class="words-deck-index">${String(i + 1).padStart(2, "0")}</span>
+          <span class="words-deck-copy"><b>${esc(d.title)}</b><small>${d.words.length} kelime</small></span>
+          <span class="words-deck-status ${due ? "is-due" : "is-current"}">${due ? due + " hazır" : "Güncel"}</span>
+          <span class="words-deck-arrow" aria-hidden="true">↗</span>
+        </button>`;
   }).join("")}
-    </div>
-    <h2 class="sec-title" style="margin-top:34px">Sözlük: En Sık 3000 Kelime</h2>
-    <p class="sec-sub">Hepsi seslendirmeli. Seviye seç, 100'lük gruplarla gez ya da doğrudan ara — kelimeye dokun, dinle.</p>
-    <input class="dict-search" id="dsearch" type="search" placeholder="3000 kelimede ara… (ör. water, sevmek, get up)">
-    <div class="dict-levels" id="dlevels"></div>\n    <div class="dict-pages" id="dpages"></div>
-    <div class="card" id="dlist" style="overflow:hidden"></div>`;
+        </div>
+      </section>
+    </div>`;
   renderDict();
-  document.querySelectorAll(".deck").forEach(el => {
+  document.querySelectorAll("#v-kelime .deck").forEach(el => {
     el.onclick = () => startDeck(el.dataset.d);
-    el.onkeydown = e => { if (e.key === "Enter") startDeck(el.dataset.d); };
   });
 }
 let run = null;
