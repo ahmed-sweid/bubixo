@@ -23,6 +23,8 @@ Bubixo, Türkçe konuşan başlangıç düzeyindeki öğrencilerin İngilizceyi 
 - [Kontrol ve test](#kontrol-ve-test)
 - [Tasarım ilkeleri](#tasarım-ilkeleri)
 - [Bilinen sınırlar](#bilinen-sınırlar)
+- [Veri ve içerik kaynakları](#veri-ve-içerik-kaynakları)
+- [Ürün fikri ve vizyonu](#ürün-fikri-ve-vizyonu)
 - [Katkıda bulunma](#katkıda-bulunma)
 
 ## Öne çıkan özellikler
@@ -256,6 +258,18 @@ Arayüz geliştirmelerinde `DESIGN-webflow.md` dosyasını temel alın.
 - Mevcut düzeni değiştiren büyük refaktörler yerine küçük, test edilebilir değişiklikler.
 
 Tasarım değişikliklerinde hedef yalnızca daha yeni görünen bir arayüz değil; kullanıcının ne yapacağını daha kolay anlaması ve öğrenme akışını kaybetmemesidir.
+
+## Ürün fikri ve vizyonu
+
+Bubixo'nun henüz geliştirilecek uygulama fikrini, hedef kullanıcılarını, öğrenme yaklaşımını, ana bölümlerini, ilk sürüm kapsamını ve ürün yol haritasını açıklayan konsept belgesi: [Bubixo — Ürün Fikri ve Uygulama Vizyonu](docs/BUBIXO-URUN-FIKRI-VE-VIZYONU.md). Bu belge ürün vizyonunu tanımlar; tamamlanmış mobil uygulama veya doğrulanmış öğrenme sonuçları iddiası taşımaz.
+
+## Veri ve içerik kaynakları
+
+Derslerin, sözlüğün, gramerin, hikâyelerin, oyun verilerinin, ses dosyalarının, çeviri servisinin ve yerel kullanıcı verilerinin nereden geldiğini açıklayan ayrıntılı inceleme: [Bubixo — Veri ve İçerik Kaynakları](docs/BUBIXO-VERI-VE-ICERIK-KAYNAKLARI.md). Belge, depoda doğrulanabilen kaynaklarla henüz kaynağı doğrulanamayan içerikleri birbirinden ayırır.
+
+## Flutter'a veri aktarımı
+
+Mevcut Bubixo eğitim verilerini Flutter uygulamasında yeniden kullanmak için önerilen yaklaşım ve adım adım geçiş planı: [Bubixo → Flutter: Veri Aktarımı ve Entegrasyon Planı](docs/BUBIXO-FLUTTER-VERI-AKTARIM-PLANI.md). Belge; yerel JavaScript içeriklerini JSON asset'lerine dönüştürmeyi, ses ve çeviri servislerini ayrı ele almayı, ilerlemeyi yerel depolamaya taşımayı ve doğrulama aşamalarını açıklar. Bu bir plan dokümanıdır; Flutter uygulamasının veya veri dönüşümünün tamamlandığı iddiası değildir.
 
 ## Bilinen sınırlar
 
