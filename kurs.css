@@ -2422,7 +2422,7 @@ h1, h2, h3, .serif, .fcard .w, .pr-word { font-family: 'WF Visual Sans Variable'
 }
 .top .brand {
   display: inline-flex;
-  align-items: baseline;
+  align-items: center;
   flex-wrap: wrap;
   gap: 9px;
   color: var(--ink);
