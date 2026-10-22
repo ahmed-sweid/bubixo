@@ -23,6 +23,7 @@ Bubixo, Türkçe konuşan başlangıç düzeyindeki öğrencilerin İngilizceyi 
 - [Kontrol ve test](#kontrol-ve-test)
 - [Tasarım ilkeleri](#tasarım-ilkeleri)
 - [Bilinen sınırlar](#bilinen-sınırlar)
+- [Veri ve içerik kaynakları](#veri-ve-içerik-kaynakları)
 - [Katkıda bulunma](#katkıda-bulunma)
 
 ## Öne çıkan özellikler
@@ -260,6 +261,10 @@ Tasarım değişikliklerinde hedef yalnızca daha yeni görünen bir arayüz de�
 ## Veri ve içerik kaynakları
 
 Derslerin, sözlüğün, gramerin, hikâyelerin, oyun verilerinin, ses dosyalarının, çeviri servisinin ve yerel kullanıcı verilerinin nereden geldiğini açıklayan ayrıntılı inceleme: [Bubixo — Veri ve İçerik Kaynakları](docs/BUBIXO-VERI-VE-ICERIK-KAYNAKLARI.md). Belge, depoda doğrulanabilen kaynaklarla henüz kaynağı doğrulanamayan içerikleri birbirinden ayırır.
+
+## Flutter'a veri aktarımı
+
+Mevcut Bubixo eğitim verilerini Flutter uygulamasında yeniden kullanmak için önerilen yaklaşım ve adım adım geçiş planı: [Bubixo → Flutter: Veri Aktarımı ve Entegrasyon Planı](docs/BUBIXO-FLUTTER-VERI-AKTARIM-PLANI.md). Belge; yerel JavaScript içeriklerini JSON asset'lerine dönüştürmeyi, ses ve çeviri servislerini ayrı ele almayı, ilerlemeyi yerel depolamaya taşımayı ve doğrulama aşamalarını açıklar. Bu bir plan dokümanıdır; Flutter uygulamasının veya veri dönüşümünün tamamlandığı iddiası değildir.
 
 ## Bilinen sınırlar
 
