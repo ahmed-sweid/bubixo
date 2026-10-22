@@ -901,7 +901,7 @@ function gCeldirici(w, n) {
 /* img alani ileride doldurulacak; o gun bu satir disinda kod degismeyecek */
 function gGorsel(w, boy) {
   return w.img ? `<img class="gimg ${boy || ""}" src="${esc(w.img)}" alt="${esc(w.t)}" loading="lazy">`
-    : `<span class="emo ${boy || ""}">${w.m}</span>`;
+    : `<span class="gimg-fallback ${boy || ""}" aria-hidden="true">${esc(w.e.slice(0, 1).toUpperCase())}</span>`;
 }
 /* oyun oynamak da gunluk seriyi beslesin (sekme gece yarisini asarak acik kalirsa da) */
 function touchStreak() {
